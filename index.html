@@ -1524,8 +1524,9 @@ async function submitOpinion() {
   }
 
   closeModal();
-  document.getElementById('modal-topic').value = '';
-  showToast('🔨 topic submitted! going live after review.');
+  setTimeout(() => {
+    showToast('🔨 topic submitted! going live after review.');
+  }, 300);
 }
 
 function showToast(msg) {
