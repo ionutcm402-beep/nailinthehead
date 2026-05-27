@@ -14,6 +14,7 @@
 <meta name="twitter:description" content="AI has the nails. you have the head.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔨</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -29,6 +30,7 @@
   }
 
   body {
+    background: #12121f !important;
     background: var(--darker);
     color: var(--white);
     font-family: 'Nunito', sans-serif;
@@ -623,6 +625,84 @@
     0%, 100% { transform: rotate(-3deg); }
     50% { transform: rotate(3deg); }
   }
+
+  /* MOBILE FIXES */
+  @media (max-width: 768px) {
+    nav { padding: 10px 14px; gap: 8px; }
+    .logo { font-size: 20px; }
+    .logo-emoji { font-size: 22px; }
+    .btn-nav { font-size: 11px !important; padding: 8px 12px !important; border-radius: 50px !important; white-space: nowrap !important; letter-spacing: 0 !important; }
+    .hero { min-height: 40vh !important; padding: 70px 20px 20px !important; }
+    .hero-tagline { font-size: clamp(28px, 8vw, 44px); }
+    .hero-sub { font-size: 15px; }
+    .ticker-item { font-size: 13px; padding: 0 20px; }
+    .section { padding: 40px 16px; }
+    .section-title { font-size: 26px; }
+    .feed { gap: 16px; }
+    .opinion-card { padding: 18px; }
+    .opinion-text { font-size: 16px; }
+    .vote-btn { padding: 9px 16px; font-size: 13px; }
+    .how-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .how-card { padding: 20px 14px; }
+    .how-emoji { font-size: 32px; }
+    .how-title { font-size: 17px; }
+    .how-desc { font-size: 12px; }
+    .cta-title { font-size: clamp(32px, 8vw, 56px); }
+    footer { padding: 24px 16px; flex-direction: column; gap: 8px; text-align: center; }
+    /* Category buttons scroll horizontally */
+    .cat-row { display: flex !important; gap: 8px !important; overflow-x: auto !important; padding-bottom: 8px !important; flex-wrap: nowrap !important; scrollbar-width: none !important; -webkit-overflow-scrolling: touch; }
+    .cat-row::-webkit-scrollbar { display: none; }
+    .cat-btn { white-space: nowrap !important; flex-shrink: 0 !important; font-size: 12px !important; padding: 6px 12px !important; }
+    /* Tab row */
+    .tab-row { display: flex !important; gap: 6px !important; flex-wrap: nowrap !important; align-items: center !important; }
+    .tab-btn { white-space: nowrap !important; flex-shrink: 0 !important; font-size: 12px !important; padding: 7px 12px !important; }
+    #search-input { width: 100px !important; font-size: 12px !important; padding: 7px 12px !important; }
+    .share-btn { width: 32px !important; height: 32px !important; font-size: 14px !important; }
+    .stats { grid-template-columns: 1fr 1fr 1fr; margin: 0 16px; }
+    .stat { padding: 30px 16px; }
+    .stat-num { font-size: 40px; }
+    .modal { padding: 24px 18px; margin: 16px; }
+    .modal-title { font-size: 22px; }
+    .opinion-actions { gap: 8px; }
+    .agree-bar-wrap { min-width: 100%; margin-top: 8px; }
+    /* Category dropdown on mobile */
+    .cat-row { display: none !important; }
+    .cat-dropdown-wrap { display: block; margin-bottom: 16px; }
+    .cat-dropdown-btn { width: 100%; background: var(--card); border: 2px solid #2e2e45; color: var(--white); padding: 12px 18px; font-family: 'Fredoka One', cursive; font-size: 17px; cursor: pointer; border-radius: 12px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+    .cat-dropdown-btn:after { content: '▼'; font-size: 12px; color: var(--muted); }
+    .cat-dropdown-btn.open:after { content: '▲'; }
+    .cat-dropdown-list { display: none; background: var(--card); border: 2px solid #2e2e45; border-top: none; border-radius: 0 0 12px 12px; overflow: hidden; }
+    .cat-dropdown-list.show { display: block; }
+    .cat-dropdown-item { display: block; width: 100%; padding: 12px 18px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; color: var(--muted); background: transparent; border: none; text-align: left; cursor: pointer; border-bottom: 1px solid #2e2e45; }
+    .cat-dropdown-item:last-child { border-bottom: none; }
+    .cat-dropdown-item:hover, .cat-dropdown-item.active { color: var(--yellow); background: rgba(255,213,63,0.05); }
+  }
+  /* Hide dropdown on desktop */
+  @media (min-width: 769px) {
+    .cat-dropdown-wrap { display: none; }
+  }
+
+  /* AUTH MODAL */
+  .auth-overlay { position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.85); z-index:300; display:none; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+  .auth-overlay.show { display:flex; }
+  .auth-box { background:var(--card); border:2px solid #2e2e45; border-radius:24px; padding:40px; max-width:420px; width:90%; position:relative; animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both; }
+  .auth-close { position:absolute; top:16px; right:20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer; }
+  .auth-close:hover { color:var(--white); }
+  .auth-title { font-family:'Fredoka One',cursive; font-size:28px; color:var(--yellow); margin-bottom:6px; }
+  .auth-sub { font-size:14px; color:var(--muted); font-weight:600; margin-bottom:24px; }
+  .auth-input { width:100%; background:var(--darker); border:2px solid #3a3a55; color:var(--white); padding:13px 16px; font-family:'Nunito',sans-serif; font-size:15px; font-weight:700; border-radius:12px; outline:none; margin-bottom:12px; transition:border-color 0.2s; }
+  .auth-input:focus { border-color:var(--yellow); }
+  .auth-input::placeholder { color:var(--muted); }
+  .auth-btn { width:100%; background:var(--yellow); color:var(--dark); border:none; padding:14px; font-family:'Fredoka One',cursive; font-size:20px; cursor:pointer; border-radius:50px; transition:all 0.2s; box-shadow:0 4px 0 #c9a800; margin-top:4px; }
+  .auth-btn:hover { transform:translateY(-2px); box-shadow:0 6px 0 #c9a800; }
+  .auth-switch { text-align:center; margin-top:16px; font-size:13px; color:var(--muted); font-weight:600; }
+  .auth-switch a { color:var(--yellow); cursor:pointer; text-decoration:none; }
+  .auth-error { color:var(--red); font-size:13px; font-weight:700; margin-bottom:10px; display:none; }
+  .auth-success { color:#4ade80; font-size:13px; font-weight:700; margin-bottom:10px; display:none; }
+  .user-menu { display:flex; align-items:center; gap:10px; }
+  .user-chip { background:rgba(255,213,63,0.15); color:var(--yellow); border:2px solid rgba(255,213,63,0.3); padding:8px 16px; border-radius:50px; font-family:'Fredoka One',cursive; font-size:15px; }
+  .logout-btn { background:transparent; color:var(--muted); border:2px solid #333; padding:8px 14px; border-radius:50px; font-family:'Fredoka One',cursive; font-size:14px; cursor:pointer; transition:all 0.2s; }
+  .logout-btn:hover { border-color:var(--red); color:var(--red); }
 </style>
 </head>
 <body>
@@ -634,7 +714,7 @@
     nailinthehead
   </div>
   <div class="nav-right">
-    <button class="btn-nav" onclick="openModal()">💡 Nail a Topic — Join Free</button>
+    <button class="btn-nav" onclick="openAuth()">💡 Nail a Topic — Join Free</button>
   </div>
 </nav>
 
@@ -669,7 +749,18 @@
   <div class="section-title">🔥 the feed</div>
   <div class="section-sub">AI generated. human voted. completely unfiltered.</div>
 
-  <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+  <div class="cat-dropdown-wrap">
+    <button class="cat-dropdown-btn" id="cat-dd-btn" onclick="toggleCatDropdown()">🔥 all categories</button>
+    <div class="cat-dropdown-list" id="cat-dd-list">
+      <button class="cat-dropdown-item active" onclick="selectCatDD(this,'all')">🔥 all</button>
+      <button class="cat-dropdown-item" onclick="selectCatDD(this,'commuting')">🚇 daily suffering</button>
+      <button class="cat-dropdown-item" onclick="selectCatDD(this,'work life')">💼 corporate trauma</button>
+      <button class="cat-dropdown-item" onclick="selectCatDD(this,'food')">🍕 food crimes</button>
+      <button class="cat-dropdown-item" onclick="selectCatDD(this,'society')">🧠 unhinged truths</button>
+      <button class="cat-dropdown-item" onclick="selectCatDD(this,'unpopular')">😤 petty rage</button>
+    </div>
+  </div>
+  <div class="cat-row" style="margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;">
     <button class="cat-btn active" onclick="filterCat(this,'all')">🔥 all</button>
     <button class="cat-btn" onclick="filterCat(this,'commuting')">🚇 daily suffering</button>
     <button class="cat-btn" onclick="filterCat(this,'work life')">💼 corporate trauma</button>
@@ -678,7 +769,7 @@
     <button class="cat-btn" onclick="filterCat(this,'unpopular')">😤 petty rage</button>
   </div>
 
-  <div style="display:flex;gap:8px;margin-bottom:28px;align-items:center;">
+  <div class="tab-row" style="margin-bottom:28px;display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;align-items:center;-webkit-overflow-scrolling:touch;">
     <button class="tab-btn active" id="tab-top" onclick="switchTab('top')">🏆 top voted</button>
     <button class="tab-btn" id="tab-today" onclick="switchTab('today')">🔨 today's</button>
     <button class="tab-btn" id="tab-divisive" onclick="switchTab('divisive')" style="border-color:#FF5A5F;color:#FF5A5F;">⚡ divisive</button>
@@ -1004,7 +1095,7 @@
 <section class="cta-section">
   <h2 class="cta-title">ready to <span>nail it?</span></h2>
   <p class="cta-sub">vote anonymously. nail a topic — join free. see what the world really thinks.</p>
-  <button class="btn-big" style="font-size:24px; padding:20px 60px;" onclick="openModal()">🔨 join nailinthehead</button>
+  <button class="btn-big" style="font-size:24px; padding:20px 60px;" onclick="openAuth()">🔨 join nailinthehead</button>
 </section>
 
 <!-- FOOTER -->
@@ -1045,7 +1136,140 @@
   </div>
 </div>
 
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="auth-modal">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    
+    <!-- Sign Up Form -->
+    <div id="signup-form">
+      <div class="auth-title">🔨 join nailinthehead</div>
+      <p class="auth-sub">create an account to nail topics and vote</p>
+      <div class="auth-error" id="signup-error"></div>
+      <div class="auth-success" id="signup-success"></div>
+      <input type="text" class="auth-input" id="signup-username" placeholder="@username (e.g. croydon_lad)" maxlength="20"/>
+      <input type="email" class="auth-input" id="signup-email" placeholder="your@email.com"/>
+      <input type="password" class="auth-input" id="signup-password" placeholder="password (min 6 characters)"/>
+      <button class="auth-btn" onclick="signUp()">🔨 create account</button>
+      <p class="auth-switch">already have an account? <a onclick="showLogin()">log in</a></p>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-form" style="display:none">
+      <div class="auth-title">👋 welcome back</div>
+      <p class="auth-sub">log in to nail topics and vote</p>
+      <div class="auth-error" id="login-error"></div>
+      <input type="email" class="auth-input" id="login-email" placeholder="your@email.com"/>
+      <input type="password" class="auth-input" id="login-password" placeholder="password"/>
+      <button class="auth-btn" onclick="logIn()">🔨 log in</button>
+      <p class="auth-switch">no account yet? <a onclick="showSignup()">sign up free</a></p>
+    </div>
+  </div>
+</div>
+
 <script>
+
+  // Supabase setup
+  const SUPABASE_URL = 'https://watlpiqmvgfdkiwoearv.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_2oOuUoE_dzUHCRZZ2VAulA_4L3Q5tsW';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  let currentUser = null;
+
+  // Check if user is logged in on page load
+  async function initAuth() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      currentUser = session.user;
+      showUserInNav(session.user);
+    }
+  }
+
+  function showUserInNav(user) {
+    const navRight = document.querySelector('.nav-right');
+    const username = user.user_metadata?.username || user.email.split('@')[0];
+    navRight.innerHTML = `
+      <div class="user-menu">
+        <span class="user-chip">🔨 @${username}</span>
+        <button class="logout-btn" onclick="logOut()">log out</button>
+      </div>
+    `;
+  }
+
+  function openAuth() {
+    document.getElementById('auth-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAuth() {
+    document.getElementById('auth-modal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function showLogin() {
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+  }
+
+  function showSignup() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'block';
+  }
+
+  async function signUp() {
+    const username = document.getElementById('signup-username').value.trim().replace('@','');
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const errEl = document.getElementById('signup-error');
+    const sucEl = document.getElementById('signup-success');
+    errEl.style.display = 'none';
+    sucEl.style.display = 'none';
+
+    if (!username || !email || !password) { errEl.textContent = 'Please fill in all fields'; errEl.style.display='block'; return; }
+    if (username.length < 3) { errEl.textContent = 'Username must be at least 3 characters'; errEl.style.display='block'; return; }
+    if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters'; errEl.style.display='block'; return; }
+
+    const { data, error } = await sb.auth.signUp({
+      email, password,
+      options: { data: { username } }
+    });
+
+    if (error) { errEl.textContent = error.message; errEl.style.display='block'; return; }
+
+    // Save username to profiles table
+    await sb.from('profiles').insert({ id: data.user.id, username, email });
+
+    sucEl.textContent = '🔨 Account created! Check your email to verify, then log in.';
+    sucEl.style.display = 'block';
+    setTimeout(() => { showLogin(); }, 3000);
+  }
+
+  async function logIn() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) { errEl.textContent = error.message; errEl.style.display='block'; return; }
+
+    currentUser = data.user;
+    showUserInNav(data.user);
+    closeAuth();
+    showToast('🔨 welcome back!');
+  }
+
+  async function logOut() {
+    await sb.auth.signOut();
+    currentUser = null;
+    document.querySelector('.nav-right').innerHTML = '<button class="btn-nav" onclick="openAuth()">💡 Nail a Topic — Join Free</button>';
+    showToast('👋 logged out');
+  }
+
+  // Init auth on load
+  initAuth();
+
 function share(btn, network) {
   const text = btn.closest('.opinion-card').querySelector('.opinion-text').innerText;
   const url = 'https://nailinthehead.org';
@@ -1083,6 +1307,27 @@ function setPage(num) {
   window.scrollTo({top: document.getElementById('feed').offsetTop - 80, behavior: 'smooth'});
 }
 
+
+function toggleCatDropdown() {
+  const btn = document.getElementById('cat-dd-btn');
+  const list = document.getElementById('cat-dd-list');
+  btn.classList.toggle('open');
+  list.classList.toggle('show');
+}
+
+function selectCatDD(item, cat) {
+  document.querySelectorAll('.cat-dropdown-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+  document.getElementById('cat-dd-btn').textContent = item.textContent;
+  document.getElementById('cat-dd-list').classList.remove('show');
+  document.getElementById('cat-dd-btn').classList.remove('open');
+  // Also filter the cards
+  const allCards = document.querySelectorAll('.opinion-card');
+  allCards.forEach(card => {
+    const cardCat = card.querySelector('.opinion-category') ? card.querySelector('.opinion-category').innerText.toLowerCase() : '';
+    card.style.display = (cat === 'all' || cardCat.includes(cat)) ? 'block' : 'none';
+  });
+}
 
 function filterCat(btn, cat) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
