@@ -1470,10 +1470,13 @@ function openModal() {
 }
 
 function closeModal() {
-  document.getElementById('modal').classList.remove('show');
+  const modal = document.getElementById('modal');
+  if (modal) modal.classList.remove('show');
   document.body.style.overflow = '';
-  document.getElementById('modal-result').style.display = 'none';
-  document.getElementById('modal-topic').value = '';
+  const result = document.getElementById('modal-result');
+  if (result) result.style.display = 'none';
+  const topic = document.getElementById('modal-topic');
+  if (topic) topic.value = '';
 }
 
 function selectCat(btn) {
