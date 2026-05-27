@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nailinthehead — admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --yellow: #FFD53F;
+    --red: #FF5A5F;
+    --purple: #8B5CF6;
+    --dark: #1a1a2e;
+    --darker: #12121f;
+    --white: #FFFDF7;
+    --card: #1B1C2B;
+    --muted: #8B8DA7;
+    --green: #4ade80;
+  }
+  body { background: var(--darker); color: var(--white); font-family: 'Nunito', sans-serif; padding: 0; }
+  
+  /* LOGIN */
+  .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .login-box { background: var(--card); border: 2px solid #2e2e45; border-radius: 24px; padding: 48px; max-width: 400px; width: 90%; text-align: center; }
+  .login-title { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--yellow); margin-bottom: 8px; }
+  .login-sub { font-size: 14px; color: var(--muted); font-weight: 600; margin-bottom: 24px; }
+  .input { width: 100%; background: var(--darker); border: 2px solid #3a3a55; color: var(--white); padding: 13px 16px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; border-radius: 12px; outline: none; margin-bottom: 12px; }
+  .input:focus { border-color: var(--yellow); }
+  .input::placeholder { color: var(--muted); }
+  .btn { background: var(--yellow); color: var(--dark); border: none; padding: 14px 28px; font-family: 'Fredoka One', cursive; font-size: 18px; cursor: pointer; border-radius: 50px; box-shadow: 0 4px 0 #c9a800; width: 100%; transition: all 0.2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .error { color: var(--red); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: none; }
+
+  /* ADMIN PANEL */
+  .admin-wrap { display: none; }
+  nav { background: var(--card); border-bottom: 2px solid #2e2e45; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-title { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--yellow); }
+  .nav-user { font-size: 14px; color: var(--muted); font-weight: 700; }
+  .logout { background: transparent; color: var(--muted); border: 2px solid #333; padding: 8px 16px; border-radius: 50px; font-family: 'Fredoka One', cursive; font-size: 14px; cursor: pointer; margin-left: 16px; }
+  .logout:hover { border-color: var(--red); color: var(--red); }
+
+  .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+  .page-title { font-family: 'Fredoka One', cursive; font-size: 32px; color: var(--white); margin-bottom: 8px; }
+  .page-sub { color: var(--muted); font-size: 15px; font-weight: 600; margin-bottom: 32px; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+  .tab { background: transparent; color: var(--muted); border: 2px solid #2e2e45; padding: 10px 20px; font-family: 'Fredoka One', cursive; font-size: 16px; cursor: pointer; border-radius: 50px; transition: all 0.2s; }
+  .tab.active { background: var(--yellow); color: var(--dark); border-color: var(--yellow); }
+
+  .topic-card { background: var(--card); border: 2px solid #2e2e45; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .topic-card.pending { border-color: #2e2e45; }
+  .topic-card.approved { border-color: rgba(74,222,128,0.3); }
+  .topic-card.rejected { border-color: rgba(255,90,95,0.3); opacity: 0.6; }
+
+  .topic-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .topic-user { color: var(--yellow); font-weight: 800; font-size: 14px; }
+  .topic-cat { background: rgba(255,213,63,0.15); color: var(--yellow); font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 50px; }
+  .topic-time { color: var(--muted); font-size: 12px; font-weight: 600; margin-left: auto; }
+  .status-badge { font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 50px; }
+  .status-pending { background: rgba(139,92,246,0.15); color: var(--purple); }
+  .status-approved { background: rgba(74,222,128,0.15); color: var(--green); }
+  .status-rejected { background: rgba(255,90,95,0.15); color: var(--red); }
+
+  .topic-text { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.5; }
+  
+  .opinion-box { background: var(--darker); border: 2px solid #2e2e45; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .opinion-label { font-size: 12px; color: var(--purple); font-weight: 800; margin-bottom: 8px; }
+  .opinion-text { font-size: 15px; color: var(--white); font-weight: 600; line-height: 1.6; }
+  .opinion-input { width: 100%; background: var(--darker); border: 2px solid #3a3a55; color: var(--white); padding: 12px 14px; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; border-radius: 10px; outline: none; resize: vertical; min-height: 80px; margin-bottom: 12px; }
+  .opinion-input:focus { border-color: var(--purple); }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-approve { background: var(--green); color: #0a0a0a; border: none; padding: 10px 20px; font-family: 'Fredoka One', cursive; font-size: 15px; cursor: pointer; border-radius: 50px; transition: all 0.2s; }
+  .btn-approve:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-reject { background: transparent; color: var(--red); border: 2px solid var(--red); padding: 10px 20px; font-family: 'Fredoka One', cursive; font-size: 15px; cursor: pointer; border-radius: 50px; transition: all 0.2s; }
+  .btn-reject:hover { background: rgba(255,90,95,0.1); }
+  .btn-generate { background: var(--purple); color: var(--white); border: none; padding: 10px 20px; font-family: 'Fredoka One', cursive; font-size: 15px; cursor: pointer; border-radius: 50px; transition: all 0.2s; }
+  .btn-generate:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-publish { background: var(--yellow); color: var(--dark); border: none; padding: 10px 20px; font-family: 'Fredoka One', cursive; font-size: 15px; cursor: pointer; border-radius: 50px; box-shadow: 0 3px 0 #c9a800; transition: all 0.2s; }
+  .btn-publish:hover { transform: translateY(-2px); }
+
+  .empty { text-align: center; padding: 60px; color: var(--muted); font-size: 16px; font-weight: 700; }
+  .loading { text-align: center; padding: 40px; color: var(--muted); font-family: 'Fredoka One', cursive; font-size: 18px; }
+
+  .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--yellow); color: var(--dark); padding: 14px 28px; border-radius: 50px; font-family: 'Fredoka One', cursive; font-size: 18px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--card); border: 2px solid #2e2e45; border-radius: 16px; padding: 20px; text-align: center; }
+  .stat-num { font-family: 'Fredoka One', cursive; font-size: 36px; color: var(--yellow); }
+  .stat-label { font-size: 13px; color: var(--muted); font-weight: 700; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-title">🔨 admin panel</div>
+    <p class="login-sub">nailinthehead — content management</p>
+    <div class="error" id="login-error"></div>
+    <input type="email" class="input" id="admin-email" placeholder="your@email.com"/>
+    <input type="password" class="input" id="admin-password" placeholder="password"/>
+    <button class="btn" onclick="adminLogin()">log in</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-wrap" id="admin-wrap">
+  <nav>
+    <div class="nav-title">🔨 nailinthehead admin</div>
+    <div style="display:flex;align-items:center;">
+      <span class="nav-user" id="admin-user"></span>
+      <button class="logout" onclick="adminLogout()">log out</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="page-title">content dashboard</div>
+    <p class="page-sub">review topics and opinions before they go live</p>
+
+    <div class="stats" id="stats">
+      <div class="stat-card"><div class="stat-num" id="stat-pending">0</div><div class="stat-label">pending topics</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-generating">0</div><div class="stat-label">need opinion</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-review">0</div><div class="stat-label">opinions to review</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-live">0</div><div class="stat-label">live opinions</div></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('pending', this)">⏳ pending topics</button>
+      <button class="tab" onclick="switchTab('generating', this)">🤖 generate opinions</button>
+      <button class="tab" onclick="switchTab('review', this)">👀 review opinions</button>
+      <button class="tab" onclick="switchTab('live', this)">✅ live</button>
+    </div>
+
+    <div id="topics-list">
+      <div class="loading">loading topics...</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://watlpiqmvgfdkiwoearv.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_2oOuUoE_dzUHCRZZ2VAulA_4L3Q5tsW';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  let currentTab = 'pending';
+
+  // LOGIN
+  async function adminLogin() {
+    const email = document.getElementById('admin-email').value.trim();
+    const password = document.getElementById('admin-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; return; }
+
+    showAdmin(data.user);
+  }
+
+  async function checkSession() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) showAdmin(session.user);
+  }
+
+  function showAdmin(user) {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('admin-wrap').style.display = 'block';
+    document.getElementById('admin-user').textContent = user.email;
+    loadTopics();
+    loadStats();
+  }
+
+  async function adminLogout() {
+    await sb.auth.signOut();
+    document.getElementById('login-wrap').style.display = 'flex';
+    document.getElementById('admin-wrap').style.display = 'none';
+  }
+
+  // TABS
+  function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    loadTopics();
+  }
+
+  // LOAD STATS
+  async function loadStats() {
+    const { data } = await sb.from('topics').select('status, opinion_status');
+    if (!data) return;
+    document.getElementById('stat-pending').textContent = data.filter(t => t.status === 'pending').length;
+    document.getElementById('stat-generating').textContent = data.filter(t => t.status === 'approved' && !t.opinion_status || t.opinion_status === 'pending').length;
+    document.getElementById('stat-review').textContent = data.filter(t => t.opinion_status === 'generated').length;
+    document.getElementById('stat-live').textContent = data.filter(t => t.opinion_status === 'approved').length;
+  }
+
+  // LOAD TOPICS
+
+  async function loadTopics() {
+    const list = document.getElementById('topics-list');
+    list.innerHTML = '<div class="loading">loading...</div>';
+
+    let query = sb.from('topics').select('*').order('created_at', { ascending: false });
+
+    if (currentTab === 'pending') query = query.eq('status', 'pending');
+    else if (currentTab === 'generating') query = query.eq('status', 'approved').or('opinion_status.eq.pending,opinion_status.is.null');
+    else if (currentTab === 'review') query = query.eq('opinion_status', 'generated');
+    else if (currentTab === 'live') query = query.eq('opinion_status', 'approved');
+
+    const { data, error } = await query;
+    if (error) { list.innerHTML = '<div class="empty">error loading topics</div>'; return; }
+    if (!data.length) { list.innerHTML = '<div class="empty">nothing here yet 🔨</div>'; return; }
+
+    list.innerHTML = data.map(t => renderTopic(t)).join('');
+  }
+
+  function renderTopic(t) {
+    const date = new Date(t.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    const statusClass = t.status === 'approved' ? 'approved' : t.status === 'rejected' ? 'rejected' : 'pending';
+    
+    let actions = '';
+    
+    if (currentTab === 'pending') {
+      actions = `
+        <div class="actions">
+          <button class="btn-approve" onclick="approveTopic('${t.id}')">✅ approve topic</button>
+          <button class="btn-reject" onclick="rejectTopic('${t.id}')">✕ reject</button>
+        </div>`;
+    } else if (currentTab === 'generating') {
+      actions = `
+        <div class="actions">
+          <button class="btn-generate" onclick="generateOpinion('${t.id}', '${t.topic.replace(/'/g, "\\'")}', '${t.category}')">🤖 generate with Claude</button>
+        </div>`;
+    } else if (currentTab === 'review') {
+      actions = `
+        <div class="opinion-box">
+          <div class="opinion-label">🤖 AI generated opinion:</div>
+          <div class="opinion-text">${t.generated_opinion || ''}</div>
+        </div>
+        <textarea class="opinion-input" id="edit-${t.id}" placeholder="edit the opinion if needed...">${t.generated_opinion || ''}</textarea>
+        <div class="actions">
+          <button class="btn-publish" onclick="publishOpinion('${t.id}')">🔨 approve & publish</button>
+          <button class="btn-generate" onclick="regenerate('${t.id}', '${t.topic.replace(/'/g, "\\'")}', '${t.category}')">🔄 regenerate</button>
+          <button class="btn-reject" onclick="rejectOpinion('${t.id}')">✕ reject</button>
+        </div>`;
+    } else if (currentTab === 'live') {
+      actions = `
+        <div class="opinion-box">
+          <div class="opinion-label">✅ live opinion:</div>
+          <div class="opinion-text">${t.generated_opinion || ''}</div>
+        </div>`;
+    }
+
+    return `
+      <div class="topic-card ${statusClass}" id="card-${t.id}">
+        <div class="topic-meta">
+          <span class="topic-user">@${t.username || 'anonymous'}</span>
+          <span class="topic-cat">${t.category}</span>
+          <span class="status-badge status-${t.status}">${t.status}</span>
+          <span class="topic-time">${date}</span>
+        </div>
+        <div class="topic-text">"${t.topic}"</div>
+        ${actions}
+      </div>`;
+  }
+
+  // ACTIONS
+  async function approveTopic(id) {
+    await sb.from('topics').update({ status: 'approved' }).eq('id', id);
+    showToast('✅ topic approved!');
+    loadTopics(); loadStats();
+  }
+
+  async function rejectTopic(id) {
+    await sb.from('topics').update({ status: 'rejected' }).eq('id', id);
+    showToast('✕ topic rejected');
+    loadTopics(); loadStats();
+  }
+
+  async function generateOpinion(id, topic, category) {
+    const btn = document.querySelector(`#card-${id} .btn-generate`);
+    btn.textContent = '🤖 generating...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 200,
+          messages: [{
+            role: 'user',
+            content: `Generate a short, punchy, slightly controversial opinion about the topic: "${topic}". Category: ${category}. 
+            
+            Style: internet hot take, 1-2 sentences max, funny but relatable, slightly edgy. 
+            Do NOT start with "people who". Be creative. Just write the opinion, nothing else.`
+          }]
+        })
+      });
+      const data = await response.json();
+      const opinion = data.content[0].text.trim();
+
+      await sb.from('topics').update({ 
+        generated_opinion: opinion, 
+        opinion_status: 'generated' 
+      }).eq('id', id);
+
+      showToast('🤖 opinion generated!');
+      loadTopics(); loadStats();
+    } catch (e) {
+      btn.textContent = '🤖 generate with Claude';
+      btn.disabled = false;
+      showToast('error generating — check API key');
+    }
+  }
+
+  async function regenerate(id, topic, category) {
+    await generateOpinion(id, topic, category);
+  }
+
+  async function publishOpinion(id) {
+    const editedOpinion = document.getElementById(`edit-${id}`).value.trim();
+    await sb.from('topics').update({ 
+      generated_opinion: editedOpinion,
+      opinion_status: 'approved',
+      status: 'approved'
+    }).eq('id', id);
+    showToast('🔨 opinion published!');
+    loadTopics(); loadStats();
+  }
+
+  async function rejectOpinion(id) {
+    await sb.from('topics').update({ opinion_status: 'rejected' }).eq('id', id);
+    showToast('✕ opinion rejected');
+    loadTopics(); loadStats();
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  checkSession();
+</script>
+</body>
+</html>
