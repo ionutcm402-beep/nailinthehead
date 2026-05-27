@@ -1518,15 +1518,26 @@ async function submitOpinion() {
   submitBtn.disabled = false;
 
   if (error) {
-    showToast('error: ' + error.message);
+    submitBtn.textContent = '🔨 submit topic';
+    submitBtn.disabled = false;
+    submitBtn.style.background = 'var(--red)';
+    submitBtn.textContent = 'error: ' + error.message;
     console.error('Submit error:', error);
     return;
   }
 
-  closeModal();
+  // Show success inside modal before closing
+  submitBtn.style.background = '#4ade80';
+  submitBtn.style.boxShadow = '0 4px 0 #22a355';
+  submitBtn.textContent = '✓ topic submitted!';
+  document.getElementById('modal-topic').value = '';
+
   setTimeout(() => {
-    showToast('🔨 topic submitted! going live after review.');
-  }, 300);
+    closeModal();
+    submitBtn.style.background = 'var(--yellow)';
+    submitBtn.style.boxShadow = '0 4px 0 #c9a800';
+    submitBtn.textContent = '🔨 submit topic';
+  }, 2000);
 }
 
 function showToast(msg) {
