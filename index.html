@@ -1134,9 +1134,9 @@
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title">🔨 what annoys you irrationally?</div>
-    <p class="modal-sub">got something that bugs you? drop the topic. AI generates the opinion. the world votes. your @username gets the glory.</p>
-    <textarea class="modal-input" id="modal-topic" placeholder="what annoys you irrationally? e.g. people who ghost after 3 dates..." rows="3" maxlength="120"></textarea>
+    <div class="modal-title">🔨 nail a topic</div>
+    <p class="modal-sub">drop a topic that bugs you. we'll generate the opinion. the world votes. your @username gets the credit.</p>
+    <textarea class="modal-input" id="modal-topic" placeholder="what annoys you? e.g. people who ghost after 3 dates..." rows="3" maxlength="120"></textarea>
     <div class="modal-cats" id="modal-cats">
       <button class="modal-cat active" onclick="selectCat(this)">🔥 general</button>
       <button class="modal-cat" onclick="selectCat(this)">🚇 daily suffering</button>
@@ -1147,12 +1147,7 @@
       <button class="modal-cat" onclick="selectCat(this)">💪 gym culture</button>
       <button class="modal-cat" onclick="selectCat(this)">📱 internet</button>
     </div>
-    <button class="modal-generate" onclick="generateOpinion()">🔨 generate opinion</button>
-    <div id="modal-result" style="display:none;margin-top:20px;padding:16px;background:var(--darker);border-radius:12px;border:2px solid var(--yellow);">
-      <div style="font-size:12px;color:#8B5CF6;font-weight:700;margin-bottom:8px;">🤖 AI generated opinion:</div>
-      <p id="modal-opinion-text" style="font-size:15px;font-weight:700;color:var(--white);line-height:1.6;"></p>
-      <button onclick="submitOpinion()" style="margin-top:12px;width:100%;background:var(--red);color:var(--white);border:none;padding:12px;font-family:'Fredoka One',cursive;font-size:17px;cursor:pointer;border-radius:50px;">submit to the feed 🚀</button>
-    </div>
+    <button class="modal-generate" onclick="submitOpinion()">🔨 submit topic</button>
   </div>
 </div>
 
@@ -1486,32 +1481,7 @@ function selectCat(btn) {
   btn.classList.add('active');
 }
 
-const aiOpinions = [
-  "people who ghost after 3 dates have never had to sit with their own discomfort and it shows",
-  "gym selfies are just insecurity dressed in activewear and everyone knows it",
-  "dating apps have made people treat other humans like Amazon returns",
-  "remote workers who say they're more productive have simply replaced commuting with Netflix",
-  "people who meal prep on Sundays are just cosplaying as organised people for 4 hours",
-  "anyone still using Comic Sans in 2024 is either a dentist or a war criminal",
-  "the phrase 'I'm just being honest' is code for 'I'm about to be unnecessarily cruel'",
-  "people who don't use headphones on public transport want to watch the world burn",
-];
 
-function generateOpinion() {
-  const topic = document.getElementById('modal-topic').value.trim();
-  const btn = document.querySelector('.modal-generate');
-  btn.textContent = '🤖 generating...';
-  btn.style.opacity = '0.7';
-  setTimeout(() => {
-    const opinion = topic ? 
-      `people who ${topic.toLowerCase().replace('people who','')} have never had to deal with consequences and it absolutely shows` :
-      aiOpinions[Math.floor(Math.random() * aiOpinions.length)];
-    document.getElementById('modal-opinion-text').textContent = opinion;
-    document.getElementById('modal-result').style.display = 'block';
-    btn.textContent = '🔨 generate opinion';
-    btn.style.opacity = '1';
-  }, 1500);
-}
 
 async function submitOpinion() {
   if (!currentUser) {
