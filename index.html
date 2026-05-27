@@ -1513,9 +1513,44 @@ function generateOpinion() {
   }, 1500);
 }
 
-function submitOpinion() {
-  closeModal();
-  showToast('🔨 opinion submitted! going live soon...');
+async function submitOpinion() {
+  if (!currentUser) {
+    closeModal();
+    openAuth();
+    showToast('please sign in to submit a topic!');
+    return;
+  }
+
+  const topic = document.getElementById('modal-topic').value.trim();
+  const selectedCat = document.querySelector('#modal-cats .modal-cat.active');
+  const category = selectedCat ? selectedCat.textContent.trim().replace(/^[^\w]+/, '') : 'general';
+  const username = currentUser.user_metadata?.username || currentUser.email.split('@')[0];
+
+  if (!topic) {
+    showToast('please enter a topic first!');
+    return;
+  }
+
+  const btn = document.querySelector('#modal-cats').nextElementSibling.nextElementSibling;
+
+  try {
+    const { error } = await sb.from('topics').insert({
+      user_id: currentUser.id,
+      username: username,
+      topic: topic,
+      category: category,
+      status: 'pending',
+      opinion_status: 'pending'
+    });
+
+    if (error) throw error;
+
+    closeModal();
+    showToast('🔨 topic submitted! going live after review.');
+  } catch (e) {
+    showToast('error submitting — please try again');
+    console.error(e);
+  }
 }
 
 function showToast(msg) {
