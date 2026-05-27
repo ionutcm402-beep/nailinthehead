@@ -1493,7 +1493,7 @@ async function submitOpinion() {
 
   const topic = document.getElementById('modal-topic').value.trim();
   const selectedCat = document.querySelector('#modal-cats .modal-cat.active');
-  const category = selectedCat ? selectedCat.textContent.trim().replace(/^[^\w]+/, '') : 'general';
+  const category = selectedCat ? selectedCat.textContent.trim().replace(/^\W+/, '').trim() : 'general';
   const username = currentUser.user_metadata?.username || currentUser.email.split('@')[0];
 
   if (!topic) {
@@ -1501,26 +1501,31 @@ async function submitOpinion() {
     return;
   }
 
-  const btn = document.querySelector('#modal-cats').nextElementSibling.nextElementSibling;
+  const submitBtn = document.querySelector('.modal-generate');
+  submitBtn.textContent = '🔨 submitting...';
+  submitBtn.disabled = true;
 
-  try {
-    const { error } = await sb.from('topics').insert({
-      user_id: currentUser.id,
-      username: username,
-      topic: topic,
-      category: category,
-      status: 'pending',
-      opinion_status: 'pending'
-    });
+  const { data, error } = await sb.from('topics').insert([{
+    user_id: currentUser.id,
+    username: username,
+    topic: topic,
+    category: category,
+    status: 'pending',
+    opinion_status: 'pending'
+  }]).select();
 
-    if (error) throw error;
+  submitBtn.textContent = '🔨 submit topic';
+  submitBtn.disabled = false;
 
-    closeModal();
-    showToast('🔨 topic submitted! going live after review.');
-  } catch (e) {
-    showToast('error submitting — please try again');
-    console.error(e);
+  if (error) {
+    showToast('error: ' + error.message);
+    console.error('Submit error:', error);
+    return;
   }
+
+  closeModal();
+  document.getElementById('modal-topic').value = '';
+  showToast('🔨 topic submitted! going live after review.');
 }
 
 function showToast(msg) {
