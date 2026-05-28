@@ -65,7 +65,7 @@ nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* LAYOUT */
-.layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; max-width: 1060px; margin: 0 auto; padding: 32px 24px; }
+.layout { display: grid; grid-template-columns: 1fr 280px; gap: 28px; max-width: 1080px; margin: 0 auto; padding: 32px 24px; align-items: start; }
 
 /* FEED */
 .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
@@ -129,8 +129,8 @@ nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center
 
 
 /* SIDEBAR */
-.sidebar { display: flex; flex-direction: column; gap: 18px; }
-.sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+.sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 80px; }
+.sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
 .sidebar-title { font-family: 'Fredoka One', cursive; font-size: 17px; color: var(--white); margin-bottom: 12px; }
 .post-box { background: #000; border: 2px solid var(--border); border-radius: 12px; padding: 12px 14px; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); width: 100%; resize: none; outline: none; min-height: 80px; margin-bottom: 8px; transition: border-color 0.2s; }
 .post-box:focus { border-color: var(--yellow); }
@@ -526,8 +526,6 @@ footer { background: #000000; border-top: 1px solid var(--border); padding: 20px
           </div>
           <button class="flag-btn" onclick="openFlagModal('demo-1')">🚩 flag the nail</button>
         </div>
-        <div class="verdict-result-value">🔨 NAILED IT — 97% agreed</div>
-        </div>
       </div>
 
       <div class="post-card" data-cat="unhinged truths">
@@ -568,10 +566,6 @@ footer { background: #000000; border-top: 1px solid var(--border); padding: 20px
           </div>
           <button class="flag-btn" onclick="openFlagModal('demo-2')">🚩 flag the nail</button>
         </div>
-      </div>
-
-      <p class="post-text">people who let their dogs bark non-stop for hours are too emotionally fragile to handle basic feedback</p>
-        <div class="under-review">⚠️ this nail is being reviewed by the workshop. voting is paused.</div>
       </div>
 
       <div class="post-card" data-cat="daily suffering">
