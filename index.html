@@ -308,6 +308,7 @@
     <div class="modal-header">
       <div>
         <div class="modal-cat" id="modalCat"></div>
+      <div id="modalWarning"></div>
         <div class="modal-title" id="modalTitle"></div>
       </div>
       <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
@@ -870,6 +871,13 @@ function quickCopy(id) {
 
 /* ---- MODAL ---- */
 function openModal(id) {
+  const sensitiveCategories = ['letters', 'money', 'work'];
+  const p = PROMPTS.find(x => x.id === id);
+  const warningHtml = p && sensitiveCategories.includes(p.cat)
+    ? `<div style="background:#fff8e1; border-left:4px solid #f39c12; padding:12px 16px; margin-bottom:16px; font-size:13px; line-height:1.6; border-radius:2px;">
+        <strong>⚠️ Important:</strong> This prompt relates to a legal, financial, or employment matter. AI output is a starting point only — always review carefully and seek professional advice for important decisions. <span onclick="showPage('disclaimer')" style="color:var(--accent); cursor:pointer; text-decoration:underline;">See our disclaimer.</span>
+       </div>`
+    : '';
   const p = PROMPTS.find(x => x.id === id);
   if (!p) return;
 
@@ -974,7 +982,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="page" id="page-disclaimer">
   <div style="max-width:720px; margin:0 auto; padding:48px 32px 80px;">
     <div class="section-title" style="margin-bottom:8px;">Disclaimer</div>
-    <p style="color:var(--muted); margin-bottom:40px; font-size:14px;">Last updated: May 2025</p>
+    <p style="color:var(--muted); margin-bottom:40px; font-size:14px;">Last updated: May 2025 &nbsp;|&nbsp; This site is operated from England, United Kingdom</p>
 
     <div style="display:flex; flex-direction:column; gap:32px;">
 
@@ -1013,8 +1021,58 @@ document.addEventListener("DOMContentLoaded", () => {
         <p style="line-height:1.7;">This disclaimer is governed by the laws of England and Wales. Any disputes arising from your use of this website shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
       </div>
 
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">No warranty — provided as is</h3>
+        <p style="line-height:1.7;">This website and all content are provided on an "as is" and "as available" basis without warranties of any kind. We make no warranty that the site will be uninterrupted, error-free, or free of harmful components. Your use of the site is at your sole risk.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Indemnification</h3>
+        <p style="line-height:1.7;">By using this site, you agree to indemnify, defend, and hold harmless Nail in the Head and its operators from any claims, liabilities, damages, losses, costs, or expenses arising from your use of this site, your use of any AI-generated content produced using our prompts, or your violation of these terms.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Age restriction</h3>
+        <p style="line-height:1.7;">This website is intended for users aged 18 and over. By using this site you confirm that you are at least 18 years of age. We accept no liability for use of this site by anyone under 18.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Copyright protection</h3>
+        <p style="line-height:1.7;">All original content — including the prompt library, design, text, and branding — is protected under UK copyright law. Unauthorised reproduction or commercial redistribution of our prompt library in whole or substantial part is prohibited. Individual prompts may be freely used for personal and commercial purposes as outlined in our Terms of Use.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Right to remove or change content</h3>
+        <p style="line-height:1.7;">We reserve the right to modify, update, or remove any prompt or content at any time without notice. We accept no liability for reliance placed on content that has since been changed or removed.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Right to refuse service</h3>
+        <p style="line-height:1.7;">We reserve the right to refuse access to this site to anyone we reasonably believe is using it for unlawful, harmful, or abusive purposes without notice or liability.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Sensitive prompt categories</h3>
+        <p style="line-height:1.7;">This site contains prompts relating to legal matters, financial decisions, employment disputes, benefits claims, and medical communications. These are starting points only — not a replacement for qualified professional advice. You must review, adapt, and take full responsibility for any content you use from this site.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Future monetisation disclosure</h3>
+        <p style="line-height:1.7;">This site may in future contain paid features, sponsored content, or affiliate links. Any such content will be clearly labelled. Sponsorship or affiliate relationships will never influence the content of our free prompt library.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Data breach policy</h3>
+        <p style="line-height:1.7;">In the event of a data breach affecting your personal information, we will notify affected users within 72 hours of becoming aware, as required by UK GDPR, and notify the Information Commissioner's Office (ICO) where required by law.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:10px;">Governing law and jurisdiction</h3>
+        <p style="line-height:1.7;">This disclaimer and all matters relating to your use of this site are governed exclusively by the laws of England and Wales. You irrevocably submit to the exclusive jurisdiction of the courts of England and Wales for resolution of any dispute, regardless of where you are located.</p>
+      </div>
+
       <div style="background:var(--card-bg); border:1px solid var(--border); padding:24px; margin-top:8px;">
-        <p style="line-height:1.7; margin:0;"><strong>In plain English:</strong> Our prompts are a helpful starting point — not a substitute for proper professional advice. Use them sensibly, review what the AI produces, and get expert help for anything important.</p>
+        <p style="line-height:1.7; margin:0;"><strong>In plain English:</strong> Our prompts are a helpful starting point — not professional advice. You use them at your own risk. You must be 18+. Don't steal our content or use the site for anything illegal. Get expert help for anything important.</p>
       </div>
 
     </div>
