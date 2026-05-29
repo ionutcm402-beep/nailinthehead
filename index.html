@@ -334,6 +334,13 @@ body {
   gap: 0;
 }
 
+mark {
+  background: #fff176;
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
 .no-results {
   padding: 48px 24px;
   font-size: 18px;
@@ -2004,37 +2011,65 @@ function handleSearch() {
   renderPrompts();
 }
 
+/* ---- SCORE a prompt against a search query ---- */
+function scorePrompt(p, query) {
+  if (!query) return 1;
+  const terms = query.split(/\s+/).filter(Boolean);
+  const fields = [
+    { text: p.title.toLowerCase(),            weight: 10 },
+    { text: p.desc.toLowerCase(),             weight: 6  },
+    { text: (p.tip || "").toLowerCase(),      weight: 4  },
+    { text: p.prompt.toLowerCase(),           weight: 3  },
+    { text: CATS[p.cat].toLowerCase(),        weight: 2  }
+  ];
+
+  let score = 0;
+  for (const term of terms) {
+    let termHit = false;
+    for (const field of fields) {
+      if (field.text.includes(term)) {
+        score += field.weight;
+        termHit = true;
+      }
+    }
+    if (!termHit) return 0; // every term must match somewhere
+  }
+  return score;
+}
+
 /* ---- RENDER PROMPT CARDS ---- */
 function renderPrompts() {
   const grid = document.getElementById("promptGrid");
   if (!grid) return;
 
-  const filtered = PROMPTS.filter(p => {
-    const matchCat = currentCat === "all" || p.cat === currentCat;
-    const matchSearch = !currentSearch ||
-      p.title.toLowerCase().includes(currentSearch) ||
-      p.desc.toLowerCase().includes(currentSearch) ||
-      CATS[p.cat].toLowerCase().includes(currentSearch);
-    return matchCat && matchSearch;
-  });
+  let results = PROMPTS
+    .filter(p => currentCat === "all" || p.cat === currentCat)
+    .map(p => ({ p, score: scorePrompt(p, currentSearch) }))
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(x => x.p);
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="no-results">No prompts found for "<strong>${currentSearch}</strong>". Try something else.</div>`;
+  if (results.length === 0) {
+    grid.innerHTML = `<div class="no-results">No prompts found for "<strong>${currentSearch}</strong>". Try a different word — e.g. "complaint", "CV", "benefits".</div>`;
     return;
   }
 
-  grid.innerHTML = filtered.map(p => `
+  grid.innerHTML = results.map(p => {
+    const titleHtml = currentSearch
+      ? p.title.replace(new RegExp(`(${currentSearch.split(/\s+/).join("|")})`, "gi"), "<mark>$1</mark>")
+      : p.title;
+    return `
     <div class="prompt-card">
       <div class="card-cat">${CATS[p.cat]}</div>
-      <div class="card-title">${p.title}</div>
+      <div class="card-title">${titleHtml}</div>
       <div class="card-desc">${p.desc}</div>
       <div class="prompt-preview">${p.preview}</div>
       <div class="card-footer">
         <button class="copy-btn" id="copy-${p.id}" onclick="quickCopy(${p.id})">Copy prompt</button>
         <button class="expand-btn" onclick="openModal(${p.id})">View full ↗</button>
       </div>
-    </div>
-  `).join("");
+    </div>`;
+  }).join("");
 }
 
 /* ---- QUICK COPY (from card) ---- */
