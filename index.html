@@ -172,15 +172,15 @@
     <h2>Submit<br>a prompt</h2>
     <p class="subtitle">Know a prompt that gets brilliant results? Share it here and help other people get more out of AI. If it's good, we'll add it to the site.</p>
 
-    <form id="submitForm" novalidate>
+    <form id="submitForm" action="https://formspree.io/f/xojbryzb" method="POST" novalidate>
       <div class="form-group">
         <label class="form-label" for="submitTitle">Prompt title</label>
-        <input class="form-input" type="text" id="submitTitle" placeholder="e.g. Write a letter to dispute a parking fine" maxlength="80" />
+        <input class="form-input" type="text" id="submitTitle" name="Prompt Title" placeholder="e.g. Write a letter to dispute a parking fine" maxlength="80" />
         <div class="form-hint">Keep it short and clear — what does this prompt do?</div>
       </div>
       <div class="form-group">
         <label class="form-label" for="submitCat">Category</label>
-        <select class="form-select" id="submitCat">
+        <select class="form-select" id="submitCat" name="Category">
           <option value="">— Choose a category —</option>
           <option value="general">General</option>
           <option value="work">Work</option>
@@ -193,18 +193,20 @@
       </div>
       <div class="form-group">
         <label class="form-label" for="submitDesc">Short description</label>
-        <input class="form-input" type="text" id="submitDesc" placeholder="One or two sentences describing what this prompt does" maxlength="160" />
+        <input class="form-input" type="text" id="submitDesc" name="Description" placeholder="One or two sentences describing what this prompt does" maxlength="160" />
       </div>
       <div class="form-group">
         <label class="form-label" for="submitPrompt">The prompt</label>
-        <textarea class="form-textarea" id="submitPrompt" placeholder="Paste your full prompt here. Use [SQUARE BRACKETS] for parts the user fills in."></textarea>
+        <textarea class="form-textarea" id="submitPrompt" name="Prompt" placeholder="Paste your full prompt here. Use [SQUARE BRACKETS] for parts the user fills in."></textarea>
         <div class="form-hint">Use [SQUARE BRACKETS] for any parts the user needs to customise.</div>
       </div>
       <div class="form-group">
         <label class="form-label" for="submitTip">Tip for users (optional)</label>
-        <input class="form-input" type="text" id="submitTip" placeholder="e.g. Works best if you paste the actual document into the prompt" maxlength="200" />
+        <input class="form-input" type="text" id="submitTip" name="Tip" placeholder="e.g. Works best if you paste the actual document into the prompt" maxlength="200" />
       </div></div>
       <button class="submit-form-btn" type="submit">Submit my prompt →</button>
+      <input type="hidden" name="_subject" value="New prompt submission — Nail in the Head" />
+      <input type="hidden" name="_next" value="https://ionutcm402-beep.github.io/nailinthehead" />
       <div class="success-msg" id="submitSuccess">
         <strong>Thank you!</strong> Your prompt has been received. Thank you! If it's a good fit we'll add it to the site.
       </div>
