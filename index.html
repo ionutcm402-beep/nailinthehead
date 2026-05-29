@@ -74,12 +74,12 @@
     </div>
   </section>
 
-  <section style="padding: 32px 32px 0;">
-    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:24px;">
+  <section style="padding: 48px 32px 0;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:32px;">
       <div class="section-title" style="margin-bottom:0;">Featured prompts</div>
-      <button class="expand-btn" onclick="showPage('prompts')" style="font-size:14px; padding:8px 16px;">See all →</button>
+      <button class="expand-btn" onclick="showPage('prompts')" style="font-size:14px; padding:8px 18px;">See all →</button>
     </div>
-    <div class="prompt-grid" id="featuredGrid" style="padding:0;"></div>
+    <div id="featuredGrid"></div>
   </section>
 
   <!-- Premium teaser banner -->
@@ -498,22 +498,26 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const featuredGrid = document.getElementById("featuredGrid");
-    if (featuredGrid) {
-      featuredGrid.innerHTML = PROMPTS.slice(0, 6).map(p => `
-        <div class="prompt-card">
-          <div class="card-cat">${CATS[p.cat]}</div>
-          <div class="card-title">${p.title}</div>
-          <div class="card-desc">${p.desc}</div>
-          <div class="prompt-preview">${p.preview}</div>
-          <div class="card-footer">
-            <button class="copy-btn" id="copy-home-${p.id}" onclick="quickCopy(${p.id})">Copy prompt</button>
-            <button class="expand-btn" onclick="openModal(${p.id})">View full ↗</button>
-          </div>
-        </div>
-      `).join("");
-    }
     document.getElementById("promptCount").textContent = PROMPTS.length;
+
+    // Featured grid — 8 cards, same site style
+    const featuredIds = [1, 22, 36, 62, 93, 122, 153, 185];
+    const fps = featuredIds.map(id => PROMPTS.find(p => p.id === id)).filter(Boolean);
+    const grid = document.getElementById("featuredGrid");
+    grid.style.cssText = "display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; padding:0;";
+    grid.innerHTML = fps.map(p => `
+      <div class="prompt-card">
+        <div class="card-cat">${CATS[p.cat]}</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="prompt-preview">${p.preview}</div>
+        <div class="card-footer">
+          <button class="copy-btn" id="copy-home-${p.id}" onclick="quickCopy(${p.id})">Copy prompt</button>
+          <button class="expand-btn" onclick="openModal(${p.id})">View full ↗</button>
+        </div>
+      </div>
+    `).join("");
+  });
   });
 </script>
 </body>
