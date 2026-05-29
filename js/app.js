@@ -1,356 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nail in the Head — AI Prompts for Real Life</title>
-  <meta name="description" content="Ready-to-use AI prompts for everyday life. Copy, paste, done. No tech knowledge needed." />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+/* =============================================
+   NAIL IN THE HEAD — Main JavaScript
+   ============================================= */
 
-<!-- ===================== HEADER ===================== -->
-<header class="site-header">
-  <a class="logo-wrap" onclick="showPage('home'); return false;" href="#">
-    <div class="logo">Nail in the <span>Head</span></div>
-    <div class="logo-tagline">AI prompts for real life — copy, paste, done</div>
-  </a>
-  <nav class="header-nav">
-    <a class="nav-link active" data-page="home"    onclick="showPage('home');    return false;" href="#">Home</a>
-    <a class="nav-link"        data-page="prompts" onclick="showPage('prompts'); return false;" href="#">All prompts</a>
-    <a class="nav-link"        data-page="how"     onclick="showPage('how');     return false;" href="#">How it works</a>
-    <a class="nav-link"        data-page="submit"  onclick="showPage('submit');  return false;" href="#">Submit a prompt</a>
-    <a class="nav-cta"         onclick="showPage('premium'); return false;" href="#">Get premium ⭐</a>
-  </nav>
-</header>
+const CATS = {
+  general:  "General",
+  all:      "All",
+  work:     "Work",
+  money:    "Money",
+  letters:  "Letters & Complaints",
+  everyday: "Everyday Life",
+  business: "Small Business",
+  writing:  "Writing"
+};
 
+let currentCat = "all";
+let currentSearch = "";
 
-<!-- ===================== PAGE: HOME ===================== -->
-<div class="page active" id="page-home">
+/* ---- NAVIGATION ---- */
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
 
-  <section class="hero">
-    <div class="hero-left">
-      <h1>Stop<br>Wasting<br><em>Time</em><br>With AI</h1>
-    </div>
-    <div class="hero-right">
-      <p>Most people get <strong>rubbish results from AI</strong> because they don't know what to type. We've done the hard work. Every prompt here is tested, tweaked, and ready to copy straight into ChatGPT or Claude.</p>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num" id="promptCount">16</div>
-          <div class="stat-label">Free prompts</div>
-        </div>
-        <div>
-          <div class="stat-num">6</div>
-          <div class="stat-label">Categories</div>
-        </div>
-        <div>
-          <div class="stat-num">0</div>
-          <div class="stat-label">Experience needed</div>
-        </div>
-      </div>
-      <button class="hero-btn" onclick="showPage('prompts')">Browse all prompts →</button>
-    </div>
-  </section>
+  const page = document.getElementById("page-" + pageId);
+  if (page) page.classList.add("active");
 
-  <section class="how-section">
-    <div class="section-title">How it works</div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Find your prompt</h3>
-        <p>Browse by category or search for what you need. Complaint letter? Pay rise? CV? We've got it.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>Copy it</h3>
-        <p>One click and the prompt is on your clipboard. Fill in the bits in [brackets] with your details.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>Paste into AI</h3>
-        <p>Open ChatGPT or Claude, paste, hit send. Get back a proper result — not generic nonsense.</p>
-      </div>
-    </div>
-  </section>
+  const link = document.querySelector(`[data-page="${pageId}"]`);
+  if (link) link.classList.add("active");
 
-  <section style="padding: 32px 32px 0;">
-    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:24px;">
-      <div class="section-title" style="margin-bottom:0;">Featured prompts</div>
-      <button class="expand-btn" onclick="showPage('prompts')" style="font-size:14px; padding:8px 16px;">See all →</button>
-    </div>
-    <div class="prompt-grid" id="featuredGrid" style="padding:0;"></div>
-  </section>
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
-  <!-- Premium teaser banner -->
-  <section class="premium-banner" onclick="showPage('premium')">
-    <div class="premium-banner-inner">
-      <div>
-        <div class="premium-banner-tag">Coming soon</div>
-        <div class="premium-banner-title">Nail in the Head Premium</div>
-        <div class="premium-banner-sub">Advanced prompts, new packs every month, priority support. Join the waitlist — it's free.</div>
-      </div>
-      <button class="premium-banner-btn">Join the waitlist →</button>
-    </div>
-  </section>
+  if (pageId === "prompts") renderPrompts();
+}
 
-</div>
+/* ---- CATEGORY FILTER ---- */
+function setCategory(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderPrompts();
+}
 
+/* ---- SEARCH ---- */
+function handleSearch() {
+  currentSearch = document.getElementById("searchInput").value.toLowerCase().trim();
+  renderPrompts();
+}
 
-<!-- ===================== PAGE: PROMPTS ===================== -->
-<div class="page" id="page-prompts">
+/* ---- RENDER PROMPT CARDS ---- */
+function renderPrompts() {
+  const grid = document.getElementById("promptGrid");
+  if (!grid) return;
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search prompts... e.g. complaint letter, pay rise, CV..." oninput="handleSearch()" />
-    <button onclick="handleSearch()">SEARCH</button>
-  </div>
-
-  <div class="categories">
-    <span class="cat-label">Filter:</span>
-    <button class="cat-btn active" onclick="setCategory('all', this)">All</button>
-    <button class="cat-btn" onclick="setCategory('work', this)">Work</button>
-    <button class="cat-btn" onclick="setCategory('money', this)">Money</button>
-    <button class="cat-btn" onclick="setCategory('letters', this)">Letters &amp; Complaints</button>
-    <button class="cat-btn" onclick="setCategory('everyday', this)">Everyday Life</button>
-    <button class="cat-btn" onclick="setCategory('business', this)">Small Business</button>
-    <button class="cat-btn" onclick="setCategory('writing', this)">Writing</button>
-  </div>
-
-  <main class="prompt-grid" id="promptGrid"></main>
-
-</div>
-
-
-<!-- ===================== PAGE: HOW IT WORKS ===================== -->
-<div class="page" id="page-how">
-  <div class="how-page">
-    <h2>How it<br>works</h2>
-    <p class="subtitle">You don't need to be a tech expert. If you can copy and paste, you can get brilliant results from AI.</p>
-
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-step-num">1</div>
-        <div class="how-step-content">
-          <h3>Find the prompt you need</h3>
-          <p>Browse our library by category — Work, Money, Letters, Everyday Life, Small Business, and Writing. Or use the search bar to find exactly what you need. Every prompt is written for a real, specific situation.</p>
-        </div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">2</div>
-        <div class="how-step-content">
-          <h3>Copy the prompt</h3>
-          <p>Click "Copy prompt" and the whole thing is on your clipboard. Every prompt has bits in [square brackets] — those are the parts you fill in with your own details. The more specific you are, the better the result.</p>
-        </div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">3</div>
-        <div class="how-step-content">
-          <h3>Open ChatGPT or Claude</h3>
-          <p>Go to <a href="https://chat.openai.com" target="_blank" rel="noopener" style="color:var(--accent);">chat.openai.com</a> or <a href="https://claude.ai" target="_blank" rel="noopener" style="color:var(--accent);">claude.ai</a>. Both are free to use. Paste your prompt and hit send.</p>
-        </div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">4</div>
-        <div class="how-step-content">
-          <h3>Get your result</h3>
-          <p>Within seconds you'll have a proper, tailored response. If you want to tweak it, just tell the AI what to change — "make it shorter", "make it more formal", "add a paragraph about X".</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ai-works-box">
-      <h3>Which AI should I use?</h3>
-      <p>Both ChatGPT and Claude are free and brilliant. You don't need to pay for anything to get started.</p>
-      <p><strong style="color:#fff;">ChatGPT</strong> — made by OpenAI. Very popular, great at most tasks.</p>
-      <p><strong style="color:#fff;">Claude</strong> — made by Anthropic. Excellent at reading long documents and being direct.</p>
-      <p>Our prompts work on both. Try them and see which you prefer.</p>
-      <div class="ai-links">
-        <a class="ai-link" href="https://chat.openai.com" target="_blank" rel="noopener">Open ChatGPT →</a>
-        <a class="ai-link" href="https://claude.ai" target="_blank" rel="noopener">Open Claude →</a>
-      </div>
-    </div>
-
-    <div style="text-align:center; padding-top:8px;">
-      <button class="hero-btn" onclick="showPage('prompts')">Browse all prompts →</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ===================== PAGE: SUBMIT ===================== -->
-<div class="page" id="page-submit">
-  <div class="submit-page">
-    <h2>Submit<br>a prompt</h2>
-    <p class="subtitle">Know a prompt that gets brilliant results? Share it here and help other people get more out of AI. If it's good, we'll add it to the site.</p>
-
-    <form id="submitForm" novalidate>
-      <div class="form-group">
-        <label class="form-label" for="submitTitle">Prompt title</label>
-        <input class="form-input" type="text" id="submitTitle" placeholder="e.g. Write a letter to dispute a parking fine" maxlength="80" />
-        <div class="form-hint">Keep it short and clear — what does this prompt do?</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="submitCat">Category</label>
-        <select class="form-select" id="submitCat">
-          <option value="">— Choose a category —</option>
-          <option value="general">General</option>
-          <option value="work">Work</option>
-          <option value="money">Money</option>
-          <option value="letters">Letters &amp; Complaints</option>
-          <option value="everyday">Everyday Life</option>
-          <option value="business">Small Business</option>
-          <option value="writing">Writing</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="submitDesc">Short description</label>
-        <input class="form-input" type="text" id="submitDesc" placeholder="One or two sentences describing what this prompt does" maxlength="160" />
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="submitPrompt">The prompt</label>
-        <textarea class="form-textarea" id="submitPrompt" placeholder="Paste your full prompt here. Use [SQUARE BRACKETS] for parts the user fills in."></textarea>
-        <div class="form-hint">Use [SQUARE BRACKETS] for any parts the user needs to customise.</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="submitTip">Tip for users (optional)</label>
-        <input class="form-input" type="text" id="submitTip" placeholder="e.g. Works best if you paste the actual document into the prompt" maxlength="200" />
-      </div></div>
-      <button class="submit-form-btn" type="submit">Submit my prompt →</button>
-      <div class="success-msg" id="submitSuccess">
-        <strong>Thank you!</strong> Your prompt has been received. Thank you! If it's a good fit we'll add it to the site.
-      </div>
-    </form>
-  </div>
-</div>
-
-
-<!-- ===================== PAGE: PREMIUM ===================== -->
-<div class="page" id="page-premium">
-  <div class="premium-page">
-
-    <div class="premium-hero">
-      <div class="premium-hero-tag">Coming soon</div>
-      <h2 class="premium-hero-title">Nail in the Head<br><span>Premium</span></h2>
-      <p class="premium-hero-sub">We are working on premium prompt packs for specific topics and jobs. Join the waitlist — we will email you when it launches and you will get 50% off your first 3 months.</p>
-    </div>
-
-    <div class="premium-plans">
-
-      <div class="plan-card plan-free">
-        <div class="plan-label">Free — always</div>
-        <div class="plan-price">£0<span>/month</span></div>
-        <ul class="plan-features">
-          <li class="yes">All current prompts</li>
-          <li class="yes">Copy with one click</li>
-          <li class="yes">Search and filter</li>
-          <li class="yes">Submit your own prompts</li>
-          <li class="no">Advanced prompt packs</li>
-          <li class="no">New prompts every week</li>
-          <li class="no">Topic prompt packs</li>
-          <li class="no">Members-first access</li>
-        </ul>
-        <button class="plan-btn-free" onclick="showPage('prompts')">Start using free →</button>
-      </div>
-
-      <div class="plan-card plan-premium">
-        <div class="plan-badge">Waitlist open</div>
-        <div class="plan-label">Premium</div>
-        <div class="plan-price">£3.99<span>/month</span></div>
-        <ul class="plan-features">
-          <li class="yes">Everything in free</li>
-          <li class="yes">Full topic prompt packs</li>
-          <li class="yes">New packs added regularly</li>
-          <li class="yes">Packs built around real life situations</li>
-          <li class="yes">Members get new prompts first</li>
-          <li class="yes">50% off your first 3 months</li>
-        </ul>
-        <button class="plan-btn-premium" onclick="scrollToWaitlist()">Join the waitlist →</button>
-      </div>
-
-    </div>
-
-    <!-- Waitlist form -->
-    <div class="waitlist-section" id="waitlistSection">
-      <div class="waitlist-inner">
-        <div class="waitlist-title">Join the waitlist</div>
-        <p class="waitlist-sub">No payment needed. We'll email you when Premium launches — early members get 50% off their first 3 months.</p>
-        <form id="waitlistForm" class="waitlist-form" novalidate>
-          <div class="waitlist-row">
-            <input class="form-input" type="text"  id="waitlistName"  placeholder="Your first name" />
-            <input class="form-input" type="email" id="waitlistEmail" placeholder="Your email address" />
-            <button class="waitlist-btn" type="submit">Reserve my spot →</button>
-          </div>
-          <div class="waitlist-note">No spam. No sharing your details. Just a heads-up when we launch.</div>
-        </form>
-        <div class="success-msg" id="waitlistSuccess" style="margin-top:20px;">
-          <strong>You're on the list!</strong> We'll email you before we launch so you get 50% off your first 3 months. Thank you for the support.
-        </div>
-      </div>
-    </div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ===================== MODAL ===================== -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-cat" id="modalCat"></div>
-        <div class="modal-title" id="modalTitle"></div>
-      </div>
-      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-    </div>
-    <div class="modal-body">
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-label">Copy this prompt exactly</div>
-      <div class="modal-prompt" id="modalPrompt"></div>
-      <div class="modal-tip" id="modalTip"></div>
-      <button class="modal-copy-btn" id="modalCopyBtn" onclick="copyModalPrompt()">Copy prompt to clipboard</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== TOAST ===================== -->
-<div class="toast" id="toast"></div>
-
-<!-- ===================== FOOTER ===================== -->
-<footer class="site-footer">
-  <div class="footer-left">
-    <p><strong>Nail in the Head</strong> — nailinthehead.org</p>
-    <p>Built for real people. No jargon. No nonsense.</p>
-  </div>
-  <div class="footer-links">
-    <a class="footer-link" onclick="showPage('prompts')">All prompts</a>
-    <a class="footer-link" onclick="showPage('how')">How it works</a>
-    <a class="footer-link" onclick="showPage('premium')">Premium</a>
-    <a class="footer-link" onclick="showPage('submit')">Submit a prompt</a>
-  </div>
-</footer>
-
-<script src="data/prompts.js"></script>
-<script src="js/app.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const featuredGrid = document.getElementById("featuredGrid");
-    if (featuredGrid) {
-      featuredGrid.innerHTML = PROMPTS.slice(0, 6).map(p => `
-        <div class="prompt-card">
-          <div class="card-cat">${CATS[p.cat]}</div>
-          <div class="card-title">${p.title}</div>
-          <div class="card-desc">${p.desc}</div>
-          <div class="prompt-preview">${p.preview}</div>
-          <div class="card-footer">
-            <button class="copy-btn" id="copy-home-${p.id}" onclick="quickCopy(${p.id})">Copy prompt</button>
-            <button class="expand-btn" onclick="openModal(${p.id})">View full ↗</button>
-          </div>
-        </div>
-      `).join("");
-    }
-    document.getElementById("promptCount").textContent = PROMPTS.length;
+  const filtered = PROMPTS.filter(p => {
+    const matchCat = currentCat === "all" || p.cat === currentCat;
+    const matchSearch = !currentSearch ||
+      p.title.toLowerCase().includes(currentSearch) ||
+      p.desc.toLowerCase().includes(currentSearch) ||
+      CATS[p.cat].toLowerCase().includes(currentSearch);
+    return matchCat && matchSearch;
   });
-</script>
-</body>
-</html>
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results">No prompts found for "<strong>${currentSearch}</strong>". Try something else.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="prompt-card">
+      <div class="card-cat">${CATS[p.cat]}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="prompt-preview">${p.preview}</div>
+      <div class="card-footer">
+        <button class="copy-btn" id="copy-${p.id}" onclick="quickCopy(${p.id})">Copy prompt</button>
+        <button class="expand-btn" onclick="openModal(${p.id})">View full ↗</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* ---- QUICK COPY (from card) ---- */
+function quickCopy(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+  navigator.clipboard.writeText(p.prompt).then(() => {
+    const btn = document.getElementById("copy-" + id);
+    if (btn) {
+      btn.textContent = "Copied ✓";
+      btn.classList.add("copied");
+      setTimeout(() => {
+        btn.textContent = "Copy prompt";
+        btn.classList.remove("copied");
+      }, 2000);
+    }
+    showToast("Prompt copied to clipboard!");
+  });
+}
+
+/* ---- MODAL ---- */
+function openModal(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById("modalCat").textContent = CATS[p.cat];
+  document.getElementById("modalTitle").textContent = p.title;
+  document.getElementById("modalDesc").textContent = p.desc;
+  document.getElementById("modalPrompt").textContent = p.prompt;
+  document.getElementById("modalTip").textContent = p.tip;
+
+  const copyBtn = document.getElementById("modalCopyBtn");
+  copyBtn.textContent = "Copy prompt to clipboard";
+  copyBtn.classList.remove("copied");
+  copyBtn._promptId = id;
+
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById("modalOverlay")) {
+    document.getElementById("modalOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+}
+
+function copyModalPrompt() {
+  const text = document.getElementById("modalPrompt").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("modalCopyBtn");
+    btn.textContent = "Copied ✓";
+    btn.classList.add("copied");
+    showToast("Prompt copied to clipboard!");
+    setTimeout(() => {
+      btn.textContent = "Copy prompt to clipboard";
+      btn.classList.remove("copied");
+    }, 2500);
+  });
+}
+
+/* ---- SUBMIT FORM ---- */
+function handleSubmit(e) {
+  e.preventDefault();
+  const title = document.getElementById("submitTitle").value.trim();
+  const cat   = document.getElementById("submitCat").value;
+  const desc  = document.getElementById("submitDesc").value.trim();
+  const prompt = document.getElementById("submitPrompt").value.trim();
+
+  if (!title || !cat || !desc || !prompt) {
+    showToast("Please fill in all fields before submitting.");
+    return;
+  }
+
+  /* In a real deployment, you'd POST this to a backend or Formspree.
+     For now we show a success message and log it. */
+  console.log("Submitted prompt:", { title, cat, desc, prompt });
+
+  document.getElementById("submitSuccess").style.display = "block";
+  document.getElementById("submitForm").reset();
+  document.getElementById("submitSuccess").scrollIntoView({ behavior: "smooth" });
+}
+
+/* ---- TOAST ---- */
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+/* ---- KEYBOARD ---- */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+});
+
+/* ---- INIT ---- */
+document.addEventListener("DOMContentLoaded", () => {
+  renderPrompts();
+
+  /* Search on enter key */
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") handleSearch();
+    });
+  }
+
+  /* Submit form */
+  const form = document.getElementById("submitForm");
+  if (form) form.addEventListener("submit", handleSubmit);
+});
