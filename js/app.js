@@ -138,28 +138,6 @@ function copyModalPrompt() {
   });
 }
 
-/* ---- SUBMIT FORM ---- */
-function handleSubmit(e) {
-  e.preventDefault();
-  const title = document.getElementById("submitTitle").value.trim();
-  const cat   = document.getElementById("submitCat").value;
-  const desc  = document.getElementById("submitDesc").value.trim();
-  const prompt = document.getElementById("submitPrompt").value.trim();
-
-  if (!title || !cat || !desc || !prompt) {
-    showToast("Please fill in all fields before submitting.");
-    return;
-  }
-
-  /* In a real deployment, you'd POST this to a backend or Formspree.
-     For now we show a success message and log it. */
-  console.log("Submitted prompt:", { title, cat, desc, prompt });
-
-  document.getElementById("submitSuccess").style.display = "block";
-  document.getElementById("submitForm").reset();
-  document.getElementById("submitSuccess").scrollIntoView({ behavior: "smooth" });
-}
-
 /* ---- TOAST ---- */
 function showToast(msg) {
   const toast = document.getElementById("toast");
@@ -186,6 +164,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Submit form */
-  const form = document.getElementById("submitForm");
-  if (form) form.addEventListener("submit", handleSubmit);
+  /* Formspree handles form submission directly */
 });
