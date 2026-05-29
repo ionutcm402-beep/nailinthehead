@@ -263,17 +263,15 @@
       <div class="waitlist-inner">
         <div class="waitlist-title">Join the waitlist</div>
         <p class="waitlist-sub">No payment needed. We'll email you when Premium launches — early members get 50% off their first 3 months.</p>
-        <form id="waitlistForm" class="waitlist-form" novalidate>
+        <form class="waitlist-form" action="https://formspree.io/f/mzdwoqaq" method="POST">
+          <input type="hidden" name="_subject" value="New Premium Waitlist Signup — Nail in the Head" />
           <div class="waitlist-row">
-            <input class="form-input" type="text"  id="waitlistName"  placeholder="Your first name" />
-            <input class="form-input" type="email" id="waitlistEmail" placeholder="Your email address" />
+            <input class="form-input" type="text"  name="First Name"  placeholder="Your first name" required />
+            <input class="form-input" type="email" name="Email" placeholder="Your email address" required />
             <button class="waitlist-btn" type="submit">Reserve my spot →</button>
           </div>
           <div class="waitlist-note">No spam. No sharing your details. Just a heads-up when we launch.</div>
         </form>
-        <div class="success-msg" id="waitlistSuccess" style="margin-top:20px;">
-          <strong>You're on the list!</strong> We'll email you before we launch so you get 50% off your first 3 months. Thank you for the support.
-        </div>
       </div>
     </div>
     </div>
