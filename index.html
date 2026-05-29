@@ -2049,16 +2049,16 @@ function quickCopy(id) {
 
 /* ---- MODAL ---- */
 function openModal(id) {
-  const sensitiveCategories = ['letters', 'money', 'work'];
   const p = PROMPTS.find(x => x.id === id);
-  const warningHtml = p && sensitiveCategories.includes(p.cat)
+  if (!p) return;
+  const sensitiveCategories = ['letters', 'money', 'work'];
+  const warningHtml = sensitiveCategories.includes(p.cat)
     ? `<div style="background:#fff8e1; border-left:4px solid #f39c12; padding:12px 16px; margin-bottom:16px; font-size:13px; line-height:1.6; border-radius:2px;">
         <strong>⚠️ Important:</strong> This prompt relates to a legal, financial, or employment matter. AI output is a starting point only — always review carefully and seek professional advice for important decisions. <span onclick="showPage('disclaimer')" style="color:var(--accent); cursor:pointer; text-decoration:underline;">See our disclaimer.</span>
        </div>`
     : '';
-  const p = PROMPTS.find(x => x.id === id);
-  if (!p) return;
 
+  document.getElementById("modalWarning").innerHTML = warningHtml;
   document.getElementById("modalCat").textContent = CATS[p.cat];
   document.getElementById("modalTitle").textContent = p.title;
   document.getElementById("modalDesc").textContent = p.desc;
