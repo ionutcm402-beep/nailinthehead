@@ -1556,7 +1556,15 @@ mark {
   #page-services .examples,
   #page-services .svc-contact { padding:5rem 1.5rem; }
 }
-  </style>
+  
+/* ---- BLOG POST BODY ---- */
+.blog-post-body h2 { font-family: var(--font-display); font-size: 26px; letter-spacing: 1px; margin: 40px 0 16px; }
+.blog-post-body p { margin-bottom: 20px; }
+.blog-post-body blockquote { border-left: 3px solid var(--accent); padding: 16px 24px; margin: 32px 0; background: #f5f0e8; font-size: 17px; font-style: italic; color: var(--black); }
+.blog-post-body em { font-style: italic; }
+.blog-post-body strong { font-weight: 600; }
+
+</style>
 </head>
 <body>
 
@@ -1573,6 +1581,8 @@ mark {
     <a class="nav-link"        data-page="course"   onclick="showPage('course');   return false;" href="#">Free course</a>
     <a class="nav-link"        data-page="prompts"  onclick="showPage('prompts');  return false;" href="#">All prompts</a>
     <a class="nav-link"        data-page="services" onclick="showPage('services'); return false;" href="#">Services</a>
+    <a class="nav-link"        data-page="blog"     onclick="showPage('blog');     return false;" href="#">My Blog</a>
+    <a class="nav-link"        data-page="community" onclick="showPage('community'); return false;" href="#">AI — My New Religion</a>
     <a class="nav-cta"         onclick="showPage('book-full'); return false;" href="#">Get Your Free Book →</a>
   </nav>
 </header>
@@ -2201,6 +2211,176 @@ mark {
 </div><!-- end last page -->
 
 
+
+
+<!-- ===================== PAGE: COMMUNITY ===================== -->
+<div class="page" id="page-community">
+
+  <!-- Hero -->
+  <div style="background:var(--black); padding:80px 48px; position:relative; overflow:hidden;">
+    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--accent), #c8952a, var(--accent));"></div>
+    <div style="position:absolute; top:-100px; right:-100px; width:400px; height:400px; border-radius:50%; border:1px solid rgba(255,255,255,0.03);"></div>
+    <div style="position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; border:1px solid rgba(255,255,255,0.05);"></div>
+    <div style="max-width:900px; margin:0 auto; position:relative;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:20px; font-family:var(--font-display);">A COMMUNITY</p>
+      <h1 style="font-family:var(--font-display); font-size:clamp(44px,6vw,80px); line-height:0.95; color:#f5f0e8; margin-bottom:24px; letter-spacing:-1px;">AI — MY NEW<br><span style="color:var(--accent);">RELIGION</span></h1>
+      <p style="font-size:18px; color:#888; line-height:1.75; max-width:580px; margin-bottom:48px;">A community for people who believe AI is the most important thing happening in the world right now — and want to talk about it honestly, without the hype or the fear.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <button onclick="document.getElementById('community-join').scrollIntoView({behavior:'smooth'})" style="background:var(--accent); color:#fff; border:none; padding:16px 32px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px;">JOIN THE COMMUNITY →</button>
+        <button onclick="document.getElementById('community-manifesto').scrollIntoView({behavior:'smooth'})" style="background:transparent; color:#f5f0e8; border:1px solid #333; padding:16px 32px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px;">READ THE MANIFESTO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div style="background:#111; padding:28px 48px; border-bottom:1px solid #222;">
+    <div style="max-width:900px; margin:0 auto; display:flex; gap:48px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:var(--accent);">0</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Members so far</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:#f5f0e8;">Free</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Always</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:#f5f0e8;">1</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Simple rule</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manifesto -->
+  <div style="padding:80px 48px; background:var(--bg);" id="community-manifesto">
+    <div style="max-width:720px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:24px;">THE MANIFESTO</p>
+
+      <div style="display:flex; flex-direction:column; gap:32px;">
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe AI is the printing press of our generation.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">Most people are still asleep. They see AI as a novelty — a toy that writes poems and makes funny pictures. We see it differently. This is infrastructure. This is civilisation-level change. And it's happening right now.</p>
+        </div>
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe in using it honestly — not pretending.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">We're not here to hide that we use AI. We're not here to pretend everything it produces is perfect. We use it openly, we talk about it honestly, and we learn from each other about how to use it better.</p>
+        </div>
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe the people who don't learn this will be left behind.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">Not because AI is taking over — but because the people who know how to use it will have an enormous advantage in every area of life. We want everyone to have that advantage, not just the tech-savvy.</p>
+        </div>
+        <div style="border-left:3px solid #ddd; padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">The one rule: no hype, no fear.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">We're not doomers and we're not evangelists. We're curious, practical people who want to understand what's actually happening and make the most of it. That's all this is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What you get -->
+  <div style="background:#f5f0e8; padding:72px 48px; border-top:1px solid var(--border);">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">WHAT YOU GET</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(28px,3.5vw,44px); margin-bottom:48px; line-height:1.1;">When you join the community.</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border);">
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">01</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Weekly AI digest</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">The most important AI news of the week — filtered, explained in plain English, and told straight. No fluff, no clickbait.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">02</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">New prompts first</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">Community members get new prompts before anyone else. Real situations, tested prompts, sent straight to your inbox.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">03</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Honest conversation</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">A place to ask questions, share what's working, and talk about AI without being made to feel stupid or being sold something.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">04</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">The free book</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">Every member gets a free copy of The Age of Intelligence — a full book on AI and society, written in plain English.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">05</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Early access</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">First look at new features, new services, and new content before it goes public. Community members help shape what gets built.</p>
+        </div>
+
+        <div style="background:var(--black); padding:36px 28px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+          <div style="font-family:var(--font-display); font-size:48px; color:var(--accent); margin-bottom:8px;">£0</div>
+          <div style="font-size:14px; color:#888; line-height:1.7;">Free. Always.<br>No credit card.<br>No catch.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Join form -->
+  <div style="background:var(--black); padding:80px 48px;" id="community-join">
+    <div style="max-width:600px; margin:0 auto; text-align:center;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; font-family:var(--font-display);">JOIN THE COMMUNITY</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(32px,4vw,52px); color:#f5f0e8; margin-bottom:16px; line-height:1.05;">Be one of the first.</h2>
+      <p style="font-size:16px; color:#888; line-height:1.75; margin-bottom:40px;">Enter your email and you're in. You'll get the free book, the weekly digest, and early access to everything we build. No spam. Unsubscribe any time.</p>
+
+      <form id="communityForm" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+        <input type="email" id="communityEmail" placeholder="your@email.com" required style="flex:1; min-width:240px; padding:16px 20px; font-size:16px; border:1px solid #333; background:#111; color:#fff; font-family:'DM Sans',sans-serif;" />
+        <button type="submit" style="background:var(--accent); color:#fff; border:none; padding:16px 28px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px; white-space:nowrap;">JOIN →</button>
+      </form>
+      <div id="communityThanks" style="display:none; margin-top:24px;">
+        <div style="font-family:var(--font-display); font-size:28px; color:#f5f0e8; margin-bottom:8px;">✓ Welcome to the community.</div>
+        <p style="color:#888; font-size:15px;">Check your email for the free book and your first digest. See you on the inside.</p>
+      </div>
+      <p style="font-size:12px; color:#444; margin-top:20px;">No spam. No credit card. No catch. Just good conversation about AI.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== PAGE: BLOG ===================== -->
+<div class="page" id="page-blog">
+
+  <!-- Header -->
+  <div style="border-bottom:1px solid var(--border); padding:56px 48px 40px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">MY BLOG</p>
+      <h1 style="font-family:var(--font-display); font-size:clamp(36px,5vw,64px); line-height:1; margin-bottom:16px;">Thoughts on AI,<br>writing, and real life.</h1>
+      <p style="font-size:16px; color:var(--muted); max-width:560px; line-height:1.7;">Plain English takes on AI, how to use it, what it means, and everything in between. No hype. No jargon. Just honest writing.</p>
+    </div>
+  </div>
+
+  <!-- Posts rendered by JS -->
+  <div style="max-width:1100px; margin:0 auto; padding:56px 48px 48px;">
+    <div id="blogPostsGrid"></div>
+
+    <!-- Newsletter signup -->
+    <div style="background:var(--black); padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; margin-top:48px;">
+      <div>
+        <div style="font-family:var(--font-display); font-size:24px; color:#f5f0e8; margin-bottom:8px;">Get new posts by email</div>
+        <p style="color:#888; font-size:14px; margin:0;">No spam. Just honest writing about AI, once or twice a month.</p>
+      </div>
+      <form id="blogEmailForm" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <input type="email" id="blogEmail" placeholder="your@email.com" required style="padding:14px 18px; font-size:15px; min-width:220px; border:1px solid #333; background:#111; color:#fff; font-family:'DM Sans',sans-serif;" />
+        <button type="submit" style="background:var(--accent); color:#fff; border:none; padding:14px 24px; font-family:var(--font-display); font-size:18px; cursor:pointer; letter-spacing:1px; white-space:nowrap;">SUBSCRIBE →</button>
+      </form>
+      <div id="blogThanks" style="display:none; color:#f5f0e8; font-size:15px;">✓ You're subscribed. Thank you!</div>
+    </div>
+  </div>
+
+  <!-- Single post view -->
+  <div id="blogPostView" style="display:none; max-width:760px; margin:0 auto; padding:56px 48px 80px;">
+    <button onclick="closeBlogPost()" style="background:none; border:none; font-family:var(--font-display); font-size:16px; letter-spacing:1px; cursor:pointer; color:var(--accent); margin-bottom:40px; padding:0;">← BACK TO BLOG</button>
+    <div id="blogPostContent"></div>
+  </div>
+
+</div>
+
 <!-- ===================== PAGE: DISCLAIMER ===================== -->
 <div class="page" id="page-disclaimer">
   <div style="max-width:720px; margin:0 auto; padding:48px 32px 80px;">
@@ -2685,6 +2865,229 @@ mark {
 
 </div>
 
+
+
+<!-- ===================== PAGE: COMMUNITY ===================== -->
+<div class="page" id="page-community">
+
+  <!-- Hero -->
+  <div style="background:var(--black); padding:80px 48px; position:relative; overflow:hidden;">
+    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--accent), #c8952a, var(--accent));"></div>
+    <div style="position:absolute; top:-100px; right:-100px; width:400px; height:400px; border-radius:50%; border:1px solid rgba(255,255,255,0.03);"></div>
+    <div style="position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; border:1px solid rgba(255,255,255,0.05);"></div>
+    <div style="max-width:900px; margin:0 auto; position:relative;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:20px; font-family:var(--font-display);">A COMMUNITY</p>
+      <h1 style="font-family:var(--font-display); font-size:clamp(44px,6vw,80px); line-height:0.95; color:#f5f0e8; margin-bottom:24px; letter-spacing:-1px;">AI — MY NEW<br><span style="color:var(--accent);">RELIGION</span></h1>
+      <p style="font-size:18px; color:#888; line-height:1.75; max-width:580px; margin-bottom:48px;">A community for people who believe AI is the most important thing happening in the world right now — and want to talk about it honestly, without the hype or the fear.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <button onclick="document.getElementById('community-join').scrollIntoView({behavior:'smooth'})" style="background:var(--accent); color:#fff; border:none; padding:16px 32px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px;">JOIN THE COMMUNITY →</button>
+        <button onclick="document.getElementById('community-manifesto').scrollIntoView({behavior:'smooth'})" style="background:transparent; color:#f5f0e8; border:1px solid #333; padding:16px 32px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px;">READ THE MANIFESTO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div style="background:#111; padding:28px 48px; border-bottom:1px solid #222;">
+    <div style="max-width:900px; margin:0 auto; display:flex; gap:48px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:var(--accent);">0</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Members so far</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:#f5f0e8;">Free</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Always</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:36px; color:#f5f0e8;">1</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; margin-top:4px;">Simple rule</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manifesto -->
+  <div style="padding:80px 48px; background:var(--bg);" id="community-manifesto">
+    <div style="max-width:720px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:24px;">THE MANIFESTO</p>
+
+      <div style="display:flex; flex-direction:column; gap:32px;">
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe AI is the printing press of our generation.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">Most people are still asleep. They see AI as a novelty — a toy that writes poems and makes funny pictures. We see it differently. This is infrastructure. This is civilisation-level change. And it's happening right now.</p>
+        </div>
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe in using it honestly — not pretending.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">We're not here to hide that we use AI. We're not here to pretend everything it produces is perfect. We use it openly, we talk about it honestly, and we learn from each other about how to use it better.</p>
+        </div>
+        <div style="border-left:3px solid var(--accent); padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">We believe the people who don't learn this will be left behind.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">Not because AI is taking over — but because the people who know how to use it will have an enormous advantage in every area of life. We want everyone to have that advantage, not just the tech-savvy.</p>
+        </div>
+        <div style="border-left:3px solid #ddd; padding-left:28px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; margin-bottom:10px;">The one rule: no hype, no fear.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.8;">We're not doomers and we're not evangelists. We're curious, practical people who want to understand what's actually happening and make the most of it. That's all this is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What you get -->
+  <div style="background:#f5f0e8; padding:72px 48px; border-top:1px solid var(--border);">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">WHAT YOU GET</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(28px,3.5vw,44px); margin-bottom:48px; line-height:1.1;">When you join the community.</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border);">
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">01</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Weekly AI digest</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">The most important AI news of the week — filtered, explained in plain English, and told straight. No fluff, no clickbait.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">02</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">New prompts first</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">Community members get new prompts before anyone else. Real situations, tested prompts, sent straight to your inbox.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">03</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Honest conversation</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">A place to ask questions, share what's working, and talk about AI without being made to feel stupid or being sold something.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">04</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">The free book</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">Every member gets a free copy of The Age of Intelligence — a full book on AI and society, written in plain English.</p>
+        </div>
+
+        <div style="background:#f5f0e8; padding:36px 28px;">
+          <div style="font-family:var(--font-display); font-size:36px; color:var(--accent); margin-bottom:16px;">05</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:10px;">Early access</h3>
+          <p style="font-size:14px; color:var(--muted); line-height:1.7;">First look at new features, new services, and new content before it goes public. Community members help shape what gets built.</p>
+        </div>
+
+        <div style="background:var(--black); padding:36px 28px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+          <div style="font-family:var(--font-display); font-size:48px; color:var(--accent); margin-bottom:8px;">£0</div>
+          <div style="font-size:14px; color:#888; line-height:1.7;">Free. Always.<br>No credit card.<br>No catch.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Join form -->
+  <div style="background:var(--black); padding:80px 48px;" id="community-join">
+    <div style="max-width:600px; margin:0 auto; text-align:center;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; font-family:var(--font-display);">JOIN THE COMMUNITY</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(32px,4vw,52px); color:#f5f0e8; margin-bottom:16px; line-height:1.05;">Be one of the first.</h2>
+      <p style="font-size:16px; color:#888; line-height:1.75; margin-bottom:40px;">Enter your email and you're in. You'll get the free book, the weekly digest, and early access to everything we build. No spam. Unsubscribe any time.</p>
+
+      <form id="communityForm" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+        <input type="email" id="communityEmail" placeholder="your@email.com" required style="flex:1; min-width:240px; padding:16px 20px; font-size:16px; border:1px solid #333; background:#111; color:#fff; font-family:'DM Sans',sans-serif;" />
+        <button type="submit" style="background:var(--accent); color:#fff; border:none; padding:16px 28px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px; white-space:nowrap;">JOIN →</button>
+      </form>
+      <div id="communityThanks" style="display:none; margin-top:24px;">
+        <div style="font-family:var(--font-display); font-size:28px; color:#f5f0e8; margin-bottom:8px;">✓ Welcome to the community.</div>
+        <p style="color:#888; font-size:15px;">Check your email for the free book and your first digest. See you on the inside.</p>
+      </div>
+      <p style="font-size:12px; color:#444; margin-top:20px;">No spam. No credit card. No catch. Just good conversation about AI.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== PAGE: BLOG ===================== -->
+<div class="page" id="page-blog">
+
+  <!-- Header -->
+  <div style="border-bottom:1px solid var(--border); padding:56px 48px 40px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">MY BLOG</p>
+      <h1 style="font-family:var(--font-display); font-size:clamp(36px,5vw,64px); line-height:1; margin-bottom:16px;">Thoughts on AI,<br>writing, and real life.</h1>
+      <p style="font-size:16px; color:var(--muted); max-width:560px; line-height:1.7;">Plain English takes on AI, how to use it, what it means, and everything in between. No hype. No jargon. Just honest writing.</p>
+    </div>
+  </div>
+
+  <!-- Blog posts grid -->
+  <div style="max-width:1100px; margin:0 auto; padding:56px 48px 80px;">
+
+    <!-- FEATURED POST -->
+    <div style="border:1px solid var(--border); padding:48px; margin-bottom:32px; cursor:pointer; transition:border-color .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'" onclick="showPage('blog-post-1')">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+        <span style="background:var(--accent); color:#fff; font-size:11px; font-weight:700; letter-spacing:2px; padding:4px 12px; font-family:var(--font-display);">FEATURED</span>
+        <span style="font-size:13px; color:var(--muted);">31 May 2026</span>
+        <span style="font-size:13px; color:var(--muted);">·</span>
+        <span style="font-size:13px; color:var(--muted);">5 min read</span>
+      </div>
+      <h2 style="font-family:var(--font-display); font-size:clamp(24px,3vw,38px); line-height:1.1; margin-bottom:16px;">Why most people get rubbish answers from AI — and how to fix it in 30 seconds</h2>
+      <p style="font-size:15px; color:var(--muted); line-height:1.75; max-width:700px; margin-bottom:24px;">Everyone's tried AI. Most people typed something vague, got something useless back, and gave up. Here's the one thing that changes everything — and it takes about 30 seconds to learn.</p>
+      <div style="font-size:14px; color:var(--accent); font-weight:600;">Read more →</div>
+    </div>
+
+    <!-- POSTS GRID -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:48px;">
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">AI BASICS</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">What is ChatGPT actually doing when you type something?</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">A plain English explanation of how AI language models work — no maths, no jargon, no PhD required.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">REAL LIFE</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">I challenged my parking fine using AI. Here's exactly what I typed.</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">A step-by-step walkthrough of using AI to write a parking fine appeal — including the prompt, the result, and what happened next.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">OPINION</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">AI isn't replacing jobs. It's replacing the people who don't use it.</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">The uncomfortable truth about AI and work — and what you should actually be doing about it right now.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">HOW TO</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">5 things you can do with AI today that will save you an hour this week</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">Practical, specific, and ready to try right now. No setup. No paid subscriptions. Just free tools doing useful things.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">MONEY</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">How I used AI to find £800 in benefits I didn't know I was entitled to</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">A real story about using AI to navigate the UK benefits system — and what it found that I'd been missing for two years.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+      <div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="showPage('blog-post-1')">
+        <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">BEGINNERS</div>
+        <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">Claude vs ChatGPT vs Gemini — which one should a beginner use?</h3>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">An honest, plain English comparison of the three main free AI tools — tested on real everyday tasks, not tech benchmarks.</p>
+        <div style="font-size:12px; color:var(--muted);">Coming soon</div>
+      </div>
+
+    </div>
+
+    <!-- Newsletter signup -->
+    <div style="background:var(--black); padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+      <div>
+        <div style="font-family:var(--font-display); font-size:24px; color:#f5f0e8; margin-bottom:8px;">Get new posts by email</div>
+        <p style="color:#888; font-size:14px; margin:0;">No spam. Just honest writing about AI, once or twice a month.</p>
+      </div>
+      <form id="blogEmailForm" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <input type="email" id="blogEmail" placeholder="your@email.com" required style="padding:14px 18px; font-size:15px; min-width:220px; border:1px solid #333; background:#111; color:#fff; font-family:'DM Sans',sans-serif;" />
+        <button type="submit" style="background:var(--accent); color:#fff; border:none; padding:14px 24px; font-family:var(--font-display); font-size:18px; cursor:pointer; letter-spacing:1px; white-space:nowrap;">SUBSCRIBE →</button>
+      </form>
+      <div id="blogThanks" style="display:none; color:#f5f0e8; font-size:15px;">✓ You're subscribed. Thank you!</div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ===================== PAGE: DISCLAIMER ===================== -->
 <div class="page" id="page-disclaimer">
   <div style="max-width:720px; margin:0 auto; padding:48px 32px 80px;">
@@ -2757,6 +3160,8 @@ mark {
   <p style="margin:0; line-height:1.5;">🍪 This site uses essential cookies only. We don't track you or run ads. <a onclick="showPage('privacy'); dismissCookie();" style="color:#c0392b; cursor:pointer; text-decoration:underline;">Privacy Policy</a></p>
   <button onclick="dismissCookie()" style="background:#c0392b; color:#fff; border:none; padding:10px 20px; font-family:'DM Sans',sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">Got it</button>
 </div>
+
+<script src="posts.js"></script>
 
 <script>
 const PROMPTS = [
@@ -3366,6 +3771,115 @@ document.addEventListener("DOMContentLoaded", () => {
       try { await fetch("https://formspree.io/f/mzdwoqaq", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email, source:"book-download"}) }); } catch(err) {}
       bookForm.style.display = "none";
       document.getElementById("bookThankYou").style.display = "block";
+    });
+  }
+
+  // ---- BLOG ----
+  function renderBlog() {
+    const grid = document.getElementById("blogPostsGrid");
+    if (!grid || typeof POSTS === "undefined") return;
+
+    const featured = POSTS.find(p => p.featured);
+    const rest = POSTS.filter(p => !p.featured);
+
+    let out = "";
+
+    // Featured post
+    if (featured) {
+      out += `<div style="border:1px solid var(--border); padding:48px; margin-bottom:32px; cursor:pointer; transition:border-color .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'" onclick="openBlogPost('${featured.id}')">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
+          <span style="background:var(--accent); color:#fff; font-size:11px; font-weight:700; letter-spacing:2px; padding:4px 12px; font-family:var(--font-display);">FEATURED</span>
+          <span style="font-size:13px; color:var(--muted);">${featured.date}</span>
+          <span style="font-size:13px; color:var(--muted);">·</span>
+          <span style="font-size:13px; color:var(--muted);">${featured.readTime}</span>
+          <span style="font-size:11px; letter-spacing:2px; color:var(--accent); font-family:var(--font-display);">${featured.category}</span>
+        </div>
+        <h2 style="font-family:var(--font-display); font-size:clamp(24px,3vw,38px); line-height:1.1; margin-bottom:16px;">${featured.title}</h2>
+        <p style="font-size:15px; color:var(--muted); line-height:1.75; max-width:700px; margin-bottom:24px;">${featured.excerpt}</p>
+        <div style="font-size:14px; color:var(--accent); font-weight:600;">Read more →</div>
+      </div>`;
+    }
+
+    // Grid of other posts
+    if (rest.length > 0) {
+      out += `<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:0;">`;
+      rest.forEach(p => {
+        out += `<div style="background:var(--bg); padding:32px 28px; cursor:pointer; transition:background .2s;" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='var(--bg)'" onclick="openBlogPost('${p.id}')">
+          <div style="font-size:11px; letter-spacing:2px; color:var(--accent); margin-bottom:12px; font-family:var(--font-display);">${p.category}</div>
+          <h3 style="font-family:var(--font-display); font-size:20px; line-height:1.2; margin-bottom:12px;">${p.title}</h3>
+          <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">${p.excerpt}</p>
+          <div style="font-size:12px; color:var(--accent); font-weight:600;">${p.date} · ${p.readTime}</div>
+        </div>`;
+      });
+      out += `</div>`;
+    }
+
+    if (POSTS.length === 0) {
+      out = `<div style="text-align:center; padding:80px 0; color:var(--muted);">
+        <div style="font-family:var(--font-display); font-size:24px; margin-bottom:12px;">No posts yet</div>
+        <p>Check back soon.</p>
+      </div>`;
+    }
+
+    grid.innerHTML = out;
+  }
+
+  function openBlogPost(id) {
+    if (typeof POSTS === "undefined") return;
+    const post = POSTS.find(p => p.id === id);
+    if (!post) return;
+    document.getElementById("blogPostsGrid").parentElement.style.display = "none";
+    const view = document.getElementById("blogPostView");
+    view.style.display = "block";
+    document.getElementById("blogPostContent").innerHTML = `
+      <div style="font-size:11px; letter-spacing:2px; color:var(--accent); font-family:var(--font-display); margin-bottom:12px;">${post.category}</div>
+      <h1 style="font-family:var(--font-display); font-size:clamp(28px,4vw,52px); line-height:1.05; margin-bottom:16px;">${post.title}</h1>
+      <div style="font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--border);">${post.date} &nbsp;·&nbsp; ${post.readTime}</div>
+      <div style="font-size:16px; line-height:1.85; color:var(--black);"
+        class="blog-post-body">${post.content}</div>
+      <div style="margin-top:56px; padding-top:32px; border-top:1px solid var(--border);">
+        <button onclick="closeBlogPost()" style="background:none; border:none; font-family:var(--font-display); font-size:16px; letter-spacing:1px; cursor:pointer; color:var(--accent); padding:0;">← BACK TO BLOG</button>
+      </div>
+    `;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function closeBlogPost() {
+    document.getElementById("blogPostView").style.display = "none";
+    document.getElementById("blogPostsGrid").parentElement.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Render blog when page is shown
+  const origShowPage = showPage;
+  showPage = function(pageId) {
+    origShowPage(pageId);
+    if (pageId === "blog") renderBlog();
+  };
+
+  const communityForm = document.getElementById("communityForm");
+  if (communityForm) {
+    communityForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const email = document.getElementById("communityEmail").value;
+      const btn = communityForm.querySelector("button");
+      if (btn) { btn.textContent = "..."; btn.disabled = true; }
+      try { await fetch("https://formspree.io/f/mzdwoqaq", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email, source:"community"}) }); } catch(err) {}
+      communityForm.style.display = "none";
+      document.getElementById("communityThanks").style.display = "block";
+    });
+  }
+
+  const blogForm = document.getElementById("blogEmailForm");
+  if (blogForm) {
+    blogForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const email = document.getElementById("blogEmail").value;
+      const btn = blogForm.querySelector("button");
+      if (btn) { btn.textContent = "..."; btn.disabled = true; }
+      try { await fetch("https://formspree.io/f/mzdwoqaq", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email, source:"blog-newsletter"}) }); } catch(err) {}
+      blogForm.style.display = "none";
+      document.getElementById("blogThanks").style.display = "block";
     });
   }
 
