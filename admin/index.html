@@ -4,44 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nail in the Head — Blog Admin</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; img-src * data: blob:; connect-src *; font-src * data:; frame-src *;">
 </head>
 <body>
-  <script>
-    window.CMS_MANUAL_INIT = true;
-  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: 'github',
-          repo: 'ionutcm402-beep/nailinthehead',
-          branch: 'main',
-          base_url: 'https://nailinthehead-oauth.ionutcm402.workers.dev',
-          auth_endpoint: '/auth'
-        },
-        media_folder: 'images',
-        public_folder: '/images',
-        collections: [
-          {
-            name: 'posts',
-            label: 'Blog Posts',
-            folder: '_posts',
-            create: true,
-            slug: '{{slug}}',
-            fields: [
-              { label: 'Title', name: 'title', widget: 'string' },
-              { label: 'Date', name: 'date', widget: 'datetime', format: 'D MMMM YYYY' },
-              { label: 'Category', name: 'category', widget: 'select', options: ['AI BASICS','REAL LIFE','OPINION','HOW TO','MONEY','BEGINNERS','SERVICES'] },
-              { label: 'Read time', name: 'readTime', widget: 'string', default: '5 min read' },
-              { label: 'Excerpt', name: 'excerpt', widget: 'text' },
-              { label: 'Featured post', name: 'featured', widget: 'boolean', default: false },
-              { label: 'Content', name: 'body', widget: 'markdown' }
-            ]
-          }
-        ]
-      }
-    });
-  </script>
 </body>
 </html>
