@@ -1565,102 +1565,151 @@ mark {
 <header class="site-header">
   <a class="logo-wrap" onclick="showPage('home'); return false;" href="#">
     <div class="logo">Nail in the <span>Head</span></div>
-    <div class="logo-tagline">AI prompts for real life — copy, paste, done</div>
+    <div class="logo-tagline" onclick="showPage('book-full')" style="cursor:pointer; color:var(--accent);">Get a free copy of The Age of Intelligence →</div>
   </a>
   <nav class="header-nav">
-    <a class="nav-link active" data-page="home"    onclick="showPage('home');    return false;" href="#">Home</a>
-    <a class="nav-link"        data-page="prompts" onclick="showPage('prompts'); return false;" href="#">All prompts</a>
-    <a class="nav-link"        data-page="start"   onclick="showPage('start');   return false;" href="#">Beginner's Guide</a>
-    <a class="nav-link"        data-page="course"  onclick="showPage('course');  return false;" href="#">Free course</a>
-    <a class="nav-link"        data-page="submit"  onclick="showPage('submit');  return false;" href="#">Submit a prompt</a>
-    <a class="nav-cta"         onclick="showPage('book-full'); return false;" href="#">Get the Book →</a>
-    <a class="nav-link" data-page="services" onclick="showPage('services'); return false;" href="#">Services</a>
+    <a class="nav-link active" data-page="home"     onclick="showPage('home');     return false;" href="#">Home</a>
+    <a class="nav-link"        data-page="start"    onclick="showPage('start');    return false;" href="#">Beginner's Guide</a>
+    <a class="nav-link"        data-page="course"   onclick="showPage('course');   return false;" href="#">Free course</a>
+    <a class="nav-link"        data-page="prompts"  onclick="showPage('prompts');  return false;" href="#">All prompts</a>
+    <a class="nav-link"        data-page="services" onclick="showPage('services'); return false;" href="#">Services</a>
+    <a class="nav-cta"         onclick="showPage('book-full'); return false;" href="#">Get Your Free Book →</a>
   </nav>
 </header>
 
 
 <!-- ===================== PAGE: HOME ===================== -->
 <div class="page active" id="page-home">
+  <span id="promptCount" style="display:none;">210</span>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <h1>AI for<br>people who<br><em>don't do tech</em></h1>
+  <!-- HERO — full bleed, split layout -->
+  <section style="min-height:100vh; display:grid; grid-template-columns:1fr 1fr; background:var(--bg);">
+
+    <!-- Left: text -->
+    <div style="display:flex; flex-direction:column; justify-content:center; padding:80px 56px 80px 48px; position:relative;">
+      <div style="position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent);"></div>
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:28px;">AI FOR REAL LIFE — COPY, PASTE, DONE</p>
+      <h1 style="font-family:var(--font-display); font-size:clamp(52px,6vw,88px); line-height:0.93; letter-spacing:-1px; margin-bottom:32px; color:var(--black);">AI FOR<br>PEOPLE<br>WHO<br><span style="color:var(--accent);">DON'T DO<br>TECH</span></h1>
+      <p style="font-size:17px; line-height:1.75; color:var(--muted); max-width:440px; margin-bottom:40px;">Everyone's talking about AI. Most people tried it, got a confusing answer, and gave up. <strong style="color:var(--black);">That's not your fault.</strong> Nobody taught you how to talk to it. We do.</p>
+
     </div>
-    <div class="hero-right">
-      <p>Everyone's talking about AI. Most people have tried it, got a confusing answer, and given up. <strong>That's not your fault.</strong> Nobody taught you how to talk to it. That's exactly what we do here — in plain English, no jargon, no nonsense.</p>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num" id="promptCount">210</div>
-          <div class="stat-label">Free prompts</div>
+
+    <!-- Right: visual grid -->
+    <div style="background:var(--black); display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr 1fr; gap:1px; background-color:#333;">
+
+      <div style="background:var(--black); padding:32px 28px; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer;" onclick="showPage('prompts')">
+        <div style="font-family:var(--font-display); font-size:48px; color:var(--accent); line-height:1; margin-bottom:8px;">210</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#666; text-transform:uppercase;">Free prompts</div>
+      </div>
+
+      <div style="background:#0f0f0f; padding:32px 28px; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer;" onclick="showPage('course')">
+        <div style="font-family:var(--font-display); font-size:48px; color:#f5f0e8; line-height:1; margin-bottom:8px;">5</div>
+        <div style="font-size:11px; letter-spacing:2px; color:#666; text-transform:uppercase;">Free lessons</div>
+      </div>
+
+      <div style="background:#111; padding:28px; grid-column:span 2; display:flex; align-items:center; gap:20px; cursor:pointer;" onclick="showPage('start')">
+        <div style="width:48px; height:48px; background:var(--accent); flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:var(--font-display); font-size:22px; color:#fff;">?</span>
         </div>
         <div>
-          <div class="stat-num">7</div>
-          <div class="stat-label">Categories</div>
-        </div>
-        <div>
-          <div class="stat-num">0</div>
-          <div class="stat-label">Experience needed</div>
+          <div style="font-family:var(--font-display); font-size:18px; color:#f5f0e8; letter-spacing:1px; margin-bottom:4px;">NEW TO AI?</div>
+          <div style="font-size:13px; color:#666; line-height:1.5;">Read the Beginner's Guide — plain English, no jargon, no tech knowledge needed.</div>
         </div>
       </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <button class="hero-btn" onclick="showPage('start')">Beginner's Guide — Start here →</button>
-        <button class="hero-btn" onclick="showPage('prompts')" style="background:transparent; border:2px solid var(--black); color:var(--black);">Browse prompts</button>
+
+      <div style="background:#0a0a0a; padding:28px; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer; border-top:2px solid #c8952a;" onclick="showPage('book-full')">
+        <div style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:20px; color:#c8952a; margin-bottom:6px;">Free book</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">The Age of Intelligence — download free</div>
       </div>
+
+      <div style="background:#0a0a0a; padding:28px; display:flex; flex-direction:column; justify-content:flex-end; cursor:pointer; border-top:2px solid #f5f0e8;" onclick="showPage('services')">
+        <div style="font-family:var(--font-display); font-size:20px; color:#f5f0e8; letter-spacing:1px; margin-bottom:6px;">SERVICES</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">Writing done for you — books, copy, scripts</div>
+      </div>
+
     </div>
   </section>
 
   <!-- WHO THIS IS FOR -->
-  <section style="background:var(--black); padding:56px 32px; margin:0;">
-    <div style="max-width:900px; margin:0 auto;">
-      <div style="font-family:var(--font-display); font-size:13px; letter-spacing:3px; color:#888; margin-bottom:24px;">THIS IS FOR YOU IF...</div>
+  <section style="background:var(--black); padding:56px 48px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:#555; margin-bottom:24px;">THIS IS FOR YOU IF...</p>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
-        <div style="border-left:3px solid var(--accent); padding-left:20px;">
-          <p style="color:#f5f0e8; font-size:16px; line-height:1.6; margin:0;">You've heard of ChatGPT but aren't really sure what to do with it</p>
-        </div>
-        <div style="border-left:3px solid var(--accent); padding-left:20px;">
-          <p style="color:#f5f0e8; font-size:16px; line-height:1.6; margin:0;">You tried AI once, got a weird answer, and haven't been back since</p>
-        </div>
-        <div style="border-left:3px solid var(--accent); padding-left:20px;">
-          <p style="color:#f5f0e8; font-size:16px; line-height:1.6; margin:0;">You feel like AI is for tech people — and you're definitely not one of those</p>
-        </div>
-        <div style="border-left:3px solid #444; padding-left:20px;">
-          <p style="color:#f5f0e8; font-size:16px; line-height:1.6; margin:0;">You want to write a complaint letter, sort your finances, or deal with your landlord — and want help doing it</p>
-        </div>
-        <div style="border-left:3px solid #444; padding-left:20px;">
-          <p style="color:#f5f0e8; font-size:16px; line-height:1.6; margin:0;">You just want something that works, explained properly, without being made to feel stupid</p>
-        </div>
-        <div style="border-left:3px solid var(--accent); padding-left:20px;">
-          <p style="color:var(--accent); font-size:18px; font-weight:600; line-height:1.6; margin:0;">Then you're in exactly the right place.</p>
-        </div>
+        <div style="border-left:3px solid var(--accent); padding-left:20px;"><p style="color:#f5f0e8; font-size:15px; line-height:1.7; margin:0;">You've heard of ChatGPT but aren't really sure what to do with it</p></div>
+        <div style="border-left:3px solid var(--accent); padding-left:20px;"><p style="color:#f5f0e8; font-size:15px; line-height:1.7; margin:0;">You tried AI once, got a weird answer, and haven't been back since</p></div>
+        <div style="border-left:3px solid var(--accent); padding-left:20px;"><p style="color:#f5f0e8; font-size:15px; line-height:1.7; margin:0;">You feel like AI is for tech people — and you're definitely not one of those</p></div>
+        <div style="border-left:3px solid #333; padding-left:20px;"><p style="color:#f5f0e8; font-size:15px; line-height:1.7; margin:0;">You want to write a complaint letter, sort your finances, or deal with your landlord</p></div>
+        <div style="border-left:3px solid #333; padding-left:20px;"><p style="color:#f5f0e8; font-size:15px; line-height:1.7; margin:0;">You just want something that works, explained properly, without feeling stupid</p></div>
+        <div style="border-left:3px solid var(--accent); padding-left:20px;"><p style="color:var(--accent); font-size:17px; font-weight:600; line-height:1.6; margin:0;">Then you're in exactly the right place.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS — reframed -->
+  <!-- WHAT WE OFFER -->
+  <section style="padding:64px 48px; background:var(--bg);">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">EVERYTHING ON THIS SITE</p>
+      <h2 style="font-family:var(--font-display); font-size:clamp(28px,3.5vw,42px); margin-bottom:48px; line-height:1.1;">Four ways we can help.</h2>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
 
+        <div style="border:1px solid var(--border); padding:32px 24px; cursor:pointer; transition:border-color .2s, transform .2s;" onclick="showPage('prompts')" onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform=''">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--accent); margin-bottom:12px;">210</div>
+          <div style="font-family:var(--font-display); font-size:18px; letter-spacing:1px; margin-bottom:12px;">FREE PROMPTS</div>
+          <p style="font-size:14px; line-height:1.7; color:var(--muted); margin-bottom:20px;">Copy-paste prompts for real life — complaint letters, CVs, pay rises, benefits, and more.</p>
+          <div style="font-size:13px; color:var(--accent); font-weight:600;">Browse all →</div>
+        </div>
 
+        <div style="border:1px solid var(--border); padding:32px 24px; cursor:pointer; transition:border-color .2s, transform .2s;" onclick="showPage('start')" onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform=''">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--accent); margin-bottom:12px;">01</div>
+          <div style="font-family:var(--font-display); font-size:18px; letter-spacing:1px; margin-bottom:12px;">BEGINNER'S GUIDE</div>
+          <p style="font-size:14px; line-height:1.7; color:var(--muted); margin-bottom:20px;">Never used AI before? Start here. Plain English, no jargon, step by step.</p>
+          <div style="font-size:13px; color:var(--accent); font-weight:600;">Read the guide →</div>
+        </div>
 
+        <div style="border:1px solid var(--border); padding:32px 24px; cursor:pointer; transition:border-color .2s, transform .2s;" onclick="showPage('course')" onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform=''">
+          <div style="font-family:var(--font-display); font-size:40px; color:var(--accent); margin-bottom:12px;">5</div>
+          <div style="font-family:var(--font-display); font-size:18px; letter-spacing:1px; margin-bottom:12px;">FREE LESSONS</div>
+          <p style="font-size:14px; line-height:1.7; color:var(--muted); margin-bottom:20px;">AI for Real Life — a free 5-lesson course. Enter your email, unlock everything.</p>
+          <div style="font-size:13px; color:var(--accent); font-weight:600;">Start the course →</div>
+        </div>
 
+        <div style="border:1px solid var(--border); padding:32px 24px; cursor:pointer; transition:border-color .2s, transform .2s; background:var(--black);" onclick="showPage('book-full')" onmouseover="this.style.borderColor='#c8952a'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform=''">
+          <div style="font-family:'Playfair Display',Georgia,serif; font-size:40px; color:#c8952a; margin-bottom:12px; font-style:italic;">Free</div>
+          <div style="font-family:var(--font-display); font-size:18px; letter-spacing:1px; margin-bottom:12px; color:#f5f0e8;">THE FREE BOOK</div>
+          <p style="font-size:14px; line-height:1.7; color:#888; margin-bottom:20px;">The Age of Intelligence — download free when you subscribe.</p>
+          <div style="font-size:13px; color:#c8952a; font-weight:600;">Get it free →</div>
+        </div>
 
-
-  <!-- Premium teaser banner -->
-  <section class="premium-banner" onclick="showPage('book-full')" style="background:#0e0d0b; border-top:3px solid #c8952a;">
-    <div class="premium-banner-inner">
-      <div>
-        <div class="premium-banner-tag">New Book</div>
-        <div class="premium-banner-title">The Age of Intelligence</div>
-        <div class="premium-banner-sub">Understanding AI and the Future of Human Society — free to download when you subscribe.</div>
       </div>
-      <button class="premium-banner-btn">Get the free book →</button>
+    </div>
+  </section>
+
+  <!-- SERVICES TEASER -->
+  <section style="background:#f5f0e8; padding:56px 48px; border-top:1px solid var(--border);">
+    <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+      <div style="max-width:600px;">
+        <p style="font-family:var(--font-display); font-size:12px; letter-spacing:3px; color:var(--accent); margin-bottom:12px;">WRITING SERVICES</p>
+        <h2 style="font-family:var(--font-display); font-size:clamp(24px,3vw,36px); margin-bottom:16px; line-height:1.1;">Want someone to do it for you?</h2>
+        <p style="font-size:16px; line-height:1.7; color:var(--muted); margin:0;">Books, business copy, scripts, speeches, CVs and more. AI does the heavy lifting. We make sure it sounds like you.</p>
+      </div>
+      <button onclick="showPage('services')" style="background:var(--black); color:#f5f0e8; border:none; padding:16px 32px; font-family:var(--font-display); font-size:20px; cursor:pointer; letter-spacing:1px; white-space:nowrap; flex-shrink:0;">EXPLORE SERVICES →</button>
+    </div>
+  </section>
+
+  <!-- BOOK TEASER -->
+  <section style="background:var(--black); padding:56px 48px; border-top:3px solid #c8952a; cursor:pointer;" onclick="showPage('book-full')">
+    <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+      <div>
+        <p style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#c8952a; margin-bottom:12px; font-family:'DM Mono',monospace;">Free Book</p>
+        <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(24px,3vw,40px); font-weight:700; color:#f5f1e8; line-height:1.1; margin-bottom:8px;">The Age of <em style="color:#c8952a;">Intelligence</em></h2>
+        <p style="color:#7a7568; font-size:15px; margin:0;">Understanding AI and the Future of Human Society — free when you subscribe.</p>
+      </div>
+      <button onclick="showPage('book-full')" style="background:#c8952a; color:#0e0d0b; border:none; padding:16px 32px; font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; flex-shrink:0;">GET THE FREE BOOK →</button>
     </div>
   </section>
 
 </div>
 
-
-
-<!-- ===================== PAGE: START HERE ===================== -->
 <div class="page" id="page-start">
   <div style="max-width:760px; margin:0 auto; padding:56px 32px 80px;">
 
@@ -1771,6 +1820,7 @@ mark {
     <button class="cat-btn" onclick="setCategory('business', this)">Small Business</button>
     <button class="cat-btn" onclick="setCategory('writing', this)">Writing</button>
     <button class="cat-btn" onclick="setCategory('general', this)">General</button>
+    <button class="cat-btn" onclick="showPage('submit')" style="margin-left:auto; background:transparent; border:1.5px solid var(--border); color:var(--black);">+ Submit a prompt</button>
   </div>
 
   <main class="prompt-grid" id="promptGrid"></main>
@@ -2222,8 +2272,8 @@ mark {
 <div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a1a; color:#e8e0d4; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; font-family:'DM Sans',sans-serif; font-size:14px;">
   <p style="margin:0; line-height:1.5;">🍪 This site uses essential cookies only. We don't track you or run ads. <a onclick="showPage('privacy'); dismissCookie();" style="color:#c0392b; cursor:pointer; text-decoration:underline;">Privacy Policy</a></p>
   <button onclick="dismissCookie()" style="background:#c0392b; color:#fff; border:none; padding:10px 20px; font-family:'DM Sans',sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; letter-spacing:.5px;">Got it</button>
-</div>
 
+</div>
 
 <!-- ===================== PAGE: BOOK FULL ===================== -->
 <div class="page" id="page-book-full">
