@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<link rel="canonical" href="https://nailinthehead.org/daily-upgrade"/>
+<meta property="og:image" content="https://nailinthehead.org/og-image.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:image" content="https://nailinthehead.org/og-image.jpg"/>
+<title>Daily Upgrade — What Would You Like to Improve? | Nail in the Head</title>
+<meta name="description" content="Tell me one thing you want to improve. I'll show you exactly how AI can help you get there — with real prompts you can use today."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  body{cursor:auto}
+  #dot,#ring{display:none}
+}
+/* =======================================================
+   NAIL IN THE HEAD — DAILY UPGRADE TOOL
+   ======================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+:root{
+  --void:#05060a;--abyss:#080a10;--deep:#0c0e18;--night:#101420;
+  --slate:#161c2a;--steel:#1e2638;--haze:#2a3348;
+  --bone:#ede8dc;--sand:#c8b898;--dust:#b8a888;--ash:#9a8e7a;--smoke:#7a6e5e;
+  --gold:#c8a84b;--gold2:#b89438;--gdim:rgba(200,168,75,.1);--gline:rgba(200,168,75,.12);
+  --fd:'Bebas Neue',sans-serif;
+  --fs:'Playfair Display',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --eX:cubic-bezier(.16,1,.3,1);--eB:cubic-bezier(.34,1.56,.64,1);
+}
+body{background:var(--void);color:var(--bone);font-family:var(--fb);font-weight:300;line-height:1.75;overflow-x:hidden;cursor:none}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:var(--gold)}
+::selection{background:var(--gold);color:var(--void)}
+
+/* ---- Cursor ---- */
+#C{position:fixed;width:12px;height:12px;background:var(--gold, #c8a84b);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;box-shadow:0 0 10px rgba(200,168,75,.8),0 0 20px rgba(200,168,75,.3);transition:opacity .15s;}
+#CR{position:fixed;width:40px;height:40px;border:2px solid rgba(200,168,75,.7);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0;transition:width .4s,height .4s,border-color .3s,background .3s,opacity .15s;}
+#C.on{opacity:1}#CR.on{opacity:1}
+#CR.lk{width:52px;height:52px;border-color:rgba(200,168,75,.35);background:rgba(200,168,75,.06)}
+#CR.think{border-color:transparent;border-top-color:var(--gold);animation:cspin .7s linear infinite}
+@keyframes cspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* ---- Nav ---- */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;transition:all .5s var(--eX)}
+#nav.dense{padding:12px 56px;background:rgba(5,6,10,.93);backdrop-filter:blur(32px) saturate(1.5);border-bottom:1px solid var(--gline)}
+@media(max-width:600px){
+  #navBurger{display:flex!important}
+  .nav-back-txt{display:none}
+}
+.nlogo{font-family:var(--fd);font-size:15px;letter-spacing:4px;color:var(--gold);cursor:pointer;text-decoration:none;transition:opacity .3s}
+.nlogo:hover{opacity:.6}
+.nback{font-family:var(--fb);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--smoke);background:none;border:1px solid var(--gline);padding:8px 18px;border-radius:100px;cursor:pointer;transition:all .3s}
+.nback:hover{color:var(--gold);border-color:rgba(200,168,75,.35)}
+
+/* ---- Reveal ---- */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s var(--eX),transform .85s var(--eX)}
+.rv.in{opacity:1;transform:translateY(0)}
+.rvl{opacity:0;transform:translateX(-36px);transition:opacity .85s var(--eX),transform .85s var(--eX)}
+.rvl.in{opacity:1;transform:translateX(0)}
+.rvr{opacity:0;transform:translateX(36px);transition:opacity .85s var(--eX),transform .85s var(--eX)}
+.rvr.in{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s!important}.d2{transition-delay:.2s!important}.d3{transition-delay:.3s!important}
+.d4{transition-delay:.4s!important}.d5{transition-delay:.5s!important}.d6{transition-delay:.6s!important}
+
+/* ---- Keyframes ---- */
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@keyframes ringBreath{0%,100%{transform:translate(-50%,-50%) scale(1) rotate(0deg);opacity:.4}50%{transform:translate(-50%,-50%) scale(1.06) rotate(180deg);opacity:.9}}
+@keyframes stemBreath{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(2)}}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-20px) scale(1.05)}66%{transform:translate(-18px,28px) scale(.95)}}
+@keyframes glowPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.12)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes barGrow{from{width:0!important}to{width:var(--bw)}}
+@keyframes typeBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes shimmer{0%{background-position:-400% 0}100%{background-position:400% 0}}
+
+/* ---- Shared layout ---- */
+.wrap{max-width:1240px;margin:0 auto;padding:0 56px}
+.sec{position:relative;overflow:hidden}
+.label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.label::before{content:'';width:22px;height:1px;background:var(--gold);flex-shrink:0}
+.big-title{font-family:var(--fd);font-size:clamp(52px,7vw,96px);line-height:.92;letter-spacing:-2px;color:var(--bone)}
+.serif-sub{font-family:var(--fs);font-style:italic;font-weight:300;font-size:clamp(17px,2vw,21px);color:var(--dust);line-height:1.8}
+
+/* ---- Buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--fb);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;cursor:pointer;border-radius:2px;transition:all .4s var(--eX);position:relative;overflow:hidden;border:none;text-decoration:none}
+.btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:translateX(-101%);transition:transform .4s var(--eX)}
+.btn:hover::before{transform:translateX(0)}
+.btn-gold{background:var(--gold);color:var(--void)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(200,168,75,.25)}
+.btn-ghost{background:transparent;color:var(--sand);border:1px solid rgba(200,184,152,.18)!important}
+.btn-ghost:hover{border-color:var(--gold)!important;color:var(--bone)}
+.btn-sm{padding:9px 22px;font-size:11px}
+.btn-pill{border-radius:100px;padding:8px 18px;font-size:10px;letter-spacing:1.5px;color:var(--smoke);background:none;border:1px solid var(--gdim)!important;cursor:pointer;font-family:var(--fb);text-transform:uppercase;transition:all .3s}
+.btn-pill:hover{color:var(--gold);border-color:rgba(200,168,75,.3)!important}
+
+/* =======================================================
+   HERO
+   ======================================================= */
+#hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hsky{position:absolute;inset:0;background:radial-gradient(ellipse 120% 70% at 50% 0%,#0d1824 0%,var(--void) 65%),radial-gradient(ellipse 55% 45% at 82% 88%,#0b100a 0%,transparent 60%)}
+#bCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hvign{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 20%,var(--void) 100%);pointer-events:none;z-index:2}
+.hring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1;border:1px solid rgba(200,168,75,.05);animation:ringBreath ease-in-out infinite}
+.hr1{width:660px;height:660px;animation-duration:11s}
+.hr2{width:430px;height:430px;border-color:rgba(74,184,200,.04);animation-duration:15s;animation-delay:-5s;animation-direction:reverse}
+.hr3{width:230px;height:230px;border-color:rgba(200,168,75,.09);animation-duration:7s;animation-delay:-2s}
+.horb{position:absolute;border-radius:50%;filter:blur(88px);pointer-events:none;animation:orbFloat ease-in-out infinite}
+.ho1{width:520px;height:520px;background:rgba(200,168,75,.07);top:-12%;left:18%;animation-duration:15s}
+.ho2{width:310px;height:310px;background:rgba(74,184,200,.05);bottom:2%;right:4%;animation-duration:19s;animation-delay:-7s}
+.ho3{width:200px;height:200px;background:rgba(120,88,200,.05);top:28%;left:-4%;animation-duration:12s;animation-delay:-4s}
+
+.hbody{position:relative;z-index:5;max-width:900px;padding:0 24px}
+.hsig{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:44px;opacity:0;animation:riseIn 1.2s var(--eX) .3s forwards}
+.sdot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:dotPulse 2s infinite}
+.sln{width:28px;height:1px;background:rgba(200,168,75,.35)}
+.hh1{font-family:var(--fd);font-size:clamp(68px,13vw,168px);line-height:.87;letter-spacing:-3px;color:var(--bone);margin-bottom:8px}
+.hln{display:block;overflow:hidden}
+.hinner{display:block;opacity:0;transform:translateY(105%);animation:slideUp 1.1s var(--eX) forwards}
+.hln:nth-child(1) .hinner{animation-delay:.55s}
+.hln:nth-child(2) .hinner{animation-delay:.72s;color:var(--gold)}
+.hln:nth-child(3) .hinner{animation-delay:.89s}
+.hsub{font-family:var(--fs);font-style:italic;font-weight:300;font-size:clamp(16px,2.2vw,22px);color:#c8b490;max-width:580px;margin:38px auto 54px;line-height:1.75;opacity:0;animation:riseIn 1.3s var(--eX) 1.1s forwards}
+.hacts{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:riseIn 1.1s var(--eX) 1.4s forwards}
+.hscroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:riseIn .8s var(--eX) 2s forwards}
+.hstem{width:1px;height:54px;background:linear-gradient(to bottom,var(--gold),transparent);animation:stemBreath 2.8s ease-in-out infinite;transform-origin:top}
+.hlbl{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--smoke)}
+
+/* =======================================================
+   SECTION: THE QUESTION
+   ======================================================= */
+#question{padding:100px 0 56px;background:linear-gradient(180deg,var(--void) 0%,#08090d 100%)}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end;margin-bottom:64px}
+.q-body p{font-size:16px;color:var(--dust);line-height:1.88;margin-top:20px}
+
+/* =======================================================
+   CATEGORY CARDS
+   ======================================================= */
+#picker{padding:0 0 80px;background:linear-gradient(180deg,#08090d 0%,var(--void) 100%)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:36px}
+.cat{background:var(--abyss);border:1px solid var(--gline);padding:28px 24px 24px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s var(--eX);user-select:none}
+.cat::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 25% 25%,rgba(200,168,75,.06),transparent);opacity:0;transition:opacity .4s}
+.cat::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--eX)}
+.cat:hover{background:var(--deep);border-color:rgba(200,168,75,.24);transform:translateY(-4px)}
+.cat:hover::before,.cat.on::before{opacity:1}
+.cat:hover::after,.cat.on::after{transform:scaleY(1)}
+.cat.on{background:var(--slate);border-color:rgba(200,168,75,.46);transform:translateY(-5px);box-shadow:0 22px 64px rgba(0,0,0,.5)}
+.cat-ic{font-size:28px;margin-bottom:16px;display:block}
+.cat-nm{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:var(--bone);margin-bottom:6px}
+.cat-tg{font-size:12px;color:var(--dust);line-height:1.5}
+.cat-dot{width:6px;height:6px;border-radius:50%;background:var(--smoke);margin-top:18px;transition:all .3s}
+.cat.on .cat-dot{background:var(--gold);box-shadow:0 0 10px rgba(200,168,75,.5)}
+
+/* Custom input row */
+.custom-row{display:flex;gap:12px}
+.custom-in{flex:1;background:var(--abyss);border:1px solid var(--gline);color:var(--bone);font-family:var(--fb);font-size:16px;padding:16px 22px;outline:none;transition:border-color .3s;border-radius:2px}
+.custom-in:focus{border-color:rgba(200,168,75,.42)}
+.custom-in::placeholder{color:var(--smoke)}
+
+/* =======================================================
+   THINKING STATE
+   ======================================================= */
+#thinking{display:none;padding:72px 0;text-align:center}
+.think-ring{width:60px;height:60px;border:2px solid transparent;border-top-color:var(--gold);border-radius:50%;animation:cspin .7s linear infinite;margin:0 auto 28px}
+.think-txt{font-family:var(--fs);font-style:italic;font-size:18px;color:var(--dust)}
+.think-dots span{display:inline-block;animation:dotPulse 1.4s ease-in-out infinite}
+.think-dots span:nth-child(2){animation-delay:.2s}
+.think-dots span:nth-child(3){animation-delay:.4s}
+
+/* =======================================================
+   RESULTS
+   ======================================================= */
+#results{display:none;padding:0 0 100px}
+
+/* Header strip */
+.rh{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding:52px;background:var(--abyss);border:1px solid var(--gline);margin-bottom:3px}
+.rh-eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.rh-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold)}
+.rh-title{font-family:var(--fd);font-size:clamp(40px,5vw,72px);line-height:.92;letter-spacing:-1px;color:var(--bone);margin-bottom:10px}
+.rh-sub{font-family:var(--fs);font-style:italic;font-size:18px;color:var(--dust);line-height:1.7;max-width:560px}
+
+/* Three quick wins */
+.qw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:rgba(200,168,75,.04);margin-bottom:3px}
+.qw{background:var(--deep);padding:40px 36px;position:relative;overflow:hidden;transition:background .4s,transform .3s var(--eX)}
+.qw:hover{background:var(--slate);transform:translateY(-3px)}
+.qw-bg{position:absolute;bottom:-10px;right:14px;font-family:var(--fd);font-size:90px;color:rgba(200,168,75,.04);line-height:1;pointer-events:none}
+.qw-ic{font-size:24px;margin-bottom:16px;display:block}
+.qw-title{font-family:var(--fs);font-size:18px;font-weight:700;color:var(--bone);margin-bottom:10px;line-height:1.2}
+.qw-body{font-size:14px;color:var(--dust);line-height:1.75}
+
+/* Prompt showcase */
+.ps{background:var(--abyss);border:1px solid var(--gline);margin-bottom:3px}
+.ps-head{padding:36px 48px 24px;border-bottom:1px solid rgba(200,168,75,.07)}
+.ps-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.ps-label::before{content:'';width:16px;height:1px;background:var(--gold)}
+.ps-title{font-family:var(--fd);font-size:clamp(30px,4vw,52px);letter-spacing:-1px;color:var(--bone)}
+.ps-tabs{display:flex;gap:8px;padding:20px 48px;border-bottom:1px solid rgba(200,168,75,.06);overflow-x:auto;scrollbar-width:none}
+.ps-tabs::-webkit-scrollbar{display:none}
+.tab{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border:1px solid var(--gdim);border-radius:100px;cursor:pointer;color:var(--smoke);background:none;font-family:var(--fb);white-space:nowrap;transition:all .3s}
+.tab:hover{color:var(--sand);border-color:rgba(200,168,75,.25)}
+.tab.on{background:var(--gold);color:var(--void);border-color:var(--gold);font-weight:600}
+.ps-body{padding:40px 48px}
+.pb-situation{font-size:14px;color:var(--dust);line-height:1.75;margin-bottom:26px;padding-left:16px;border-left:2px solid rgba(200,168,75,.2)}
+.pb-plabel{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.pb-prompt{background:var(--night);border:1px solid var(--gdim);padding:22px 26px;font-family:monospace;font-size:14px;color:rgba(232,224,208,.88);line-height:1.8;white-space:pre-wrap;border-radius:2px;transition:border-color .3s;position:relative}
+.pb-prompt:hover{border-color:rgba(200,168,75,.25)}
+.pb-result{margin-top:14px;padding:13px 18px;background:rgba(200,168,75,.04);border-left:2px solid rgba(200,168,75,.35);font-size:13px;color:var(--sand);font-style:italic;line-height:1.65}
+.pb-acts{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.copy-btn{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border:1px solid var(--gdim);color:var(--smoke);background:none;border-radius:100px;cursor:pointer;transition:all .3s;font-family:var(--fb)}
+.copy-btn:hover{color:var(--gold);border-color:rgba(200,168,75,.38)}
+.copy-btn.done{color:#4ade80;border-color:rgba(74,222,128,.4)}
+
+/* Insight cards */
+.ic-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:rgba(200,168,75,.03);margin-bottom:3px}
+.ic{background:var(--deep);padding:38px 34px;transition:background .4s}
+.ic:hover{background:var(--slate)}
+.ic-icon{font-size:22px;margin-bottom:14px;display:block}
+.ic-title{font-family:var(--fs);font-size:17px;font-weight:700;color:var(--bone);margin-bottom:10px}
+.ic-body{font-size:14px;color:var(--dust);line-height:1.75}
+
+/* Progress bars */
+.pb-section{background:var(--abyss);border:1px solid var(--gline);padding:48px;margin-bottom:3px}
+.pb-sec-title{font-family:var(--fd);font-size:clamp(30px,4vw,52px);letter-spacing:-1px;color:var(--bone);margin-bottom:6px}
+.pb-sec-sub{font-size:14px;color:var(--dust);margin-bottom:36px}
+.bars{display:flex;flex-direction:column;gap:18px}
+.bar-row{display:grid;grid-template-columns:160px 1fr 48px;gap:16px;align-items:center}
+.bar-lbl{font-size:12px;color:var(--sand);letter-spacing:.5px}
+.bar-track{height:3px;background:rgba(200,168,75,.08);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(to right,var(--gold2),var(--gold));border-radius:2px;width:0;transition:width 1.3s var(--eX)}
+.bar-pct{font-family:var(--fd);font-size:18px;color:var(--gold);text-align:right;line-height:1}
+
+/* Go deeper cards */
+.deep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:36px}
+.deep-card{background:var(--abyss);border:1px solid var(--gline);padding:24px;cursor:pointer;transition:all .4s var(--eX);position:relative;overflow:hidden}
+.deep-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--eX)}
+.deep-card:hover{background:var(--deep);border-color:rgba(200,168,75,.24);transform:translateY(-3px)}
+.deep-card:hover::before{transform:scaleY(1)}
+.dc-ic{font-size:18px;margin-bottom:10px;display:block}
+.dc-nm{font-family:var(--fd);font-size:18px;letter-spacing:1px;color:var(--bone);margin-bottom:4px}
+.dc-desc{font-size:12px;color:var(--smoke);line-height:1.5}
+
+/* =======================================================
+   DAILY TRACKER PREVIEW
+   ======================================================= */
+#tracker{padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090e 50%,var(--void) 100%)}
+.tracker-box{max-width:780px;margin:0 auto}
+.tbox{background:var(--abyss);border:1px solid var(--gline);overflow:hidden}
+.tbar{background:var(--deep);padding:14px 22px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--gline)}
+.tdot{width:10px;height:10px;border-radius:50%}
+.td1{background:#ff5f57}.td2{background:#febc2e}.td3{background:#28c840}
+.tbartitle{font-size:11px;letter-spacing:1px;color:var(--smoke);margin-left:10px}
+.tbody{padding:40px 44px}
+.tdate{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.tq{font-family:var(--fs);font-size:21px;color:var(--bone);margin-bottom:28px;font-weight:400}
+.topts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.topt{background:var(--night);border:1px solid var(--gdim);padding:16px 18px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:12px;border-radius:2px}
+.topt:hover{background:var(--slate);border-color:rgba(200,168,75,.24)}
+.topt.on{background:var(--slate);border-color:rgba(200,168,75,.48)}
+.topt-ic{font-size:18px;flex-shrink:0}
+.topt-tx{font-size:14px;color:var(--dust);line-height:1.4}
+.tprompt{background:var(--night);border:1px solid var(--gdim);padding:20px 24px;border-radius:2px;min-height:88px;font-family:monospace;font-size:13px;color:rgba(232,224,208,.82);line-height:1.75;margin-bottom:18px}
+.tcursor{display:inline-block;width:2px;height:1.1em;background:var(--gold);vertical-align:text-bottom;animation:typeBlink 1.2s steps(1) infinite;margin-left:2px}
+.tacts{display:flex;gap:10px}
+
+/* =======================================================
+   HOW IT WORKS
+   ======================================================= */
+#how{padding:100px 0;background:var(--void)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:rgba(200,168,75,.03)}
+.hw{background:var(--abyss);padding:48px 40px;position:relative;overflow:hidden;transition:background .4s}
+.hw:hover{background:var(--deep)}
+.hw-bg{position:absolute;bottom:-8px;right:12px;font-family:var(--fd);font-size:110px;color:rgba(200,168,75,.04);line-height:1;pointer-events:none}
+.hw-ic{font-size:32px;margin-bottom:22px;display:block}
+.hw-title{font-family:var(--fs);font-size:20px;font-weight:700;color:var(--bone);margin-bottom:12px}
+.hw-body{font-size:15px;color:var(--dust);line-height:1.8}
+
+/* =======================================================
+   FINAL CTA
+   ======================================================= */
+#cta{padding:160px 0;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;width:600px;height:500px;background:radial-gradient(ellipse,rgba(200,168,75,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(80px);animation:glowPulse 7s ease-in-out infinite;pointer-events:none}
+.ct-title{font-family:var(--fd);font-size:clamp(60px,10vw,136px);line-height:.88;letter-spacing:-3px;color:var(--bone);margin-bottom:28px;position:relative;z-index:2}
+.ct-em{color:var(--gold)}
+.ct-sub{font-family:var(--fs);font-style:italic;font-size:clamp(16px,1.8vw,20px);color:var(--dust);max-width:460px;margin:0 auto 52px;line-height:1.75;position:relative;z-index:2}
+.ct-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+
+/* =======================================================
+   FOOTER
+   ======================================================= */
+footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32px}
+.ft{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.flogo{font-family:var(--fd);font-size:14px;letter-spacing:4px;color:var(--gold)}
+.flinks{display:flex;gap:8px;flex-wrap:wrap}
+.fb{text-align:center;margin-top:28px;font-size:10px;color:rgba(200,184,152,.15);letter-spacing:1px}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+@media(max-width:1024px){
+  .q-grid{grid-template-columns:1fr;gap:40px}
+  .qw-grid{grid-template-columns:1fr 1fr}
+  .ic-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:130px 1fr 40px}
+}
+@media(max-width:768px){
+  #nav{padding:0 24px;height:56px;align-items:center}#nav.dense{padding:0 24px}
+  .wrap{padding:0 24px}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .qw-grid{grid-template-columns:1fr}
+  .rh{grid-template-columns:1fr;gap:20px}
+  .ps-head,.ps-body{padding:24px}
+  .ps-tabs{padding:16px 24px}
+  .pb-section{padding:32px 24px}
+  .topts{grid-template-columns:1fr}
+  .deep-grid{grid-template-columns:1fr 1fr}
+  .bar-row{grid-template-columns:110px 1fr 36px}
+  footer{padding:36px 24px 24px}
+}
+@media(max-width:480px){
+  .cat-grid{grid-template-columns:1fr}
+  .deep-grid{grid-template-columns:1fr}
+  .hacts{flex-direction:column;align-items:center}
+  .custom-row{flex-direction:column}
+  .tacts{flex-direction:column}
+}
+*:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+</style>
+</head>
+<body>
+
+<div id="C"></div>
+<div id="CR"></div>
+
+<nav id="nav">
+  <a class="nlogo" href="niith_homepage.html">NAIL IN THE HEAD</a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button class="nback" onclick="location.href='niith_homepage.html'" id="navBackBtn">&#8592; <span class="nav-back-txt">All Rooms</span></button>
+    <button id="navBurger" style="display:none;background:none;border:1px solid var(--gline);color:var(--bone);width:38px;height:38px;border-radius:2px;font-size:16px;cursor:pointer;align-items:center;justify-content:center" onclick="toggleDrawer()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">&#9776;</button>
+  </div>
+</nav>
+<div id="navDrawer" style="position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:var(--deep);border-left:1px solid var(--gline);padding:72px 32px 40px;z-index:600;transform:translateX(100%);transition:transform .5s var(--eX);display:flex;flex-direction:column;gap:20px">
+  <button onclick="toggleDrawer()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:var(--ash);font-size:20px;cursor:pointer">&#10005;</button>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="scrollToSec('question');toggleDrawer()">Choose Your Area</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="scrollToSec('tracker');toggleDrawer()">Daily Tracker</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="scrollToSec('how');toggleDrawer()">How It Works</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="location.href='about.html';toggleDrawer()">About</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="location.href='contact.html';toggleDrawer()">Contact</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="location.href='disclaimer.html';toggleDrawer()">Disclaimer</a>
+  <a style="color:var(--dust);cursor:pointer;font-size:14px;padding-bottom:16px;border-bottom:1px solid var(--gline)" onclick="location.href='niith_homepage.html'">&#8592; Back to Rooms</a>
+</div>
+
+<!-- ===================================================
+     HERO
+     =================================================== -->
+<section id="hero">
+  <div class="hsky" id="hSky"></div>
+  <canvas id="bCanvas"></canvas>
+  <div class="hvign"></div>
+  <div class="hring hr1"></div>
+  <div class="hring hr2"></div>
+  <div class="hring hr3"></div>
+  <div class="horb ho1"></div>
+  <div class="horb ho2"></div>
+  <div class="horb ho3"></div>
+  <div class="hbody">
+    <div class="hsig">
+      <span class="sdot"></span>
+      <span class="sln"></span>
+      Your Daily Upgrade Tool
+      <span class="sln" style="transform:scaleX(-1)"></span>
+    </div>
+    <h1 class="hh1">
+      <span class="hln"><span class="hinner">WHAT WOULD</span></span>
+      <span class="hln"><span class="hinner">YOU LIKE TO</span></span>
+      <span class="hln"><span class="hinner">IMPROVE?</span></span>
+    </h1>
+    <p class="hsub">Tell me one area of your life you want to make better. I'll show you exactly how AI can help — with real prompts you can use right now, today.</p>
+    <div class="hacts">
+      <button class="btn btn-gold" onclick="scrollToSec('question')">Choose Your Area</button>
+      <button class="btn btn-ghost" onclick="scrollToSec('tracker')">See the Daily Tool</button>
+    </div>
+  </div>
+  <div class="hscroll">
+    <div class="hstem"></div>
+    <div class="hlbl">Begin</div>
+  </div>
+</section>
+
+<!-- ===================================================
+     THE QUESTION
+     =================================================== -->
+<section class="sec" id="question" style="padding:96px 0 48px;background:linear-gradient(180deg,var(--void) 0%,#08090d 100%)">
+  <div class="wrap">
+    <div class="q-grid">
+      <div>
+        <div class="label">Daily Upgrade</div>
+        <h2 class="big-title">One area.<br>Today.</h2>
+      </div>
+      <div>
+        <p class="serif-sub">Pick the part of your life you want to work on right now. Not forever — just today. One prompt, one improvement, one step closer to the person you're building toward.</p>
+        <p style="font-size:15px;color:var(--dust);line-height:1.8;margin-top:16px">You don't need to know anything about AI to use this. Choose a category, copy a prompt, paste it into ChatGPT or Claude — and follow where it leads.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     CATEGORY PICKER
+     =================================================== -->
+<section class="sec" id="picker" style="padding:0 0 64px;background:linear-gradient(180deg,#08090d 0%,var(--void) 100%)">
+  <div class="wrap">
+    <div class="cat-grid" id="catGrid"></div>
+    <div class="custom-row">
+      <label for="customIn" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Type your own topic to upgrade</label>
+      <input class="custom-in" id="customIn" type="text" aria-label="Type your own topic to upgrade" placeholder="Or type something else — confidence, parenting, fitness, public speaking, anxiety..."/>
+      <button class="btn btn-gold" onclick="runCustom()">Explore &#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     THINKING
+     =================================================== -->
+<section class="sec" id="thinkSec" style="background:var(--void)">
+  <div class="wrap">
+    <div id="thinking">
+      <div class="think-ring"></div>
+      <div class="think-txt">Finding your path<span class="think-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     RESULTS
+     =================================================== -->
+<section class="sec" id="resultSec" style="background:var(--void)">
+  <div class="wrap">
+    <div id="results"></div>
+  </div>
+</section>
+
+<!-- ===================================================
+     DAILY TRACKER
+     =================================================== -->
+<section class="sec" id="tracker" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090e 50%,var(--void) 100%)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:60px">
+      <div class="label" style="justify-content:center">The Daily Prompt</div>
+      <h2 class="big-title">One question.<br>Every day.</h2>
+      <p class="serif-sub" style="max-width:500px;margin:18px auto 0">The best way to use AI is not once. It is every day, building toward a different version of yourself — one honest question at a time.</p>
+    </div>
+    <div class="tracker-box">
+      <div class="tbox">
+        <div class="tbar">
+          <div class="tdot td1"></div><div class="tdot td2"></div><div class="tdot td3"></div>
+          <span class="tbartitle">Daily Upgrade Tool &#183; Nail in the Head</span>
+        </div>
+        <div class="tbody">
+          <div class="tdate" id="tDate"></div>
+          <div class="tq">What's one thing you want to work on today?</div>
+          <div class="topts" id="tOpts">
+            <div class="topt" onclick="pickDaily(this,'career')"><span class="topt-ic">💼</span><div class="topt-tx">Something at work or in my career</div></div>
+            <div class="topt" onclick="pickDaily(this,'personal')"><span class="topt-ic">🌱</span><div class="topt-tx">Something personal — who I am or how I feel</div></div>
+            <div class="topt" onclick="pickDaily(this,'money')"><span class="topt-ic">💰</span><div class="topt-tx">My finances or earning more</div></div>
+            <div class="topt" onclick="pickDaily(this,'create')"><span class="topt-ic">✨</span><div class="topt-tx">Something I want to make or create</div></div>
+          </div>
+          <div class="tprompt"><span id="tTyped"></span><span class="tcursor"></span></div>
+          <div class="tacts">
+            <button class="btn btn-gold btn-sm" onclick="copyDaily()">Copy This Prompt</button>
+            <button class="btn btn-ghost btn-sm" onclick="nextDaily()">Different Prompt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     HOW IT WORKS
+     =================================================== -->
+<section class="sec" id="how" style="padding:100px 0;background:var(--void)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:64px">
+      <div class="label" style="justify-content:center">Getting Started</div>
+      <h2 class="big-title">Three steps.<br>That's all.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="hw"><span class="hw-ic">🎯</span><div class="hw-bg">1</div><div class="hw-title">Choose what you want to improve</div><div class="hw-body">Pick any area of your life — not the most important one, the one that's on your mind today. That's enough to begin.</div></div>
+      <div class="hw"><span class="hw-ic">📋</span><div class="hw-bg">2</div><div class="hw-title">Copy the prompt and paste it into AI</div><div class="hw-body">Go to ChatGPT, Claude, or Gemini. Paste the prompt. Fill in the parts in brackets with your situation. Press enter. That's the whole technical skill required.</div></div>
+      <div class="hw"><span class="hw-ic">🚀</span><div class="hw-bg">3</div><div class="hw-title">Take one action from what comes back</div><div class="hw-body">Read the response. Take one action today — just one. Come back tomorrow and choose again. This is how change happens. Not dramatically. Daily.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================
+     FINAL CTA
+     =================================================== -->
+<section class="sec" id="cta" style="padding:160px 0;background:var(--void)">
+  <div class="cta-orb"></div>
+  <div class="wrap" style="position:relative;z-index:2;text-align:center">
+    <div class="label" style="justify-content:center">Every Single Day</div>
+    <h2 class="ct-title">One prompt.<br><span class="ct-em">One better</span><br>version of you.</h2>
+    <p class="ct-sub">You don't need to transform overnight. You just need to improve by one percent, every day. AI makes that surprisingly possible.</p>
+    <div class="ct-btns">
+      <button class="btn btn-gold" onclick="scrollToSec('question')">Choose Today's Area</button>
+      <button class="btn btn-ghost" onclick="location.href='niith_homepage.html'">Explore All Six Rooms</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="flogo">NAIL IN THE HEAD</div>
+    <div class="flinks">
+      <button class="btn-pill" onclick="location.href='learn-faster.html'">Learn Faster</button>
+      <button class="btn-pill" onclick="location.href='work-smarter.html'">Work Smarter</button>
+      <button class="btn-pill" onclick="location.href='earn-more.html'">Earn More</button>
+      <button class="btn-pill" onclick="location.href='create-more.html'">Create More</button>
+      <button class="btn-pill" onclick="location.href='think-better.html'">Think Better</button>
+      <button class="btn-pill" onclick="location.href='future-you.html'">Future You</button>
+      <button class="btn-pill" onclick="location.href='about.html'">About</button>
+      <button class="btn-pill" onclick="location.href='contact.html'">Contact</button>
+      <button class="btn-pill" onclick="location.href='disclaimer.html'">Disclaimer</button>
+    </div>
+  </div>
+  <div class="fb">&#169; 2026 Nail in the Head &#183; nailinthehead.org &#183; AI for real people &#183; Free forever</div>
+</footer>
+
+<script>
+/* =======================================================
+   COMPLETE JAVASCRIPT — DAILY UPGRADE TOOL
+   ======================================================= */
+
+(function(){
+  var _d=document.getElementById('C');
+  var _r=document.getElementById('CR');
+  if(!_d||!_r)return;
+  var mx=-100,my=-100,rx=-100,ry=-100,alive=false;
+  // Position off-screen initially
+  _d.style.left='-100px';_d.style.top='-100px';
+  _r.style.left='-100px';_r.style.top='-100px';
+  document.addEventListener('mousemove',function(e){
+    if(!alive){
+      alive=true;
+      _d.style.opacity='1';
+      _r.style.opacity='1';
+      _d.classList.add('on');
+      _r.classList.add('on');
+    }
+    mx=e.clientX;my=e.clientY;
+    _d.style.left=mx+'px';_d.style.top=my+'px';
+  });
+  document.addEventListener('mouseleave',function(){
+    _d.style.opacity='0';_r.style.opacity='0';alive=false;
+  });
+  document.addEventListener('mouseenter',function(){
+    if(alive){_d.style.opacity='1';_r.style.opacity='1';}
+  });
+  (function loop(){
+    rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+    _r.style.left=rx+'px';_r.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  // Hover states - expand ring on interactive elements
+  function bindHover(){
+    document.querySelectorAll('button,a,[onclick],.cat,.prompt-card,.sq,.topt,.deep-card,.qw,.hw,.ic,.tbox,.rf-card,.story,.mc').forEach(function(el){
+      el.addEventListener('mouseenter',function(){_r.style.width='52px';_r.style.height='52px';_r.style.borderColor='rgba(200,168,75,.35)';_r.style.background='rgba(200,168,75,.05)';});
+      el.addEventListener('mouseleave',function(){_r.style.width='';_r.style.height='';_r.style.borderColor='';_r.style.background='';});
+    });
+  }
+  bindHover();
+  window._bindCursor=bindHover;
+})();
+  window.bindCursor=function(){
+    document.querySelectorAll('button,a,[onclick],.cat,.topt,.deep-card,.qw,.hw,.ic,.tbox').forEach(el=>{
+      el.addEventListener('mouseenter',()=>CR.classList.add('lk'));
+      el.addEventListener('mouseleave',()=>CR.classList.remove('lk'));
+    });
+  };
+  bindCursor();
+function cursorThink(v){const CR=document.getElementById('CR');if(CR)CR.classList.toggle('think',v)}
+function toggleDrawer(){
+  const d=document.getElementById('navDrawer');
+  if(!d)return;
+  const isOpen=d.style.transform==='translateX(0px)'||d.style.transform==='translateX(0%)';
+  d.style.transform=isOpen?'translateX(100%)':'translateX(0)';
+  var b=document.getElementById('navBurger');
+  if(b)b.setAttribute('aria-expanded',isOpen?'false':'true');
+}
+
+// ─── NAV ─────────────────────────────────────────────
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('dense',scrollY>50),{passive:true});
+
+// ─── SCROLL ──────────────────────────────────────────
+window.scrollToSec=function(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})};
+
+// ─── REVEAL ──────────────────────────────────────────
+const revObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      revObs.unobserve(e.target);
+    }
+  });
+},{threshold:0,rootMargin:'0px 0px 0px 0px'});
+
+function attachReveal(){
+  document.querySelectorAll('.rv,.rvl,.rvr').forEach(function(el){
+    // If already in viewport, show immediately
+    const rect=el.getBoundingClientRect();
+    if(rect.top < window.innerHeight && rect.bottom > 0){
+      el.classList.add('in');
+    } else {
+      revObs.observe(el);
+    }
+  });
+}
+attachReveal();
+
+// ─── MAGNETIC BUTTONS ────────────────────────────────
+function bindMagnetic(){
+  document.querySelectorAll('.btn').forEach(b=>{
+    b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.13}px,${(e.clientY-r.top-r.height/2)*.13}px)`});
+    b.addEventListener('mouseleave',()=>b.style.transform='');
+  });
+}
+bindMagnetic();
+
+// ─── 3D TILT ─────────────────────────────────────────
+function bindTilt(){
+  document.querySelectorAll('.qw,.ic,.hw,.tbox,.rh').forEach(c=>{
+    c.addEventListener('mousemove',e=>{
+      const r=c.getBoundingClientRect();
+      c.style.transform=`perspective(900px) rotateY(${((e.clientX-r.left)/r.width-.5)*4}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*3}deg) translateY(-2px)`;
+    });
+    c.addEventListener('mouseleave',()=>{
+      c.style.transition='transform .6s cubic-bezier(.16,1,.3,1),background .4s';
+      c.style.transform='';
+      setTimeout(()=>c.style.transition='',600);
+    });
+  });
+}
+bindTilt();
+
+// ─── CANVAS ──────────────────────────────────────────
+(function(){
+  const cv=document.getElementById('bCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');let W,H;
+  function resize(){W=cv.width=cv.offsetWidth||innerWidth;H=cv.height=cv.offsetHeight||innerHeight}
+  resize();new ResizeObserver(resize).observe(cv);
+  const nodes=Array.from({length:48},()=>({x:Math.random()*1600,y:Math.random()*900,vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.1,r:Math.random()*1.4+.4,op:Math.random()*.22+.05}));
+  const parts=Array.from({length:42},()=>newPart());
+  function newPart(){return{x:Math.random()*1600,y:Math.random()*900+100,vy:-(Math.random()*.18+.04),vx:(Math.random()-.5)*.08,r:Math.random()*.8+.2,life:Math.random(),mxl:Math.random()*.8+.3,op:Math.random()*.13+.03,g:Math.random()>.4}}
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);t+=.003;
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<165){ctx.save();ctx.globalAlpha=(1-d/165)*.045;ctx.strokeStyle='#c8a84b';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();ctx.restore()}
+    }
+    nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;ctx.save();ctx.globalAlpha=n.op*(.55+Math.sin(t*1.4)*.45);ctx.fillStyle='#c8a84b';ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fill();ctx.restore()});
+    parts.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.life+=.0013;if(p.y<-10||p.life>p.mxl)Object.assign(p,newPart(),{y:H+10,life:0});const f=Math.sin(p.life/p.mxl*Math.PI);ctx.save();ctx.globalAlpha=p.op*f;ctx.fillStyle=p.g?'#c8a84b':'#4ab8c8';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore()});
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── PARALLAX ────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const sy=scrollY;
+  const hb=document.querySelector('.hbody');
+  if(hb)hb.style.transform=`translateY(${sy*.18}px)`;
+  document.querySelectorAll('.hring').forEach((r,i)=>r.style.transform=`translate(-50%,-50%) rotate(${sy*(.025+i*.015)}deg) scale(${1+i*.04})`);
+  document.querySelectorAll('.horb').forEach((o,i)=>o.style.transform=`translateY(${sy*(.06+i*.03)}px)`);
+},{passive:true});
+
+// ─── AMBIENT SKY DRIFT ───────────────────────────────
+(function(){let t=0;const sky=document.getElementById('hSky');
+(function d(){t+=.0012;if(sky){const x=50+Math.sin(t)*7;sky.style.background=`radial-gradient(ellipse 120% 70% at ${x}% ${Math.cos(t*.6)*5-5}%,#0d1824 0%,var(--void) 65%),radial-gradient(ellipse 55% 45% at 82% 88%,#0b100a 0%,transparent 60%)`}requestAnimationFrame(d)})()})();
+
+// ─── DATE ────────────────────────────────────────────
+(function(){const el=document.getElementById('tDate');if(el)el.textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'})})();
+
+/* =======================================================
+   CATEGORY DATA
+   ======================================================= */
+const CATS=[
+  {id:'fitness',icon:'💪',name:'Fitness',tag:'Move, feel, and get stronger',ac:'#5ab87a',
+   hl:'YOUR BODY,\nUPGRADED.',
+   sub:"Most people know what they should do. The gap is turning that knowledge into a habit that fits the life you actually have — not the one you wish you had.",
+   qw:[
+     {ic:'🏃',t:'Build a habit that actually sticks',b:"AI designs a routine around your real schedule — not an ideal one. Five minutes done consistently beats sixty minutes abandoned."},
+     {ic:'🥗',t:'Eat better without willpower',b:"Ask AI to build a meal plan from foods you actually like, with time you actually have. No deprivation. No guilt. Just a plan that works."},
+     {ic:'😴',t:'Recover as hard as you train',b:"AI explains what rest and recovery mean for your specific goals — and helps you build them in before you burn out."},
+   ],
+   prompts:[
+     {tab:'Build a Routine',sit:"You want to get fitter but every routine you've tried has lasted two weeks.",pr:"I want to get fitter. My honest schedule allows me [X minutes per day, X days per week]. I currently do [describe your activity level — be honest]. My goal is to [lose weight / feel stronger / have more energy / etc.]. Design me the smallest, most realistic routine I could actually stick to for 90 days. Make the first week easy enough that there is no excuse not to start.",res:"Stuck to it for 11 weeks. Longest routine I've ever maintained in my life."},
+     {tab:'Meal Planning',sit:"You want to eat better but you don't have time to think about it every day.",pr:"I want to eat better this week. I have [X minutes to cook on weekdays, more time at weekends]. Foods I enjoy eating: [list them]. Foods I dislike or avoid: [list them]. Please create a simple weekly meal plan that is genuinely healthy, uses realistic ingredients, and takes honest amounts of time to prepare.",res:"Ate well for a whole month without having to think about it once."},
+     {tab:'Break a Plateau',sit:"You've been exercising but stopped seeing results.",pr:"I have been doing [describe your current routine] for [X weeks/months] and I have stopped making progress toward [your goal]. What is most likely causing this plateau, and what are the two or three most effective changes I could make to start seeing results again? Be specific and practical.",res:"Changed two things based on this. Results returned within three weeks."},
+     {tab:'Fix Sleep',sit:"Your energy is low and you want to recover better.",pr:"I sleep approximately [X hours] per night and wake feeling [how rested you feel]. I need to be up at [time]. I want to genuinely improve my sleep quality and energy levels. Give me a specific, practical sleep improvement plan based on what I've told you — not generic advice, but targeted to my situation.",res:"Best sleep I've had in years. The advice was things I could actually do."},
+   ],
+   ins:[
+     {ic:'🔬',t:'The science of starting small',b:"Research consistently shows the biggest barrier to fitness isn't motivation — it's the size of the initial commitment. A habit you actually do every day beats a perfect plan you abandon. AI designs for your real life, not your aspirational one."},
+     {ic:'⏰',t:'Consistency matters more than intensity',b:"Three 20-minute sessions per week for a year produces dramatically better results than six intense weeks followed by collapse. AI builds for the long game by default."},
+     {ic:'🧠',t:'Your mind moves your body',b:"Every fitness goal is also a belief about yourself. The people who sustain change shift their identity — from someone trying to get fit to someone who moves every day. Ask AI to help you build that shift too."},
+     {ic:'📊',t:'Track the minimum, not the maximum',b:"You don't need a detailed training log. You need to know: did I do it today, yes or no? Ask AI to design a two-minute daily check-in that keeps you honest without becoming a burden."},
+   ],
+   bars:[{l:'Energy levels',w:78},{l:'Habit consistency',w:71},{l:'Sleep quality',w:65},{l:'Goal clarity',w:88}],
+   rooms:[{ic:'🎯',nm:'Think Better',desc:'Mental clarity fuels physical change',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design your strongest self',url:'future-you.html'},{ic:'💼',nm:'Work Smarter',desc:'Energy management at work',url:'work-smarter.html'}]
+  },
+  {id:'money',icon:'💰',name:'Money',tag:'Earn more, spend smarter, own your future',ac:'#c8943c',
+   hl:'YOUR FINANCES,\nTRANSFORMED.',
+   sub:"Money problems are almost always thinking problems first. AI helps you see your situation clearly, plan honestly, and earn what you are actually worth.",
+   qw:[
+     {ic:'📊',t:'See where your money actually goes',b:"Most people are genuinely surprised by their real spending. Ask AI to help you build an honest picture of your finances — without judgment, just clarity."},
+     {ic:'💸',t:'Find the money you are already losing',b:"Unused subscriptions, overpaid bills, unclaimed tax savings. AI helps you find the money you're already losing before you worry about earning more."},
+     {ic:'📈',t:'Build a plan that fits your real life',b:"Not an ambitious budget you'll abandon. A financial plan designed around your actual income, actual habits, and actual goals."},
+   ],
+   prompts:[
+     {tab:'Budget That Works',sit:"You want to understand and control your money better.",pr:"I want to build a realistic monthly budget. My take-home income is approximately [£X per month]. My fixed monthly expenses are: [list rent, bills, subscriptions]. I typically spend around [£X] on food and [£X] on other things. My financial goals are: [e.g. save for X / pay off Y / build emergency fund]. Please build me a practical budget that is honest about what I can afford and gives me a clear plan toward my goals.",res:"First budget I've ever actually used. Found £200 a month I didn't know I was losing."},
+     {tab:'Earn More',sit:"You want to increase your income but aren't sure where to start.",pr:"My current work situation: [employed / freelance / both] as a [your role]. My skills and experience include: [describe]. I want to increase my income. Please give me: the 5 most realistic ways someone with my background could earn more right now, which I could start within the next 30 days, and the most important first step for each one.",res:"Three real options I hadn't considered. I started pursuing one within two weeks."},
+     {tab:'Pay Rise',sit:"You want to ask for more money but don't know how to approach it.",pr:"I want to ask my employer for a pay rise. I have been in my current role for [X time]. My key achievements include: [list 3 things — with numbers or impact where possible]. The market rate for this role in my area is approximately [amount, or ask me to research it]. Write me a professional, confident email requesting a salary review. Make it assured, not apologetic.",res:"Sent it. Had a meeting booked within 48 hours. Got the increase."},
+     {tab:'Clear Debt',sit:"You have debt and want a clear, realistic plan to deal with it.",pr:"I have the following debts: [list each with approximate balance and interest rate if known]. My monthly income is [£X] and essential expenses are [£X], leaving approximately [£X] available. Please build me a realistic debt repayment plan — not optimistic, but honest. Tell me: which to prioritise and why, how long it will realistically take, and what to do if I have an unexpected expense.",res:"First time I've had a clear picture of my debt. The plan is working."},
+   ],
+   ins:[
+     {ic:'🧮',t:'The maths is simple. The behaviour is hard.',b:"Most financial problems are habit problems or clarity problems, not mathematical ones. AI provides the clarity that makes better habits possible — without judgment, without an agenda."},
+     {ic:'💡',t:'Small changes compound dramatically',b:"Saving an extra £100 per month at 5% is worth over £80,000 after 30 years. The maths of small, consistent improvement is genuinely astonishing. AI helps you find the small changes worth making."},
+     {ic:'🎯',t:'Clarity is worth more than advice',b:"Most people don't need more financial information. They need a clearer picture of their own situation. AI provides this without embarrassment and without trying to sell you anything."},
+     {ic:'🔑',t:'Your income is more negotiable than you think',b:"Most people accept their salary as fixed. It almost never is. The Earn More room has everything you need to start the conversations that change your financial situation faster than any budget."},
+   ],
+   bars:[{l:'Financial clarity',w:88},{l:'Savings rate',w:64},{l:'Debt reduction',w:71},{l:'Income growth',w:58}],
+   rooms:[{ic:'💰',nm:'Earn More',desc:'Make more from your existing skills',url:'earn-more.html'},{ic:'💼',nm:'Work Smarter',desc:'Perform better, get paid for it',url:'work-smarter.html'},{ic:'🌟',nm:'Future You',desc:'Design your financially secure future',url:'future-you.html'}]
+  },
+  {id:'learning',icon:'📚',name:'Learning',tag:'Understand anything, grow every day',ac:'#6480d4',
+   hl:'YOUR MIND,\nUNLOCKED.',
+   sub:"You have a hundred things you've always meant to learn. For the first time, the teacher who explains it perfectly — at your exact level, with your exact examples — is available around the clock.",
+   qw:[
+     {ic:'💡',t:'Finally understand the thing that confused you',b:"Ask AI to explain it at your exact level, with examples from your own life. No more nodding along and hoping it clicks later."},
+     {ic:'⚡',t:'Learn a skill in a single focused session',b:"Find the 20% of knowledge that gives 80% of the results. Skip the rest until you need it. Get competent, quickly."},
+     {ic:'🧪',t:'Test whether you actually know what you think you know',b:"Ask AI to quiz you. The gap between what you think you know and what you actually know is where real learning begins."},
+   ],
+   prompts:[
+     {tab:'Understand Anything',sit:"There's something you've always struggled to understand.",pr:"I want to understand [topic or concept]. Explain it to me as if I am an intelligent adult who knows absolutely nothing about it. Use one simple, memorable metaphor and one concrete example from everyday life. After explaining, ask me if I have any questions.",res:"Understood in four minutes what twenty years of confusion couldn't crack."},
+     {tab:'Learn a New Skill',sit:"You want to get good at something new, quickly.",pr:"I want to learn [skill]. I am a complete beginner. I don't need to become an expert — I need to be competent and confident. What are the 5 most important things I need to understand or practise? Please ignore everything that isn't essential for a solid foundation. After listing them, tell me the single best way to practise each one.",res:"Competent at Excel in two afternoons. Changed how I work completely."},
+     {tab:'Fix a Misconception',sit:"You think you understand something but you're not totally sure.",pr:"I believe I understand [concept or topic]. My current understanding is: [explain it in your own words as best you can]. Please tell me: where I am right, where I am wrong or oversimplifying, what important nuance I am missing, and what would complete my understanding of this.",res:"Found a misunderstanding I'd held for fifteen years. Essential to know."},
+     {tab:'Go Deeper',sit:"You're interested in something and want to explore it properly.",pr:"I am interested in [topic] and want to go deeper. I already understand [describe your current level]. My goal is: [understand it better / talk about it confidently / explore it as a hobby / etc.]. Give me: the most interesting threads to follow, the best questions to ask about this subject, and the most surprising or counterintuitive thing about it that most people don't know.",res:"Most engaged I've felt learning something since I was a child."},
+   ],
+   ins:[
+     {ic:'🔑',t:'The best teacher adapts to you',b:"Traditional education explains the same thing to everyone. AI gives you a personalised explanation at your level, with your examples, answering your specific questions. This is qualitatively different from everything before it."},
+     {ic:'⏱️',t:'Testing beats reading every time',b:"Cognitive science consistently shows that being tested on what you've just learned produces dramatically better retention than reading it again. Ask AI to test you — it makes this trivially easy."},
+     {ic:'🌐',t:'Curiosity is a skill you can rebuild',b:"Most adults have slowly stopped being curious because learning felt hard. When learning becomes easy and satisfying again — as it does with AI — curiosity returns faster than you'd expect."},
+     {ic:'📌',t:'The foundation matters most',b:"Most confusion comes from missing one foundational concept. Ask AI: 'What is the single most important idea I need before everything else makes sense?' Build on that one thing first."},
+   ],
+   bars:[{l:'Comprehension speed',w:82},{l:'Retention rate',w:74},{l:'Learning confidence',w:68},{l:'Curiosity',w:91}],
+   rooms:[{ic:'📚',nm:'Learn Faster',desc:'The full learning transformation room',url:'learn-faster.html'},{ic:'💭',nm:'Think Better',desc:'Use learning to sharpen your thinking',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design who you are becoming',url:'future-you.html'}]
+  },
+  {id:'productivity',icon:'⚡',name:'Productivity',tag:'Do more of what matters most',ac:'#4ab8c8',
+   hl:'YOUR TIME,\nRECLAIMED.',
+   sub:"Productivity is not about doing more. It is about doing the right things with the time and energy you actually have. AI helps you design a working day that works.",
+   qw:[
+     {ic:'📥',t:'Clear your mental backlog',b:"The weight of undone things is exhausting. Ask AI to help you capture, sort, and prioritise everything — and get it out of your head and into a system."},
+     {ic:'🎯',t:'Find the one thing that matters today',b:"Most to-do lists are survival lists, not achievement lists. AI helps you find the one thing that would make today genuinely successful."},
+     {ic:'⏳',t:'Eliminate your biggest time drains',b:"Ask AI to help you see where your time actually goes — and which of those places is stealing from your most important work."},
+   ],
+   prompts:[
+     {tab:'Prioritise Today',sit:"You have too much to do and don't know where to start.",pr:"Here is everything I need to do today or this week: [list everything — as messy as it is]. Please help me: identify what is genuinely urgent and important versus what just feels urgent, suggest an order for tackling them, identify anything I could delete, delegate, or defer, and tell me the single most important thing to do first to make today feel like a success.",res:"Went from overwhelmed to clear in about ten minutes. I do this every morning now."},
+     {tab:'Build a System',sit:"You want a productivity system that actually fits your life.",pr:"I want to build a simple system for managing my work and personal tasks. My situation: [describe your work setup, your biggest challenges, what systems have failed you before]. I want a system that: is simple enough to maintain when I'm busy, flexible enough for different types of work, and focused on progress over perfect organisation. Design the simplest system that would genuinely work for my life.",res:"First system I've stuck with for more than a month."},
+     {tab:'Deep Work',sit:"You struggle to do focused, important work without distraction.",pr:"I want to do better focused work on [type of work]. My biggest distractions are: [list them honestly]. My current schedule looks like: [describe it]. Please help me: design a deep work routine that fits around my existing commitments, suggest the best time of day for focused work based on what I've told you, and give me a specific five-minute protocol for getting into a focused state before I begin.",res:"Did more in my first week than I had in the previous month."},
+     {tab:'Stop Procrastinating',sit:"There's something important you've been putting off.",pr:"I have been procrastinating on [describe the task — be specific]. I have been avoiding it for [how long]. The honest reason I keep not doing it is: [be as honest as you can]. Please help me: understand what is really stopping me, break this down into the smallest possible first step I could take in the next 30 minutes, and give me one reason why starting today matters more than starting tomorrow.",res:"Started and finished the thing I'd been avoiding for three months. Same day."},
+   ],
+   ins:[
+     {ic:'🔮',t:'The planning fallacy is universal',b:"Humans consistently underestimate how long things take and overestimate what they can achieve in a day. AI builds plans that are honest about time — which means you actually complete them instead of feeling like a failure."},
+     {ic:'🧘',t:'Energy management matters more than time management',b:"Two focused hours when you're alert produces more than six tired, distracted ones. Ask AI to design your day around when you have energy, not just when you have time."},
+     {ic:'❌',t:"Most tasks don't need to be done",b:"The most productive thing you can do is identify what doesn't need to happen at all. AI is remarkably good at helping you see which obligations are genuinely necessary versus accumulated habit."},
+     {ic:'✅',t:'Done is better than perfect, always',b:"Perfectionism is the most common form of procrastination. AI helps you define what 'good enough' actually means for each task — which is liberating rather than lowering your standards."},
+   ],
+   bars:[{l:'Tasks completed',w:79},{l:'Focused time',w:68},{l:'Decision speed',w:84},{l:'Energy levels',w:72}],
+   rooms:[{ic:'💼',nm:'Work Smarter',desc:'The full work and productivity room',url:'work-smarter.html'},{ic:'💭',nm:'Think Better',desc:'Clearer thinking, faster decisions',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design your ideal working life',url:'future-you.html'}]
+  },
+  {id:'relationships',icon:'❤️',name:'Relationships',tag:'Connect better, communicate more clearly',ac:'#d47884',
+   hl:'YOUR CONNECTIONS,\nDEEPENED.',
+   sub:"Every difficult relationship is a communication problem at its core. AI helps you find the right words for the conversations that matter most — without losing yourself in the process.",
+   qw:[
+     {ic:'💬',t:"Prepare for the conversation you've been avoiding",b:"Before any hard conversation — with a partner, parent, friend, or colleague — use AI to plan what to say, anticipate responses, and stay calm."},
+     {ic:'✉️',t:'Write the message you keep not sending',b:"The email, text, or letter you've been putting off because you can't find the words. AI finds them."},
+     {ic:'🔍',t:'Understand the other person better',b:"Describe a conflict to AI and ask it to help you see the other person's perspective. Empathy is almost always the missing ingredient."},
+   ],
+   prompts:[
+     {tab:'Hard Conversation',sit:"There's a conversation you've been avoiding but know you need to have.",pr:"I need to have a difficult conversation with [relationship — partner / parent / friend / colleague] about [the issue]. What I want from this conversation is: [your goal]. What I'm afraid might happen is: [your worry]. Please give me: the key things I need to say, how to start it, what to do if they react badly, and how to stay calm and clear throughout.",res:"Had the conversation I'd been dreading for two years. It went better than I could have imagined."},
+     {tab:'Find the Words',sit:"You need to say something important but can't find how to say it.",pr:"I need to tell [who] that [what you need to say]. The context is: [explain the situation briefly]. I want to come across as [honest and caring / firm but kind / direct but not aggressive]. I most want to avoid: [what you don't want]. Please write me what I should say — in a way that is clear, genuine, and keeps the relationship intact.",res:"Sent it. The response I got back was everything I had hoped for."},
+     {tab:'Understand Someone',sit:"You're struggling to understand why someone is behaving the way they are.",pr:"I am struggling to understand why [who] is doing [what they are doing]. Here is the situation: [explain it]. Here is what I know about them: [describe]. Please help me: understand what might be driving their behaviour from their perspective, identify what needs of theirs might not be getting met, and suggest how I could approach this with more empathy and less frustration.",res:"Changed how I saw the whole situation. The relationship improved within a week."},
+     {tab:'Rebuild Trust',sit:"There has been a rupture in a relationship you want to repair.",pr:"There has been a [disagreement / falling out / misunderstanding / hurt] between me and [who]. What happened: [describe honestly, including your own part]. I want to repair this relationship because: [why it matters]. Please give me: an honest assessment of what I could do differently, what I might say to begin repairing things, and realistic expectations for how long rebuilding trust takes.",res:"The most honest conversation I'd had about a relationship — with AI, before having it with the person. It changed everything."},
+   ],
+   ins:[
+     {ic:'🗣️',t:'Every relationship problem is a communication problem',b:"Not in the sense that talking fixes everything. In the sense that misunderstanding, unspoken needs, and unclear expectations are at the root of almost every persistent relationship difficulty. AI helps you name what is going unsaid."},
+     {ic:'🪞',t:'The most important relationship is with yourself',b:"How you talk to yourself — your inner critic, your self-compassion, how you handle your own mistakes — shapes every other relationship you have. Use AI to improve this one first."},
+     {ic:'👂',t:'Being heard matters more than being right',b:"Research on relationships shows people need to feel understood before they can be influenced. AI can help you practise the skill of reflecting back before you respond."},
+     {ic:'⏳',t:'Repairs take longer than ruptures',b:"A difficult moment can damage a relationship quickly. Rebuilding requires time, consistency, and repeated small actions. Ask AI to help you design the small, consistent actions that rebuild trust."},
+   ],
+   bars:[{l:'Communication clarity',w:84},{l:'Conflict resolution',w:71},{l:'Emotional intelligence',w:78},{l:'Connection quality',w:68}],
+   rooms:[{ic:'💭',nm:'Think Better',desc:'Understand your own patterns first',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design the relationships you want',url:'future-you.html'},{ic:'✍️',nm:'Create More',desc:'Express yourself more fully',url:'create-more.html'}]
+  },
+  {id:'business',icon:'🚀',name:'Business',tag:'Build, grow, and lead with AI alongside you',ac:'#7ab4e8',
+   hl:'YOUR BUSINESS,\nACCELERATED.',
+   sub:"Running a business means wearing every hat at once. AI is the one tool that genuinely helps with all of them — strategy, writing, research, marketing, operations, and thinking.",
+   qw:[
+     {ic:'📋',t:'Write better business copy, faster',b:"Proposals, emails, website copy, social posts — AI produces a working first draft in minutes. You edit. Quality goes up and time goes down."},
+     {ic:'🔍',t:'Research anything before you decide',b:"Markets, competitors, customers, trends — AI gives you a thorough briefing on anything before you have to act on it."},
+     {ic:'💡',t:'Think through your strategy out loud',b:"Describe your challenge to AI. Ask it to challenge your thinking. The best strategy sessions happen when you explain your reasoning to someone who asks good questions."},
+   ],
+   prompts:[
+     {tab:'Write a Proposal',sit:"You need to pitch your business, service, or idea to someone.",pr:"I need to write a proposal for [what you're pitching] to [who]. The core value I offer is: [describe it simply]. My relevant experience or credentials: [describe]. Please write me a concise, professional proposal that: demonstrates I understand their problem, makes a clear case for my solution, includes relevant experience or proof, and ends with a specific next step.",res:"Won the contract. Client said it was the clearest proposal they received."},
+     {tab:'Marketing Copy',sit:"You need to communicate what your business does in a way that attracts people.",pr:"My business does: [describe in plain English]. My ideal customer is: [who they are, what they struggle with, what they want]. Please write me: a one-sentence description of what I do, a short homepage paragraph (2–3 sentences), and three social media posts that would attract my ideal customer without feeling like advertising.",res:"Enquiries doubled in three months. Same business, better words."},
+     {tab:'Business Strategy',sit:"You're facing an important business decision and want to think it through.",pr:"My business is: [describe briefly]. I am facing this strategic decision: [describe the choice]. The options I am considering: [list them]. My main concern is: [what worries you most]. Please help me think through this by: identifying what I might be missing, questioning the assumptions behind each option, and telling me what I should find out before deciding.",res:"Made a different decision than I was going to. Very glad I did."},
+     {tab:'Know Your Customer',sit:"You want to understand your customers better so you can serve them more effectively.",pr:"My business serves [describe your customers]. I want to understand them better in order to: [your goal — serve them better / market more effectively / improve the product]. Please: identify the most important questions I should be asking my customers, describe what their typical frustrations and desires are likely to be, and suggest three ways I could get genuine insight into what they actually want.",res:"Redesigned my offer based on this. Conversion rate went up immediately."},
+   ],
+   ins:[
+     {ic:'🏗️',t:'AI is your entire support team',b:"Most small business owners can't afford a copywriter, strategist, researcher, and operations consultant. AI isn't all of these at full professional level — but it's all of them at a level most small businesses have never had access to before."},
+     {ic:'⏱️',t:'Speed compounds as a competitive advantage',b:"Businesses that use AI well don't just work more efficiently — they move faster. They test ideas, produce content, and respond to opportunities faster. In competitive markets, speed compounds."},
+     {ic:'🎯',t:'Clarity is your most underused asset',b:"Most businesses fail not because of bad products but because of unclear communication. AI is the fastest way to get clear about what you do, who for, and why anyone should care."},
+     {ic:'🔄',t:'Give AI context and it becomes exponentially more useful',b:"The more context you give AI about your business, customers, and goals, the more powerful it becomes. Build a library of prompts that include your key background — and reuse them."},
+   ],
+   bars:[{l:'Output quality',w:86},{l:'Time saved per week',w:79},{l:'Strategic clarity',w:74},{l:'Customer insight',w:68}],
+   rooms:[{ic:'💰',nm:'Earn More',desc:'Grow your revenue and income',url:'earn-more.html'},{ic:'💼',nm:'Work Smarter',desc:'Operate more effectively',url:'work-smarter.html'},{ic:'💭',nm:'Think Better',desc:'Better strategy and decisions',url:'think-better.html'}]
+  },
+  {id:'confidence',icon:'🦁',name:'Confidence',tag:'Stand taller, speak clearly, own your worth',ac:'#e8b048',
+   hl:'YOUR CONFIDENCE,\nREBUILT.',
+   sub:"Confidence is not a personality trait you either have or don't. It is a skill that comes from preparation, clarity, and the experience of doing hard things well. AI helps you build all three.",
+   qw:[
+     {ic:'🗣️',t:'Over-prepare for the moments that matter',b:"Job interviews, presentations, difficult conversations — confidence comes from knowing you're ready. AI over-prepares you for every important moment."},
+     {ic:'💪',t:'See yourself more accurately',b:"Most confident people are not objectively more impressive than you. They have a clearer, more accurate picture of their own value. AI helps you build that picture."},
+     {ic:'🔄',t:'Practise the hard things in a safe space',b:"The conversations you rehearse go better than the ones you don't. Ask AI to play the role of interviewer, difficult colleague, or sceptical audience — so you can practise without stakes."},
+   ],
+   prompts:[
+     {tab:'Interview Prep',sit:"You have an important interview, presentation, or high-stakes conversation coming up.",pr:"I have a [interview / presentation / important meeting] for [describe it]. The key things they will likely want to know: [your best guess]. My relevant experience and strengths: [list them]. My nerves or weaknesses around this: [be honest]. Please: help me prepare the key things I want to say, generate 5 likely questions and help me answer them well, and give me a strategy for staying calm if things don't go as planned.",res:"Most prepared I've ever been for an interview in my life. Got the job."},
+     {tab:'Speak Up',sit:"You struggle to speak up for yourself or ask for what you deserve.",pr:"I often struggle to [speak up in meetings / assert my opinion / ask for what I want / say no when I need to — choose what fits]. The situations where this happens most: [describe them]. What I usually do instead: [be honest]. Please help me: understand what might be driving this pattern, give me specific language I can use in these situations, and suggest a small experiment I could try this week to practise.",res:"Used the exact language in a meeting the next day. Spoke up. It worked."},
+     {tab:'Handle Criticism',sit:"You want to handle negative feedback or disagreement more confidently.",pr:"I find it difficult to handle [criticism / negative feedback / disagreement / conflict] because [be honest about why]. When this happens, I usually [go quiet / get defensive / overthink / etc.]. Please help me: understand why this is a natural response and not a character flaw, give me a specific technique for responding more confidently in the moment, and help me reframe how I think about criticism generally.",res:"Next time it happened I used the technique. Completely different outcome."},
+     {tab:'Build It Daily',sit:"You want to build confidence gradually through small, consistent action.",pr:"I want to feel more confident in [specific area — social situations / professional settings / public speaking / relationships / etc.]. My current confidence level: [describe honestly]. My goal: [what confident looks and feels like for you]. Please give me: a specific 30-day confidence-building plan with small, progressive challenges, the reason why this approach works, and how to handle the days when I feel like I'm going backwards.",res:"Completed the 30 days. I am genuinely different in those situations now."},
+   ],
+   ins:[
+     {ic:'🧠',t:'Confidence is built through action, not thinking',b:"Studies consistently show confidence is primarily a result of preparation and action — not innate personality. The people who seem most confident have usually done one thing: practised. AI is the safest, most available place to practise anything."},
+     {ic:'🎭',t:'Imposter syndrome is almost universal',b:"The majority of high-achieving people experience the feeling that they're not as good as others think they are. Knowing this doesn't make it go away — but it does mean you're not uniquely flawed."},
+     {ic:'📝',t:'Preparation is the fastest confidence builder',b:"The most reliable way to feel more confident before any important event is to prepare more thoroughly than you think is necessary. AI makes this faster and more comprehensive than any other method."},
+     {ic:'🪞',t:'How you talk to yourself is the foundation',b:"The internal voice that tells you you're not good enough is something you can change — but it takes deliberate practice. Ask AI to help you identify and challenge the specific thoughts that undermine your confidence most."},
+   ],
+   bars:[{l:'Self-belief',w:76},{l:'Preparation quality',w:91},{l:'Communication clarity',w:83},{l:'Resilience',w:69}],
+   rooms:[{ic:'💭',nm:'Think Better',desc:'Challenge the thoughts that hold you back',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design your most confident self',url:'future-you.html'},{ic:'💰',nm:'Earn More',desc:'Confident negotiation and salary',url:'earn-more.html'}]
+  },
+  {id:'creativity',icon:'🎨',name:'Creativity',tag:'Make the things you have been meaning to make',ac:'#a87ed4',
+   hl:'YOUR CREATIVITY,\nUNLEASHED.',
+   sub:"You have more ideas than you have ever acted on. The blank page is terrifying. AI removes that terror — it makes starting easier, developing ideas faster, and finishing more likely.",
+   qw:[
+     {ic:'✏️',t:"Start the thing you've been putting off",b:"The blank page demands perfection. AI gives you something imperfect to react to — which is infinitely easier than creating from nothing."},
+     {ic:'🌱',t:'Develop an idea from seed to structure',b:"Most ideas stay ideas because they never find their form. Ask AI to help you see the shape of what you want to make."},
+     {ic:'🔁',t:'Get unstuck in the middle',b:"Every creative project has a stuck moment. AI opens doors you didn't know existed when you can't see the way forward."},
+   ],
+   prompts:[
+     {tab:'Start Creating',sit:"You've been meaning to make something but haven't started.",pr:"I have been wanting to [describe what you want to create — a book / blog / podcast / painting / business / anything] for [how long]. I keep not starting because [be honest — fear, busyness, perfectionism, unclear where to begin]. Help me start right now — not a plan, not an outline, but the actual first thing. The first sentence, first paragraph, first step. Just the beginning.",res:"Started the project I'd been putting off for three years. That same evening."},
+     {tab:'Develop an Idea',sit:"You have a rough idea but can't see the full picture.",pr:"I have an idea for [describe it — as rough and incomplete as it feels in your head]. I'm not sure yet whether [describe your uncertainty — if it's interesting enough / what form it should take / whether it's worth pursuing]. Please help me understand: what is most interesting about this idea, what the right structure or form might be, and whether there is something genuinely worth making here.",res:"My vague idea became a real project with a clear direction in one conversation."},
+     {tab:'Beat the Block',sit:"You're stuck in the middle of something you were making.",pr:"I am working on [describe your project]. I've got to the point where [describe where you are stuck — be specific]. I need to [what needs to happen next, not how — just what]. Give me three completely different approaches to moving forward from here. I don't need to use any of them exactly — I just need to see options I hadn't considered.",res:"Back in motion within twenty minutes of being completely stuck for two weeks."},
+     {tab:'Find Your Voice',sit:"You want your creative work to sound more distinctly like you.",pr:"Here are three pieces of my creative work that I'm proud of: [paste or describe them]. Please help me: identify what is distinctive about my voice and perspective, articulate what makes my work recognisably mine, and give me a description of my creative voice I can use to stay consistent in future projects.",res:"For the first time I understood what makes my work mine. Stopped trying to write like other people."},
+   ],
+   ins:[
+     {ic:'🎭',t:'Creativity is a muscle, not a gift',b:"The most creative people are not the most talented — they are the most prolific. They make more things, finish more, and stumble onto breakthroughs more often. AI dramatically reduces the friction at every stage of making."},
+     {ic:'🌊',t:'Starting is the hardest part',b:"Research consistently shows the biggest barrier to creative work is beginning. Once momentum exists, creative work sustains itself. AI is the most powerful starting mechanism that has ever existed."},
+     {ic:'🔓',t:'Perfectionism is creative paralysis',b:"The internal critic that prevents you from making imperfect things is the same voice that prevents you from making anything at all. AI breaks this paralysis — you're always reacting to something rather than creating from nothing."},
+     {ic:'👁️',t:'Your perspective is the whole product',b:"The most valuable thing you bring to any creative work is your specific way of seeing the world. This cannot be replicated. AI can help with everything else — the structure, the words, the momentum — but the vision is entirely yours."},
+   ],
+   bars:[{l:'Creative output',w:88},{l:'Ideas developed',w:81},{l:'Projects finished',w:74},{l:'Creative confidence',w:77}],
+   rooms:[{ic:'✍️',nm:'Create More',desc:'The full creative transformation room',url:'create-more.html'},{ic:'💭',nm:'Think Better',desc:'Think more originally',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design your creative future',url:'future-you.html'}]
+  },
+];
+
+/* =======================================================
+   DAILY TRACKER DATA
+   ======================================================= */
+const DAILY={
+  career:[
+    "I want to make progress on [specific goal or challenge at work]. My current situation is: [describe it]. The main thing stopping me is: [be honest]. Give me: the single most important action I could take today to move this forward, and one question I should ask myself before I end the day.",
+    "I have a challenging situation at work: [describe it briefly]. Please help me think through it clearly. What are my real options? What are the likely outcomes of each? What would a calm, experienced person do in my position?",
+    "I want to get better at [specific work skill]. What is the most important thing to understand about it, and what is the single best thing I could practise today — something I could do in the next hour?",
+  ],
+  personal:[
+    "I want to work on [personal quality — e.g. patience, consistency, self-compassion]. Give me: one specific thing I could practise today, how to notice whether it's working, and one thing to say to myself when I slip back into the old pattern.",
+    "I am struggling with [personal challenge — be honest]. Help me understand it better: what is likely driving it, what I could do differently starting today, and what a realistic timeline for change looks like.",
+    "I want to feel more [quality you want — e.g. calm / present / confident / energised]. What are the three most effective things I could do today — not eventually, today — that would genuinely move me toward feeling this way?",
+  ],
+  money:[
+    "I want to improve my financial situation. My biggest challenge right now is [describe it — spending / saving / earning / debt / planning]. What is the single most impactful thing I could do or change this week?",
+    "I want to understand [financial concept — investing / budgeting / tax / savings / etc.] better. Explain it simply, with a real example from everyday life. Then tell me the one thing I should actually do with this knowledge.",
+    "I have [amount or time] and I want to make the most of it financially. My situation is: [describe briefly]. Give me honest, practical advice — not generic, but specific to what I've told you.",
+  ],
+  create:[
+    "I want to make progress on [creative project or goal — be specific]. I've been avoiding it because [honest reason]. Give me the smallest possible first step I could take in the next 30 minutes — something so small there is no excuse not to do it.",
+    "I have an idea for [describe it roughly]. Help me develop it: what is most interesting about it, what form would suit it best, and what is the one thing I would need to create in order to test whether it is worth pursuing?",
+    "I am stuck at [describe exactly where you are stuck in your creative work]. Give me three completely different approaches to moving forward — approaches I probably haven't considered. I'll choose the one that feels most right.",
+  ],
+};
+const DIDX={career:0,personal:0,money:0,create:0};
+let curType='career';
+
+/* =======================================================
+   RENDER PICKER
+   ======================================================= */
+function renderPicker(){
+  document.getElementById('catGrid').innerHTML=CATS.map(c=>`
+    <div class="cat rv" data-id="${c.id}" onclick="pickCat('${c.id}')">
+      <span class="cat-ic">${c.icon}</span>
+      <div class="cat-nm">${c.name}</div>
+      <div class="cat-tg">${c.tag}</div>
+      <div class="cat-dot"></div>
+    </div>`).join('');
+  // Re-run reveal on newly added cat cards
+  document.querySelectorAll('.cat.rv:not(.in)').forEach(function(el){
+    const rect=el.getBoundingClientRect();
+    if(rect.top < window.innerHeight && rect.bottom > 0){
+      el.classList.add('in');
+    } else {
+      revObs.observe(el);
+    }
+  });
+  if(window.bindCursor)window.bindCursor();
+}
+renderPicker();
+
+/* =======================================================
+   PICK CATEGORY
+   ======================================================= */
+let curCat=null;
+function pickCat(id){
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('on'));
+  const card=document.querySelector(`.cat[data-id="${id}"]`);
+  if(card)card.classList.add('on');
+  curCat=CATS.find(c=>c.id===id);
+  document.getElementById('thinkSec').scrollIntoView({behavior:'smooth'});
+  document.getElementById('thinking').style.display='block';
+  document.getElementById('results').style.display='none';
+  cursorThink(true);
+  setTimeout(()=>{
+    document.getElementById('thinking').style.display='none';
+    cursorThink(false);
+    renderResults(curCat);
+  },1400);
+}
+
+function runCustom(){
+  const v=document.getElementById('customIn').value.trim();
+  if(!v)return;
+  const lo=v.toLowerCase();
+  let found=CATS.find(c=>lo.includes(c.id)||c.name.toLowerCase().includes(lo));
+  if(!found)found={
+    id:'custom',icon:'✨',name:v,tag:'Your personal upgrade path',ac:'#c8a84b',
+    hl:`${v.toUpperCase()},\nTRANSFORMED.`,
+    sub:"Whatever you want to improve, AI can help you get there faster, more clearly, and more consistently than you could alone. The approach is always the same: get clear, get specific, take one action today.",
+    qw:[
+      {ic:'🎯',t:'Get specific about what you actually want',b:"Vague goals produce vague results. Use AI to define exactly what success looks like — specific, measurable, real enough to aim at."},
+      {ic:'📋',t:'Build a plan designed for your real life',b:"Not an ambitious plan that looks good on paper. A small, honest plan that fits your actual schedule, energy, and circumstances."},
+      {ic:'📊',t:'Track progress in the simplest way possible',b:"What gets measured gets managed. Ask AI to design a two-minute daily check-in that tells you whether you're moving in the right direction."},
+    ],
+    prompts:[
+      {tab:'Get Clear',sit:"You want to improve but aren't sure exactly where to start.",pr:`I want to improve [${v}] in my life. I am currently [describe where you are honestly]. My goal is to [describe what improvement looks and feels like]. Please give me: the most important thing to understand about improving in this area, the single most effective action I could take this week, and how I will know I am making real progress.`,res:"Clarity in ten minutes after months of vague wanting."},
+      {tab:'Build a Plan',sit:"You want a realistic plan for genuine improvement.",pr:`I want to make serious progress on [${v}]. My current situation: [describe honestly]. I have approximately [time per day or week] to dedicate to this. Please build me a realistic 30-day improvement plan — not aspirational, but genuinely achievable. Include specific daily or weekly actions, how to measure progress, and how to reset when things get difficult.`,res:"First plan I've actually followed because it was built for my real life."},
+      {tab:'Break the Block',sit:"Something is stopping you from making progress.",pr:`I want to improve [${v}] but I keep getting stuck because [describe what stops you]. This has been a pattern for [how long]. Please help me understand: what is really causing this block, what I could do differently starting now, and what the smallest possible step forward looks like.`,res:"Named the real problem for the first time. Everything changed after that."},
+      {tab:'Go Deep',sit:"You want to understand what genuine improvement in this area really requires.",pr:`I want to genuinely understand what it takes to improve significantly at [${v}]. Not surface-level advice — real insight. What do most people get wrong about this? What does the most effective approach actually look like? What should I be doing differently from what I'm probably already doing?`,res:"Completely changed my approach. Saw results within two weeks."},
+    ],
+    ins:[
+      {ic:'🎯',t:'Specificity is the engine of change',b:"Vague goals produce vague results. The more precisely you define what you want — what it looks like, how you'll know you've reached it — the more likely you are to get there."},
+      {ic:'🔄',t:'Small and consistent beats big and occasional',b:"Research on behaviour change consistently shows that small, daily actions produce dramatically better results than occasional intense efforts. Design for the minimum effective dose."},
+      {ic:'🪞',t:'Honest self-assessment is the beginning of everything',b:"You cannot improve what you cannot see clearly. Use AI as a mirror — honest, non-judgmental, and genuinely interested in helping you understand your situation accurately."},
+      {ic:'📈',t:'Progress compounds in both directions',b:"Every improvement makes the next one easier. The first month of any change is the hardest. After that, momentum builds. Give yourself permission to start small enough that the first month actually happens."},
+    ],
+    bars:[{l:'Goal clarity',w:91},{l:'Action consistency',w:74},{l:'Progress speed',w:78},{l:'Motivation',w:68}],
+    rooms:[{ic:'💭',nm:'Think Better',desc:'Clear thinking for any goal',url:'think-better.html'},{ic:'🌟',nm:'Future You',desc:'Design your upgraded self',url:'future-you.html'},{ic:'✍️',nm:'Create More',desc:'Make the life you want',url:'create-more.html'}]
+  };
+  curCat=found;
+  document.getElementById('thinkSec').scrollIntoView({behavior:'smooth'});
+  document.getElementById('thinking').style.display='block';
+  document.getElementById('results').style.display='none';
+  cursorThink(true);
+  setTimeout(()=>{
+    document.getElementById('thinking').style.display='none';
+    cursorThink(false);
+    renderResults(curCat);
+  },1400);
+}
+
+/* =======================================================
+   RENDER RESULTS
+   ======================================================= */
+function renderResults(cat){
+  const el=document.getElementById('results');
+  el.style.display='block';
+  const hlLines=cat.hl.split('\n');
+
+  const qwH=cat.qw.map((q,i)=>`
+    <div class="qw" style="animation:cardIn .55s var(--eX) ${i*.1+.1}s both">
+      <span class="qw-ic">${q.ic}</span>
+      <div class="qw-bg">0${i+1}</div>
+      <div class="qw-title">${q.t}</div>
+      <div class="qw-body">${q.b}</div>
+    </div>`).join('');
+
+  const tabsH=cat.prompts.map((p,i)=>`<button class="tab${i===0?' on':''}" onclick="switchTab(this,${i},'${cat.id}')">${p.tab}</button>`).join('');
+
+  const insH=cat.ins.map((ic,i)=>`
+    <div class="ic" style="animation:cardIn .55s var(--eX) ${i*.1+.2}s both">
+      <span class="ic-icon">${ic.ic}</span>
+      <div class="ic-title">${ic.t}</div>
+      <div class="ic-body">${ic.b}</div>
+    </div>`).join('');
+
+  const barsH=cat.bars.map(b=>`
+    <div class="bar-row">
+      <div class="bar-lbl">${b.l}</div>
+      <div class="bar-track"><div class="bar-fill" data-w="${b.w}%"></div></div>
+      <div class="bar-pct">${b.w}%</div>
+    </div>`).join('');
+
+  const deepH=cat.rooms.map(r=>`
+    <div class="deep-card" onclick="location.href='${r.url}'">
+      <span class="dc-ic">${r.ic}</span>
+      <div class="dc-nm">${r.nm}</div>
+      <div class="dc-desc">${r.desc}</div>
+    </div>`).join('');
+
+  el.innerHTML=`
+    <div class="rh" style="animation:cardIn .5s var(--eX) both">
+      <div>
+        <div class="rh-eyebrow">${cat.name}</div>
+        <div class="rh-title">${hlLines.join('<br>')}</div>
+        <div class="rh-sub">${cat.sub}</div>
+      </div>
+      <button class="nback" onclick="resetResults()" style="white-space:nowrap">&#8592; Change Area</button>
+    </div>
+
+    <div class="qw-grid" style="animation:cardIn .5s var(--eX) .1s both">${qwH}</div>
+
+    <div class="ps" style="animation:cardIn .5s var(--eX) .15s both">
+      <div class="ps-head">
+        <div class="ps-label">Your Prompts</div>
+        <div class="ps-title">Copy. Paste. Transform.</div>
+      </div>
+      <div class="ps-tabs">${tabsH}</div>
+      <div class="ps-body" id="psBody-${cat.id}">${promptHTML(cat.prompts[0],cat.id,0)}</div>
+    </div>
+
+    <div class="ic-grid">${insH}</div>
+
+    <div class="pb-section" style="animation:cardIn .5s var(--eX) .25s both">
+      <div class="pb-sec-title">What changes</div>
+      <div class="pb-sec-sub">Average improvements reported by people working on this area with AI</div>
+      <div class="bars">${barsH}</div>
+    </div>
+
+    <div style="animation:cardIn .5s var(--eX) .3s both">
+      <div class="label" style="margin-top:32px">Go Deeper</div>
+      <div class="deep-grid">${deepH}</div>
+    </div>`;
+
+  // Animate bars after a tick
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    el.querySelectorAll('.bar-fill').forEach(b=>{b.style.width=b.dataset.w});
+  }));
+
+  // Re-bind everything
+  if(window.bindCursor)window.bindCursor();
+  bindMagnetic();
+  bindTilt();
+  attachReveal();
+
+  document.getElementById('resultSec').scrollIntoView({behavior:'smooth'});
+}
+
+function promptHTML(p,catId,idx){
+  const resH=p.res?`<div class="pb-result">&#10003; "${p.res}"</div>`:'';
+  return `
+    <div class="pb-situation">${p.sit}</div>
+    <div class="pb-plabel">The Prompt</div>
+    <div class="pb-prompt" id="pt-${catId}-${idx}">${p.pr}</div>
+    ${resH}
+    <div class="pb-acts">
+      <button class="copy-btn" onclick="copyPrompt('pt-${catId}-${idx}',this)">Copy Prompt</button>
+    </div>`;
+}
+
+function switchTab(btn,idx,catId){
+  btn.closest('.ps').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  const cat=CATS.find(c=>c.id===catId)||curCat;
+  const body=document.getElementById('psBody-'+catId);
+  if(body&&cat){body.innerHTML=promptHTML(cat.prompts[idx],catId,idx);bindMagnetic()}
+}
+
+function copyPrompt(id,btn){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const txt=el.textContent.trim();
+  function showDone(){btn.textContent='Copied ✓';btn.classList.add('done');setTimeout(()=>{btn.textContent='Copy Prompt';btn.classList.remove('done')},2500);}
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(showDone).catch(()=>{
+      const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showDone();
+    });
+  } else {
+    const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showDone();
+  }
+}
+
+function resetResults(){
+  document.getElementById('results').style.display='none';
+  document.getElementById('thinking').style.display='none';
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('on'));
+  curCat=null;
+  scrollToSec('question');
+}
+
+/* =======================================================
+   DAILY TRACKER
+   ======================================================= */
+function pickDaily(el,type){
+  document.querySelectorAll('.topt').forEach(o=>o.classList.remove('on'));
+  el.classList.add('on');
+  curType=type;
+  typePrompt(DAILY[type][DIDX[type]||0]);
+}
+function typePrompt(txt){
+  const el=document.getElementById('tTyped');
+  if(!el)return;
+  el.textContent='';
+  let i=0;
+  (function t(){if(i<txt.length){el.textContent+=txt[i++];setTimeout(t,16)}})();
+}
+function nextDaily(){
+  DIDX[curType]=(DIDX[curType]+1)%DAILY[curType].length;
+  typePrompt(DAILY[curType][DIDX[curType]]);
+}
+function copyDaily(){
+  const t=document.getElementById('tTyped');
+  if(!t)return;
+  navigator.clipboard.writeText(t.textContent.trim()).then(()=>{
+    const b=event.target;b.textContent='Copied ✓';
+    setTimeout(()=>b.textContent='Copy This Prompt',2000);
+  });
+}
+// Start tracker
+// Enter key on custom input
+document.getElementById('customIn').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){runCustom();}
+});
+pickDaily(document.querySelector('.topt'),'career');
+
+
+// Fallback: ensure all rv elements eventually become visible
+window.addEventListener('scroll', function(){
+  document.querySelectorAll('.rv:not(.in),.rvl:not(.in),.rvr:not(.in)').forEach(function(el){
+    const rect=el.getBoundingClientRect();
+    if(rect.top < window.innerHeight*1.1 && rect.bottom > 0){
+      el.classList.add('in');
+    }
+  });
+},{passive:true});
+
+// Also run once on load with a small delay
+setTimeout(function(){
+  document.querySelectorAll('.rv:not(.in),.rvl:not(.in),.rvr:not(.in)').forEach(function(el){
+    const rect=el.getBoundingClientRect();
+    if(rect.top < window.innerHeight && rect.bottom > 0){
+      el.classList.add('in');
+    }
+  });
+},100);
+
+// ─── ESC KEY — close drawer ───────────────────────────
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var d=document.getElementById('navDrawer');
+    if(d&&(d.style.transform==='translateX(0px)'||d.style.transform==='translateX(0%)')){
+      toggleDrawer();
+    }
+  }
+});
+</script>
+</body>
+</html>
