@@ -141,7 +141,10 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 /* RESPONSIVE */
 @media(max-width:768px){
   #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important}
+  .nav-burger{display:flex!important
+  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
+.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
+}
 }
   #nav.dense{padding:0 24px}
   .wrap{padding:0 24px}
@@ -166,6 +169,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 @keyframes slUp{to{opacity:1;transform:translateY(0)}}
 @keyframes sBr{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
 @keyframes sPulse{0%,100%{opacity:1}50%{opacity:.2;transform:scale(1.9)}}
+
+/* ── Mobile-responsive split grids (RC1.8 fix) ── */
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style></head><body>
 <div id="dot"></div><div id="ring"></div>
 <nav id="nav">
@@ -218,13 +226,13 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
   </div>
 </section>
 <section class="sec" id="story" style="padding:120px 0;background:linear-gradient(180deg,var(--void) 0%,#090b10 50%,var(--void) 100%)">
-  <div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center">
+  <div class="wrap"><div class="rm-split-c">
     <div><div class="sec-label fog">The Story</div><h2 class="sec-title fog d1" style="margin-bottom:28px">The best version of you isn't a dream.</h2><p class="body-text fog d2">Most people have a vague sense of who they want to become. They can feel it — the clearer thinking, the better career, the more creative life, the more intentional relationships. But the gap between feeling it and building toward it has always been enormous.</p><p class="body-text fog d3">The problem is not ambition. The problem is that personal transformation has always required either an expensive coach, the right environment, or an unusual amount of self-awareness and self-discipline. Most people have none of these in sufficient quantity.</p><p class="body-text fog d4"><strong>AI changes the economics of personal growth entirely.</strong> For the first time, anyone can have a thinking partner who helps them design their life intentionally — not with vague inspiration, but with specific plans, honest challenge, and a working architecture for change.</p></div>
     <div class="fog-r"><div class="sq"><div class="sq-mark">"</div><div class="sq-text">I described who I wanted to be in three years to AI — honestly, in detail, without holding back. It wrote me back a portrait of that person so specific, so real, so clearly possible, that I sat there reading it thinking: why am I not already making decisions from this place? I printed it out. It's on my desk.</div><div class="sq-attr">&#8212; Tom W. &middot; Logistics manager, Leeds</div></div></div>
   </div></div>
 </section>
 <section class="sec" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090d 50%,var(--void) 100%)">
-  <div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start">
+  <div class="wrap"><div class="rm-split">
     <div><div class="sec-label fog">How It Works</div><h2 class="sec-title fog d1" style="margin-bottom:20px">The path<br>forward.</h2><p class="sec-serif fog d2" style="max-width:400px">You don&apos;t need to understand AI to use it well. You just need to know what to ask.</p></div>
     <div style="position:relative;padding-left:24px;border-left:1px solid rgba(200,168,75,.08)"><div class="step fog d1"><div class="step-num">01</div><div><div class="step-title">Start with who you are right now</div><div class="step-body">Honest self-knowledge is the foundation of everything. Before you describe the future, describe the present. Not as self-criticism — as inventory. What you're good at, what holds you back, what you've built, what you've left undone.</div></div></div><div class="step fog d2"><div class="step-num">02</div><div><div class="step-title">Describe who you want to be — in detail</div><div class="step-body">Not 'more successful.' Not 'happier.' Specific. What are you doing in three years? What does your work look like? Your relationships? Your daily rhythm? The more specific the picture, the more real it becomes.</div></div></div><div class="step fog d3"><div class="step-num">03</div><div><div class="step-title">Find the gap honestly</div><div class="step-body">The distance between who you are now and who you want to become is made of specific things. Habits you don't have. Skills you haven't built. Decisions you keep avoiding. AI helps you name them precisely.</div></div></div><div class="step fog d4"><div class="step-num">04</div><div><div class="step-title">Build the smallest possible plan</div><div class="step-body">Transformation fails when the steps are too big. Build a 90-day plan of the smallest possible actions — things you can actually do in your actual life, with the time and energy you actually have.</div></div></div><div class="step fog d5"><div class="step-num">05</div><div><div class="step-title">Come back and recalibrate</div><div class="step-body">The person you're becoming is always changing. Use AI as a regular thinking partner — monthly, weekly, whenever you need clarity. Transformation is not a one-time event. It is a continuous conversation with yourself.</div></div></div></div>
   </div></div>
@@ -239,7 +247,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
   <div class="wrap" style="max-width:800px"><div class="sec-label fog">Common Questions</div><h2 class="sec-title fog d1" style="margin-bottom:60px">Everything<br>you wondered.</h2><div class="acc-item fog"><div class="acc-head">Is this the same as life coaching?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">AI can do many of the things a life coach does — helping you clarify goals, challenge assumptions, build plans, and stay accountable. What it can't do is build a human relationship, hold genuine emotional space, or provide the accountability that comes from a real person who cares about you. For many people, AI is a powerful starting point. For some, it's all they need. For others, it opens the door to seeking the human support they actually need.</div></div></div><div class="acc-item fog"><div class="acc-head">What if I don't know what I want?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">Start there. Use AI to help you figure it out. The Clarity prompt from the Think Better room is a good starting point. Tell AI honestly that you're not sure what you want and ask it to help you find out through questions.</div></div></div><div class="acc-item fog"><div class="acc-head">This feels quite personal. Is it safe to share things with AI?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">Don't share anything you'd be uncomfortable with, including identifying information, financial details, or private information about others. The prompts here are designed to work with general descriptions. You don't need to give AI your name, your address, or your bank account to have a meaningful conversation about your goals.</div></div></div><div class="acc-item fog"><div class="acc-head">I've tried goal-setting before and it doesn't work for me.<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">Most goal-setting fails because the goals are too vague, the plans too big, and there's no mechanism for recovery when you fall off. The 90-Day Plan and Habit Design prompts above are specifically built around the reasons goal-setting fails. The key is starting smaller than you think you need to.</div></div></div><div class="acc-item fog"><div class="acc-head">How often should I use these prompts?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">The Future Portrait is worth doing once a quarter. The Monthly Check-in is worth doing monthly. The others you can use whenever you need them. There's no correct frequency — the right amount is the amount that keeps you moving.</div></div></div></div>
 </section>
 <section class="sec" style="padding:80px 0;background:linear-gradient(180deg,var(--void) 0%,#090a0d 100%)">
-  <div class="wrap"><div style="background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center" class="fog">
+  <div class="wrap"><div class="rm-cta-box fog" class="fog">
     <div><div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Next Room</div><h3 style="font-family:var(--font-d);font-size:clamp(36px,5vw,64px);color:var(--bone);letter-spacing:-1px;margin-bottom:12px">Learn Faster</h3><p style="font-size:15px;color:var(--dust)">Continue your journey into Learn Faster.</p></div>
     <button class="btn btn-gold" onclick="location.href='learn-faster.html'">Learn Faster &#8594;</button>
   </div></div>

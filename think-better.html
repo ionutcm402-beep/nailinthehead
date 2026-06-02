@@ -141,7 +141,10 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 /* RESPONSIVE */
 @media(max-width:768px){
   #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important}
+  .nav-burger{display:flex!important
+  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
+.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
+}
 }
   #nav.dense{padding:0 24px}
   .wrap{padding:0 24px}
@@ -166,6 +169,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 @keyframes slUp{to{opacity:1;transform:translateY(0)}}
 @keyframes sBr{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
 @keyframes sPulse{0%,100%{opacity:1}50%{opacity:.2;transform:scale(1.9)}}
+
+/* ── Mobile-responsive split grids (RC1.8 fix) ── */
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style></head><body>
 <div id="dot"></div><div id="ring"></div>
 <nav id="nav">
@@ -218,13 +226,13 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
   </div>
 </section>
 <section class="sec" id="story" style="padding:120px 0;background:linear-gradient(180deg,var(--void) 0%,#090b10 50%,var(--void) 100%)">
-  <div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center">
+  <div class="wrap"><div class="rm-split-c">
     <div><div class="sec-label fog">The Story</div><h2 class="sec-title fog d1" style="margin-bottom:28px">You think better than you think.</h2><p class="body-text fog d2">Most people don't have a thinking problem. They have a thinking-alone problem. When you have to explain something out loud, you understand it better. When someone asks you 'why?', you find the reasons. When a challenge is raised, you find the weaknesses before they become mistakes.</p><p class="body-text fog d3">The problem is that access to this kind of rigorous, honest thinking partnership has always been limited to people who could afford coaches, mentors, or therapists — or who happened to know the right people.</p><p class="body-text fog d4"><strong>AI is the first time in history that this kind of thinking partnership is available to everyone.</strong> Not instead of human support — alongside it. Available at 2am. Available when the decision can't wait. Available with no judgement and no agenda.</p></div>
     <div class="fog-r"><div class="sq"><div class="sq-mark">"</div><div class="sq-text">I was stuck in the same decision for three months. I'd been going round in circles — too close to it, too emotionally involved to think clearly. One conversation with AI, using the right prompt, and I had clarity in twenty minutes. I don't know why it took me so long.</div><div class="sq-attr">&#8212; Maria L. &middot; Freelance designer, Bristol</div></div></div>
   </div></div>
 </section>
 <section class="sec" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090d 50%,var(--void) 100%)">
-  <div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start">
+  <div class="wrap"><div class="rm-split">
     <div><div class="sec-label fog">How It Works</div><h2 class="sec-title fog d1" style="margin-bottom:20px">The path<br>forward.</h2><p class="sec-serif fog d2" style="max-width:400px">You don&apos;t need to understand AI to use it well. You just need to know what to ask.</p></div>
     <div style="position:relative;padding-left:24px;border-left:1px solid rgba(200,168,75,.08)"><div class="step fog d1"><div class="step-num">01</div><div><div class="step-title">Name the real decision</div><div class="step-body">Most people struggle to think clearly because they're thinking about the wrong thing. Before anything else, ask AI to help you identify what you're actually deciding — not the symptoms, but the actual question.</div></div></div><div class="step fog d2"><div class="step-num">02</div><div><div class="step-title">Argue the other side</div><div class="step-body">The fastest way to know if your thinking is sound is to have it challenged. Ask AI to argue against your position as strongly as possible. If it can't, you're on solid ground. If it can, you needed to know.</div></div></div><div class="step fog d3"><div class="step-num">03</div><div><div class="step-title">Find the assumptions</div><div class="step-body">Every decision rests on assumptions. Most of them are never examined. Ask AI: 'What am I assuming to be true in order for this reasoning to hold?' Then question each one.</div></div></div><div class="step fog d4"><div class="step-num">04</div><div><div class="step-title">Think in longer time frames</div><div class="step-body">Most regret comes from thinking too short-term. Ask AI: 'How will I feel about this decision in 5 years? What would my 70-year-old self think?' Perspective is the most powerful thinking tool there is.</div></div></div><div class="step fog d5"><div class="step-num">05</div><div><div class="step-title">Write it down and read it back</div><div class="step-body">The act of explaining your thinking in writing is itself clarifying. Use AI as the audience. Tell it your thinking. Ask it to summarise what it heard. The gap between what you meant and what it understood is where clarity lives.</div></div></div></div>
   </div></div>
@@ -239,7 +247,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
   <div class="wrap" style="max-width:800px"><div class="sec-label fog">Common Questions</div><h2 class="sec-title fog d1" style="margin-bottom:60px">Everything<br>you wondered.</h2><div class="acc-item fog"><div class="acc-head">Is this the same as therapy?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">No. AI is a thinking tool, not a therapeutic relationship. It can help you think more clearly, challenge your assumptions, and see situations from different angles. For emotional support, grief, trauma, or mental health — please seek a human professional. These two things complement rather than replace each other.</div></div></div><div class="acc-item fog"><div class="acc-head">What if I don't agree with what AI says?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">Good. Disagreement means you're thinking. Push back. Ask it to justify its position. Ask it to consider your counter-argument. The point is not to be told what to think — it's to think more rigorously than you can alone.</div></div></div><div class="acc-item fog"><div class="acc-head">Can this help with decisions at work?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">Yes. This is one of its most powerful applications. Strategic decisions, difficult conversations, team problems, career choices — all of these benefit enormously from rigorous external challenge to your thinking.</div></div></div><div class="acc-item fog"><div class="acc-head">What about really personal decisions — relationships, family?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">AI can be genuinely useful here for thinking through complex emotional situations clearly. It won't tell you what to do. But it can help you understand what you actually want, what you're afraid of, and what your options really are.</div></div></div><div class="acc-item fog"><div class="acc-head">I tend to overthink. Won't this make it worse?<span class="acc-icon">+</span></div><div class="acc-body"><div class="acc-body-inner">The opposite, in our experience. Overthinking often happens because you're running the same thoughts in circles without resolution. Externalising the conversation — writing it down, having it with AI — breaks the loop. Most overthinkers find that one good AI conversation cuts through weeks of circular thinking.</div></div></div></div>
 </section>
 <section class="sec" style="padding:80px 0;background:linear-gradient(180deg,var(--void) 0%,#090a0d 100%)">
-  <div class="wrap"><div style="background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center" class="fog">
+  <div class="wrap"><div class="rm-cta-box fog" class="fog">
     <div><div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Next Room</div><h3 style="font-family:var(--font-d);font-size:clamp(36px,5vw,64px);color:var(--bone);letter-spacing:-1px;margin-bottom:12px">Future You</h3><p style="font-size:15px;color:var(--dust)">Continue your journey into Future You.</p></div>
     <button class="btn btn-gold" onclick="location.href='future-you.html'">Future You &#8594;</button>
   </div></div>

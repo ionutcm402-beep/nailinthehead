@@ -147,7 +147,10 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 /* RESPONSIVE */
 @media(max-width:768px){
   #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important}
+  .nav-burger{display:flex!important
+  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
+.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
+}
 }
   #nav.dense{padding:0 24px}
   .wrap{padding:0 24px}
@@ -171,6 +174,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .accent { color:#6480d4; }
 .zone-bar { background:#6480d4; }
 .step::before { border-color:rgba(200,168,75,.25); }
+
+/* ── Mobile-responsive split grids (RC1.8 fix) ── */
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style>
 </head>
 <body>
@@ -243,7 +251,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
      ================================================================ -->
 <section class="sec" id="story" style="padding:120px 0;background:linear-gradient(180deg,var(--void) 0%,#090b10 50%,var(--void) 100%)">
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center">
+    <div class="rm-split-c">
       <div>
         <div class="sec-label fog">The Story</div>
         <h2 class="sec-title fog d1" style="margin-bottom:28px">Your brain was never the problem.</h2>
@@ -267,7 +275,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
      ================================================================ -->
 <section class="sec" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090d 50%,var(--void) 100%)">
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start">
+    <div class="rm-split">
       <div>
         <div class="sec-label fog">How It Works</div>
         <h2 class="sec-title fog d1" style="margin-bottom:20px">The path<br>forward.</h2>
@@ -415,7 +423,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
      ================================================================ -->
 <section class="sec" style="padding:80px 0;background:linear-gradient(180deg,var(--void) 0%,#090a0d 100%)">
   <div class="wrap">
-    <div style="background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center" class="fog">
+    <div class="rm-cta-box fog" class="fog">
       <div>
         <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Next Room</div>
         <h3 style="font-family:var(--font-d);font-size:clamp(36px,5vw,64px);color:var(--bone);letter-spacing:-1px;margin-bottom:12px">Work Smarter</h3>
