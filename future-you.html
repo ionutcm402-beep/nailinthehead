@@ -328,6 +328,19 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
       });
     });
   });
+
+// ── OPEN IN AI ───────────────────────────────────────────
+function openInAI(txt,tool){
+  if(!txt||!txt.trim())return;
+  var enc=encodeURIComponent(txt.trim());
+  var urls={
+    chatgpt:'https://chatgpt.com/?q='+enc,
+    claude:'https://claude.ai/new?q='+enc,
+    grok:'https://x.com/i/grok?text='+enc
+  };
+  window.open(urls[tool]||urls.chatgpt,'_blank','noopener');
+}
+// ─────────────────────────────────────────────────────────
 // ── USE IN AI ────────────────────────────────────────────
   document.querySelectorAll('.use-btn[data-tool]').forEach(function(useBtn){
     useBtn.addEventListener('click',function(){

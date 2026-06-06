@@ -354,6 +354,36 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
 .done-btn:hover{border-color:var(--gold);color:var(--gold)}
 .done-btn.done{background:rgba(200,168,75,.1);border-color:var(--gold);color:var(--gold);cursor:default}
 .streak-row{margin-top:12px;text-align:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.4);min-height:18px}
+
+/* ── PERSONAL AI SESSION ─────────────────────────────── */
+.pai-section{padding:80px 0 48px;background:linear-gradient(180deg,var(--void) 0%,#08090d 100%)}
+.pai-wrap{max-width:720px;margin:0 auto;padding:0 24px;text-align:center}
+.pai-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:14px}
+.pai-label::before,.pai-label::after{content:'';width:24px;height:1px;background:var(--gold)}
+.pai-title{font-family:var(--font-d);font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:-2px;color:var(--bone);margin-bottom:16px}
+.pai-title span{color:var(--gold)}
+.pai-sub{font-family:var(--font-s);font-style:italic;font-size:17px;color:var(--dust);line-height:1.75;margin-bottom:40px}
+.pai-box{background:var(--abyss);border:1px solid var(--gold-line);border-radius:4px;padding:32px;text-align:left;transition:border-color .3s}
+.pai-box:focus-within{border-color:rgba(200,168,75,.35)}
+.pai-area-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+.pai-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pai-area{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border-radius:100px;cursor:pointer;border:1px solid rgba(200,168,75,.2);background:transparent;color:var(--dust);transition:all .3s;font-family:var(--font-b)}
+.pai-area:hover{border-color:var(--gold);color:var(--gold)}
+.pai-area.selected{background:rgba(200,168,75,.1);border-color:var(--gold);color:var(--gold)}
+.pai-input-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dust);margin-bottom:10px;display:block}
+.pai-input{width:100%;background:var(--midnight);border:1px solid rgba(200,168,75,.12);padding:16px 20px;font-family:var(--font-b);font-size:15px;color:var(--bone);line-height:1.6;resize:vertical;min-height:100px;border-radius:2px;transition:border-color .3s;outline:none}
+.pai-input:focus{border-color:rgba(200,168,75,.4)}
+.pai-input::placeholder{color:var(--shadow)}
+.pai-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pai-btn{font-family:var(--font-b);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:2px;cursor:pointer;border:none;transition:all .3s;flex:1;min-width:140px}
+.pai-btn-chatgpt{background:var(--gold);color:var(--void)}
+.pai-btn-chatgpt:hover{opacity:.85}
+.pai-btn-claude{background:transparent;border:1px solid var(--gold)!important;color:var(--gold)}
+.pai-btn-claude:hover{background:rgba(200,168,75,.08)}
+.pai-btn-grok{background:transparent;border:1px solid rgba(200,168,75,.3)!important;color:var(--dust)}
+.pai-btn-grok:hover{border-color:var(--gold)!important;color:var(--gold)}
+.pai-divider{text-align:center;margin:48px 0 32px;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,75,.25)}
+.pai-divider::before,.pai-divider::after{content:'────────────────'}
 </style>
 </head>
 <body>
@@ -419,6 +449,36 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
 <!-- ===================================================
      THE QUESTION
      =================================================== -->
+
+<!-- ===================================================
+     PERSONAL AI SESSION
+     =================================================== -->
+<section class="pai-section">
+  <div class="pai-wrap">
+    <div class="pai-label">Your Personal AI Session</div>
+    <h2 class="pai-title">Tell me what<br>is going <span>on.</span></h2>
+    <p class="pai-sub">One sentence about your situation — and I will build you a personal AI session around it. No copying. No browsing prompts. Just tell me what is happening.</p>
+    <div class="pai-box">
+      <span class="pai-area-label">What area of your life?</span>
+      <div class="pai-select">
+        <button class="pai-area" data-area="career" onclick="selectArea(this)">Career</button>
+        <button class="pai-area" data-area="money" onclick="selectArea(this)">Money</button>
+        <button class="pai-area" data-area="personal" onclick="selectArea(this)">Personal</button>
+        <button class="pai-area" data-area="create" onclick="selectArea(this)">Creative</button>
+        <button class="pai-area" data-area="relationships" onclick="selectArea(this)">Relationships</button>
+        <button class="pai-area" data-area="health" onclick="selectArea(this)">Health</button>
+      </div>
+      <span class="pai-input-label">What is going on? One sentence is enough.</span>
+      <textarea class="pai-input" id="paiInput" placeholder="e.g. I have been passed over for promotion twice and I don&#8217;t know why&#8230;"></textarea>
+      <div class="pai-btns">
+        <button class="pai-btn pai-btn-chatgpt" onclick="startPersonalSession('chatgpt')">Start with ChatGPT</button>
+        <button class="pai-btn pai-btn-claude" onclick="startPersonalSession('claude')">Start with Claude</button>
+        <button class="pai-btn pai-btn-grok" onclick="startPersonalSession('grok')">Start with Grok</button>
+      </div>
+    </div>
+    <div class="pai-divider">&nbsp;or browse prompts by category below&nbsp;</div>
+  </div>
+</section>
 <section class="sec" id="question" style="padding:96px 0 48px;background:linear-gradient(180deg,var(--void) 0%,#08090d 100%)">
   <div class="wrap">
     <div class="q-grid">
@@ -1605,6 +1665,76 @@ function initDoneState(){
       row.textContent=streak+' day streak — come back tomorrow to keep it going.';
     }
   }catch(e){}
+}
+// ─────────────────────────────────────────────────────────────────
+
+
+// ── PERSONAL AI SESSION ──────────────────────────────────────────
+var selectedArea = 'career';
+
+function selectArea(btn){
+  document.querySelectorAll('.pai-area').forEach(function(b){
+    b.classList.remove('selected');
+  });
+  btn.classList.add('selected');
+  selectedArea = btn.dataset.area;
+  // Update placeholder based on area
+  var placeholders = {
+    career: "e.g. I have been passed over for promotion twice and I don\'t know why...",
+    money: "e.g. I earn decent money but never seem to have any left at the end of the month...",
+    personal: "e.g. I keep starting things and never finishing them and it is making me feel stuck...",
+    create: "e.g. I have had this idea for two years and I still haven\'t started it...",
+    relationships: "e.g. I find it really hard to say what I need without feeling like a burden...",
+    health: "e.g. I know what I should be doing but I can never make it stick for more than a week..."
+  };
+  var input = document.getElementById('paiInput');
+  if(input && placeholders[selectedArea]){
+    input.placeholder = placeholders[selectedArea];
+  }
+}
+
+function buildPersonalPrompt(situation, area){
+  var contexts = {
+    career: 'career development, professional growth, workplace challenges, salary, promotion, and work performance',
+    money: 'personal finance, budgeting, saving, earning more, debt, and financial planning',
+    personal: 'personal development, self-awareness, habits, mindset, and emotional wellbeing',
+    create: 'creativity, creative projects, making things, overcoming creative blocks, and turning ideas into reality',
+    relationships: 'relationships, communication, connection, setting boundaries, and interpersonal dynamics',
+    health: 'health, fitness, energy, sleep, nutrition, and building sustainable healthy habits'
+  };
+
+  var context = contexts[area] || contexts.career;
+
+  return 'You are a focused, honest, and practical personal coach specialising in ' + context + '. ' +
+    'The person you are working with has told you this about their situation: "' + situation + '" ' +
+    'Your job is to: ' +
+    '1. Briefly acknowledge what they have shared (1-2 sentences, no fluff). ' +
+    '2. Ask them the single most important clarifying question that would help you give them the most useful guidance. ' +
+    '3. After they answer, give them 3 specific, honest, and actionable steps they could take in the next 7 days. ' +
+    'Be direct. Be honest. Do not give generic advice. Respond as if you genuinely care about this specific person and their specific situation.';
+}
+
+function startPersonalSession(tool){
+  var input = document.getElementById('paiInput');
+  if(!input || !input.value.trim()){
+    input.focus();
+    input.style.borderColor = 'rgba(200,168,75,.6)';
+    input.placeholder = 'Tell me what is going on first...';
+    setTimeout(function(){ input.style.borderColor = ''; }, 2000);
+    return;
+  }
+
+  var situation = input.value.trim();
+  var prompt = buildPersonalPrompt(situation, selectedArea);
+  var enc = encodeURIComponent(prompt);
+
+  var urls = {
+    chatgpt: 'https://chatgpt.com/?q=' + enc,
+    claude:  'https://claude.ai/new?q=' + enc,
+    grok:    'https://x.com/i/grok?text=' + enc
+  };
+
+  window.open(urls[tool] || urls.chatgpt, '_blank', 'noopener');
 }
 // ─────────────────────────────────────────────────────────────────
 
