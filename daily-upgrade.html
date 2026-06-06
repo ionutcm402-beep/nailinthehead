@@ -455,8 +455,10 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
   <div class="wrap">
     <div style="text-align:center;margin-bottom:60px">
       <div class="label" style="justify-content:center">The Daily Prompt</div>
+      <div id="todayDate" style="text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,168,75,.5);margin:8px 0 16px"></div>
       <h2 class="big-title">One question.<br>Every day.</h2>
       <p class="serif-sub" style="max-width:500px;margin:18px auto 0">The best way to use AI is not once. It is every day, building toward a different version of yourself — one honest question at a time.</p>
+      <p style="text-align:center;font-size:11px;letter-spacing:2px;color:rgba(200,168,75,.3);margin-top:12px;text-transform:uppercase">Today's prompt changes at midnight &middot; Same for everyone, everywhere</p>
     </div>
     <div class="tracker-box">
       <div class="tbox">
@@ -468,10 +470,10 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
           <div class="tdate" id="tDate"></div>
           <div class="tq">What's one thing you want to work on today?</div>
           <div class="topts" id="tOpts">
-            <div class="topt" onclick="pickDaily(this,'career')"><span class="topt-ic">💼</span><div class="topt-tx">Something at work or in my career</div></div>
-            <div class="topt" onclick="pickDaily(this,'personal')"><span class="topt-ic">🌱</span><div class="topt-tx">Something personal — who I am or how I feel</div></div>
-            <div class="topt" onclick="pickDaily(this,'money')"><span class="topt-ic">💰</span><div class="topt-tx">My finances or earning more</div></div>
-            <div class="topt" onclick="pickDaily(this,'create')"><span class="topt-ic">✨</span><div class="topt-tx">Something I want to make or create</div></div>
+            <div class="topt" onclick="pickDaily(this,'career')" data-type="career"><span class="topt-ic">💼</span><div class="topt-tx">Something at work or in my career</div></div>
+            <div class="topt" onclick="pickDaily(this,'personal')" data-type="personal"><span class="topt-ic">🌱</span><div class="topt-tx">Something personal — who I am or how I feel</div></div>
+            <div class="topt" onclick="pickDaily(this,'money')" data-type="money"><span class="topt-ic">💰</span><div class="topt-tx">My finances or earning more</div></div>
+            <div class="topt" onclick="pickDaily(this,'create')" data-type="create"><span class="topt-ic">✨</span><div class="topt-tx">Something I want to make or create</div></div>
           </div>
           <div class="tprompt"><span id="tTyped"></span><span class="tcursor"></span></div>
           <div class="tacts">
@@ -1322,6 +1324,49 @@ function pickDaily(el,type){
   curType=type;
   typePrompt(DAILY[type][DIDX[type]||0]);
 }
+// ── DAILY PROMPT OF THE DAY ─────────────────────────────────────
+function getDayIndex(){
+  var now=new Date();
+  var start=new Date(now.getFullYear(),0,0);
+  var diff=now-start;
+  var oneDay=1000*60*60*24;
+  var dayOfYear=Math.floor(diff/oneDay);
+  return dayOfYear;
+}
+
+function getTodayPrompt(){
+  // Flatten all prompts into one ordered array (career, personal, money, create)
+  var all=[];
+  ['career','personal','money','create'].forEach(function(cat){
+    DAILY[cat].forEach(function(p){ all.push({cat:cat,txt:p}); });
+  });
+  var idx=getDayIndex()%all.length;
+  return all[idx];
+}
+
+function initDailyDate(){
+  var el=document.getElementById('todayDate');
+  if(!el)return;
+  var now=new Date();
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  el.textContent=days[now.getDay()]+' '+now.getDate()+' '+months[now.getMonth()];
+}
+
+function initTodayPrompt(){
+  var p=getTodayPrompt();
+  if(!p)return;
+  // Set the category to match today's prompt
+  curType=p.cat;
+  // Highlight the matching category button
+  document.querySelectorAll('.topt').forEach(function(o){
+    if(o.dataset&&o.dataset.type===p.cat)o.classList.add('on');
+  });
+  typePrompt(p.txt);
+  initDailyDate();
+}
+// ─────────────────────────────────────────────────────────────────
+
 var _typeTimer=null;
 function typePrompt(txt){
   const el=document.getElementById('tTyped');
@@ -1370,6 +1415,9 @@ setTimeout(function(){
     }
   });
 },100);
+
+// ─── DAILY PROMPT INIT ──────────────────────────────────
+document.addEventListener('DOMContentLoaded',function(){initTodayPrompt();});
 
 // ─── ESC KEY — close drawer ───────────────────────────
 document.addEventListener('keydown',function(e){
