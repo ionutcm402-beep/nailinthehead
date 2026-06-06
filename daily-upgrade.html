@@ -1134,12 +1134,14 @@ function pickDaily(el,type){
   curType=type;
   typePrompt(DAILY[type][DIDX[type]||0]);
 }
+var _typeTimer=null;
 function typePrompt(txt){
   const el=document.getElementById('tTyped');
   if(!el)return;
+  if(_typeTimer){clearTimeout(_typeTimer);_typeTimer=null;}
   el.textContent='';
   let i=0;
-  (function t(){if(i<txt.length){el.textContent+=txt[i++];setTimeout(t,16)}})();
+  (function t(){if(i<txt.length){el.textContent+=txt[i++];_typeTimer=setTimeout(t,18)}})();
 }
 function nextDaily(){
   DIDX[curType]=(DIDX[curType]+1)%DAILY[curType].length;
