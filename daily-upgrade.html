@@ -334,8 +334,26 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
 }
 *:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
 
-.use-btn{background:transparent!important;border:1px solid rgba(200,168,75,.4)!important;color:var(--gold)!important;margin-left:6px;cursor:pointer}
+.use-btn{background:transparent!important;border:1px solid rgba(200,168,75,.4)!important;color:var(--gold)!important;margin-left:0;cursor:pointer;font-size:10px!important;padding:6px 12px!important}
 .use-btn:hover{border-color:var(--gold)!important;background:rgba(200,168,75,.08)!important}
+.ai-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ai-row .use-btn{margin-left:0}
+
+/* ── MOOD FILTER ─────────────────────────────────── */
+.mood-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.mood-btn{font-family:var(--font-b);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border-radius:100px;cursor:pointer;transition:all .3s;border:1px solid rgba(200,168,75,.2);background:transparent;color:var(--dust)}
+.mood-btn:hover{border-color:rgba(200,168,75,.5);color:var(--bone)}
+.mood-btn.active{background:rgba(200,168,75,.1);border-color:var(--gold);color:var(--gold)}
+.mood-msg{text-align:center;font-family:var(--font-s);font-style:italic;font-size:15px;color:var(--dust);min-height:24px;margin-bottom:8px;transition:opacity .3s}
+.cat.dimmed{opacity:.3;filter:grayscale(.8)}
+.cat.highlighted{border-color:rgba(200,168,75,.5)!important;box-shadow:0 0 24px rgba(200,168,75,.08)}
+
+/* ── DONE FOR TODAY ────────────────────────────────── */
+.done-row{margin-top:24px;text-align:center}
+.done-btn{font-family:var(--font-b);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;border-radius:100px;cursor:pointer;transition:all .4s;border:1px solid rgba(200,168,75,.25);background:transparent;color:var(--dust)}
+.done-btn:hover{border-color:var(--gold);color:var(--gold)}
+.done-btn.done{background:rgba(200,168,75,.1);border-color:var(--gold);color:var(--gold);cursor:default}
+.streak-row{margin-top:12px;text-align:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.4);min-height:18px}
 </style>
 </head>
 <body>
@@ -421,7 +439,20 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
      =================================================== -->
 <section class="sec" id="picker" style="padding:0 0 64px;background:linear-gradient(180deg,#08090d 0%,var(--void) 100%)">
   <div class="wrap">
-    <div class="cat-grid" id="catGrid"></div>
+    
+      <!-- MOOD FILTER -->
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,75,.4);margin-bottom:16px">How is your day going?</div>
+        <div class="mood-row" id="moodRow">
+          <button class="mood-btn" data-mood="good" onclick="setMood('good')">&#127775; Good day</button>
+          <button class="mood-btn" data-mood="tough" onclick="setMood('tough')">&#128167; Tough day</button>
+          <button class="mood-btn" data-mood="decision" onclick="setMood('decision')">&#9878;&#65039; Big decision</button>
+          <button class="mood-btn" data-mood="stuck" onclick="setMood('stuck')">&#128260; Feeling stuck</button>
+          <div style="width:100%;text-align:center;font-size:10px;letter-spacing:1px;color:rgba(200,168,75,.25);margin-top:4px">Tap a mood — we pick the right prompts and open them for you</div>
+        </div>
+        <div class="mood-msg" id="moodMsg"></div>
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
     <div class="custom-row">
       <label for="customIn" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Type your own topic to upgrade</label>
       <input class="custom-in" id="customIn" type="text" aria-label="Type your own topic to upgrade" placeholder="Or type something else — confidence, parenting, fitness, public speaking, anxiety..."/>
@@ -481,9 +512,17 @@ footer{background:#030408;border-top:1px solid var(--gline);padding:48px 56px 32
           <div class="tprompt"><span id="tTyped"></span><span class="tcursor"></span></div>
           <div class="tacts">
             <button class="btn btn-gold btn-sm" onclick="copyDaily()">Copy This Prompt</button>
-            <button class="btn btn-sm use-btn" onclick="openDailyInChatGPT()">Use in ChatGPT ↗</button>
+            <div class="ai-row">
+            <button class="btn btn-sm use-btn" onclick="openDailyInAI('chatgpt')">ChatGPT ↗</button>
+            <button class="btn btn-sm use-btn" onclick="openDailyInAI('claude')">Claude ↗</button>
+            <button class="btn btn-sm use-btn" onclick="openDailyInAI('grok')">Grok ↗</button>
+          </div>
             <button class="btn btn-ghost btn-sm" onclick="nextDaily()">Different Prompt</button>
           </div>
+          <div class="done-row">
+            <button class="done-btn" id="doneBtn" onclick="markDone()">&#10003; Mark today as done</button>
+          </div>
+          <div class="streak-row" id="streakRow"></div>
         </div>
       </div>
     </div>
@@ -1284,7 +1323,11 @@ function promptHTML(p,catId,idx){
     ${resH}
     <div class="pb-acts">
       <button class="copy-btn" onclick="copyPrompt('pt-${catId}-${idx}',this)">Copy Prompt</button>
-      <button class="copy-btn use-btn" onclick="openPromptInChatGPT('pt-${catId}-${idx}')">Use in ChatGPT ↗</button>
+      <div class="ai-row">
+        <button class="copy-btn use-btn" onclick="openPromptInAI('pt-${catId}-${idx}','chatgpt')">ChatGPT ↗</button>
+        <button class="copy-btn use-btn" onclick="openPromptInAI('pt-${catId}-${idx}','claude')">Claude ↗</button>
+        <button class="copy-btn use-btn" onclick="openPromptInAI('pt-${catId}-${idx}','grok')">Grok ↗</button>
+      </div>
     </div>`;
 }
 
@@ -1385,18 +1428,27 @@ function nextDaily(){
   DIDX[curType]=(DIDX[curType]+1)%DAILY[curType].length;
   typePrompt(DAILY[curType][DIDX[curType]]);
 }
-function openInChatGPT(txt){
+function openInAI(txt,tool){
   if(!txt||!txt.trim())return;
-  window.open('https://chatgpt.com/?q='+encodeURIComponent(txt.trim()),'_blank','noopener');
+  var enc=encodeURIComponent(txt.trim());
+  var urls={
+    chatgpt:'https://chatgpt.com/?q='+enc,
+    claude:'https://claude.ai/new?q='+enc,
+    grok:'https://x.com/i/grok?text='+enc
+  };
+  window.open(urls[tool]||urls.chatgpt,'_blank','noopener');
 }
-function openPromptInChatGPT(id){
+function openPromptInAI(id,tool){
   var el=document.getElementById(id);
-  if(el)openInChatGPT(el.textContent);
+  if(el)openInAI(el.textContent,tool);
 }
-function openDailyInChatGPT(){
+function openDailyInAI(tool){
   var t=document.getElementById('tTyped');
-  if(t)openInChatGPT(t.textContent);
+  if(t)openInAI(t.textContent,tool);
 }
+// Legacy aliases
+function openInChatGPT(txt){openInAI(txt,'chatgpt');}
+function openDailyInChatGPT(){openDailyInAI('chatgpt');}
 function copyDaily(){
   const t=document.getElementById('tTyped');
   if(!t)return;
@@ -1434,7 +1486,123 @@ setTimeout(function(){
 },100);
 
 // ─── DAILY PROMPT INIT ──────────────────────────────────
-document.addEventListener('DOMContentLoaded',function(){initTodayPrompt();});
+document.addEventListener('DOMContentLoaded',function(){initTodayPrompt();initDoneState();});
+
+
+// ── MOOD FILTER ──────────────────────────────────────────
+var MOODS={
+  good:    {cat:'creativity', msg:'Good energy. Use it to make something.'},
+  tough:   {cat:'confidence', msg:'Tough days call for one small win. Here is yours.'},
+  decision:{cat:'productivity',msg:'Clear your thinking before you decide.'},
+  stuck:   {cat:'creativity', msg:'A new angle breaks every block. Start here.'}
+};
+var activeMood=null;
+function setMood(mood){
+  var btns=document.querySelectorAll('.mood-btn');
+  var msg=document.getElementById('moodMsg');
+
+  // Toggle off
+  if(activeMood===mood){
+    activeMood=null;
+    btns.forEach(function(b){b.classList.remove('active');});
+    if(msg)msg.textContent='';
+    return;
+  }
+
+  activeMood=mood;
+  var m=MOODS[mood];
+
+  // Highlight active button
+  btns.forEach(function(b){
+    b.classList.toggle('active',b.dataset.mood===mood);
+  });
+
+  // Show message
+  if(msg)msg.textContent=m.msg;
+
+  // Auto-pick the best category and load results
+  setTimeout(function(){
+    pickCat(m.cat);
+  }, 200);
+}
+// ─────────────────────────────────────────────────────────
+
+
+// ── DONE FOR TODAY ──────────────────────────────────────────────
+function getTodayKey(){
+  var d=new Date();
+  return 'niith_done_'+d.getFullYear()+'_'+d.getMonth()+'_'+d.getDate();
+}
+function getStreak(){
+  try{return parseInt(localStorage.getItem('niith_streak')||'0');}catch(e){return 0;}
+}
+function setStreak(n){
+  try{localStorage.setItem('niith_streak',String(n));}catch(e){}
+}
+function getLastDone(){
+  try{return localStorage.getItem('niith_last_done')||'';}catch(e){return '';}
+}
+function setLastDone(key){
+  try{localStorage.setItem('niith_last_done',key);}catch(e){}
+}
+function markDone(){
+  var btn=document.getElementById('doneBtn');
+  var row=document.getElementById('streakRow');
+  if(!btn||btn.classList.contains('done'))return;
+  
+  var key=getTodayKey();
+  var last=getLastDone();
+  var streak=getStreak();
+  
+  // Check if yesterday was done (streak continuation)
+  var yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+  var yesterdayKey='niith_done_'+yesterday.getFullYear()+'_'+yesterday.getMonth()+'_'+yesterday.getDate();
+  
+  if(last===yesterdayKey){
+    streak=streak+1; // Continue streak
+  } else if(last!==key){
+    streak=1; // Start new streak
+  }
+  
+  setStreak(streak);
+  setLastDone(key);
+  try{localStorage.setItem(key,'1');}catch(e){}
+  
+  btn.classList.add('done');
+  btn.textContent='Done for today ✓';
+  
+  if(row){
+    if(streak===1){
+      row.textContent='Day 1. Every streak starts here.';
+    } else if(streak<7){
+      row.textContent=streak+' days upgraded. Keep going.';
+    } else if(streak<30){
+      row.textContent=streak+' days. You are building something real.';
+    } else {
+      row.textContent=streak+' days. This is who you are now.';
+    }
+  }
+}
+function initDoneState(){
+  var btn=document.getElementById('doneBtn');
+  var row=document.getElementById('streakRow');
+  var key=getTodayKey();
+  var streak=getStreak();
+  try{
+    if(localStorage.getItem(key)==='1'){
+      if(btn){btn.classList.add('done');btn.textContent='Done for today ✓';}
+      if(row&&streak>0){
+        if(streak===1)row.textContent='Day 1. Every streak starts here.';
+        else if(streak<7)row.textContent=streak+' days upgraded. Keep going.';
+        else if(streak<30)row.textContent=streak+' days. You are building something real.';
+        else row.textContent=streak+' days. This is who you are now.';
+      }
+    } else if(streak>0&&row){
+      row.textContent=streak+' day streak — come back tomorrow to keep it going.';
+    }
+  }catch(e){}
+}
+// ─────────────────────────────────────────────────────────────────
 
 // ─── ESC KEY — close drawer ───────────────────────────
 document.addEventListener('keydown',function(e){
