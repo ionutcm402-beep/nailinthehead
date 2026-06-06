@@ -1491,17 +1491,16 @@ document.addEventListener('DOMContentLoaded',function(){initTodayPrompt();initDo
 
 // ── MOOD FILTER ──────────────────────────────────────────
 var MOODS={
-  good:    {cat:'creativity', msg:'Good energy. Use it to make something.'},
-  tough:   {cat:'confidence', msg:'Tough days call for one small win. Here is yours.'},
-  decision:{cat:'productivity',msg:'Clear your thinking before you decide.'},
-  stuck:   {cat:'creativity', msg:'A new angle breaks every block. Start here.'}
+  good:    {cat:'create',   msg:'Good energy. Use it to make something.'},
+  tough:   {cat:'personal', msg:'Tough days call for one small win. Here is yours.'},
+  decision:{cat:'money',    msg:'Clear your thinking before you decide.'},
+  stuck:   {cat:'career',   msg:'A new angle breaks every block. Start here.'}
 };
 var activeMood=null;
 function setMood(mood){
   var btns=document.querySelectorAll('.mood-btn');
   var msg=document.getElementById('moodMsg');
 
-  // Toggle off
   if(activeMood===mood){
     activeMood=null;
     btns.forEach(function(b){b.classList.remove('active');});
@@ -1512,18 +1511,23 @@ function setMood(mood){
   activeMood=mood;
   var m=MOODS[mood];
 
-  // Highlight active button
   btns.forEach(function(b){
     b.classList.toggle('active',b.dataset.mood===mood);
   });
 
-  // Show message
   if(msg)msg.textContent=m.msg;
 
-  // Auto-pick the best category and load results
+  // Pick the matching Daily Tracker category
+  var topt=document.querySelector('.topt[data-type="'+m.cat+'"]');
+  if(topt){
+    pickDaily(topt, m.cat);
+  }
+
+  // Scroll to the tracker section
   setTimeout(function(){
-    pickCat(m.cat);
-  }, 200);
+    var tracker=document.getElementById('tracker');
+    if(tracker)tracker.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 300);
 }
 // ─────────────────────────────────────────────────────────
 
