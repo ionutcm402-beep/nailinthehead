@@ -145,25 +145,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .pf-room-btn:hover{color:var(--gold);border-color:rgba(200,168,75,.3)}
 .pf-bot{text-align:center;margin-top:32px;font-size:10px;color:rgba(200,184,152,.18);letter-spacing:1px}
 /* RESPONSIVE */
-@media(max-width:768px){
-  #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important
-  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
-.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
-}
-}
-  #nav.dense{padding:0 24px}
-  .wrap{padding:0 24px}
-  .step{grid-template-columns:56px 1fr;gap:20px}
-  .sq{padding:28px 28px 28px 36px}
-  .page-footer{padding:40px 24px 24px}
-}
-.nav-burger{display:none;background:none;border:1px solid var(--gold-line);color:var(--bone);width:40px;height:40px;border-radius:2px;font-size:16px;cursor:pointer;align-items:center;justify-content:center;}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:var(--deep);border-left:1px solid var(--gold-line);padding:72px 32px 40px;z-index:600;display:flex;flex-direction:column;gap:20px;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);}
-#drawer.open{transform:translateX(0);}
-#drawer a{color:var(--dust);cursor:pointer;font-size:15px;padding-bottom:16px;border-bottom:1px solid var(--gold-line);transition:color .3s;text-decoration:none;display:block;}
-#drawer a:hover{color:var(--gold);}
-#drawer-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--shadow);font-size:20px;cursor:pointer;padding:4px;}
+@media(max-width:768px){#nav{padding:0 24px;height:56px;align-items:center}#nav.dense{padding:0 24px}.nav-burger{display:flex!important}.wrap{padding:0 24px}.step{grid-template-columns:56px 1fr;gap:20px}.sq{padding:28px 28px 28px 36px}.page-footer{padding:40px 24px 24px}.rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}}
 @media(max-width:480px){
   .nav-back span{display:none}
 }
@@ -174,11 +156,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .accent { color:#6480d4; }
 .zone-bar { background:#6480d4; }
 .step::before { border-color:rgba(200,168,75,.25); }
-
-/* ── Mobile-responsive split grids (RC1.8 fix) ── */
-.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
-.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style>
 </head>
 <body>
@@ -262,6 +240,10 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
       <div class="fog-r">
         <div class="sq">
           <div class="sq-mark">"</div>
+<div style="margin:40px 0;padding:28px 32px;border-left:2px solid rgba(200,168,75,.35);background:rgba(200,168,75,.04)">
+  <p style="font-family:var(--font-s);font-style:italic;font-size:17px;color:var(--dust);line-height:1.8;margin:0 0 10px 0">The first time I used AI to learn something, I asked it to explain how mortgages actually work. I was in my thirties and embarrassed that I had never understood them properly. It explained it in a way that made complete sense — using my own numbers, my own situation. I felt a bit stupid for not knowing, and then immediately thought: <em>everyone should have access to this.</em></p>
+  <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.5);margin:0">— From the person who built this room</p>
+</div>
           <div class="sq-text">I asked it to explain compound interest like I was intelligent but knew nothing. In three minutes I understood something that had confused me for twenty years. I sat there thinking — why did nobody ever explain it like this?</div>
           <div class="sq-attr">— Rachel T. · NHS nurse · Nottingham</div>
         </div>

@@ -139,25 +139,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .pf-room-btn:hover{color:var(--gold);border-color:rgba(200,168,75,.3)}
 .pf-bot{text-align:center;margin-top:32px;font-size:10px;color:rgba(200,184,152,.18);letter-spacing:1px}
 /* RESPONSIVE */
-@media(max-width:768px){
-  #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important
-  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
-.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
-}
-}
-  #nav.dense{padding:0 24px}
-  .wrap{padding:0 24px}
-  .step{grid-template-columns:56px 1fr;gap:20px}
-  .sq{padding:28px 28px 28px 36px}
-  .page-footer{padding:40px 24px 24px}
-}
-.nav-burger{display:none;background:none;border:1px solid var(--gold-line);color:var(--bone);width:40px;height:40px;border-radius:2px;font-size:16px;cursor:pointer;align-items:center;justify-content:center;}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:var(--deep);border-left:1px solid var(--gold-line);padding:72px 32px 40px;z-index:600;display:flex;flex-direction:column;gap:20px;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);}
-#drawer.open{transform:translateX(0);}
-#drawer a{color:var(--dust);cursor:pointer;font-size:15px;padding-bottom:16px;border-bottom:1px solid var(--gold-line);transition:color .3s;text-decoration:none;display:block;}
-#drawer a:hover{color:var(--gold);}
-#drawer-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--shadow);font-size:20px;cursor:pointer;padding:4px;}
+@media(max-width:768px){#nav{padding:0 24px;height:56px;align-items:center}#nav.dense{padding:0 24px}.nav-burger{display:flex!important}.wrap{padding:0 24px}.step{grid-template-columns:56px 1fr;gap:20px}.sq{padding:28px 28px 28px 36px}.page-footer{padding:40px 24px 24px}.rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}}
 @media(max-width:480px){
   .nav-back span{display:none}
 }
@@ -169,11 +151,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 @keyframes slUp{to{opacity:1;transform:translateY(0)}}
 @keyframes sBr{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
 @keyframes sPulse{0%,100%{opacity:1}50%{opacity:.2;transform:scale(1.9)}}
-
-/* ── Mobile-responsive split grids (RC1.8 fix) ── */
-.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
-.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style></head><body>
 <div id="dot"></div><div id="ring"></div>
 <nav id="nav">
@@ -228,7 +206,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 <section class="sec" id="story" style="padding:120px 0;background:linear-gradient(180deg,var(--void) 0%,#090b10 50%,var(--void) 100%)">
   <div class="wrap"><div class="rm-split-c">
     <div><div class="sec-label fog">The Story</div><h2 class="sec-title fog d1" style="margin-bottom:28px">The best version of you isn't a dream.</h2><p class="body-text fog d2">Most people have a vague sense of who they want to become. They can feel it — the clearer thinking, the better career, the more creative life, the more intentional relationships. But the gap between feeling it and building toward it has always been enormous.</p><p class="body-text fog d3">The problem is not ambition. The problem is that personal transformation has always required either an expensive coach, the right environment, or an unusual amount of self-awareness and self-discipline. Most people have none of these in sufficient quantity.</p><p class="body-text fog d4"><strong>AI changes the economics of personal growth entirely.</strong> For the first time, anyone can have a thinking partner who helps them design their life intentionally — not with vague inspiration, but with specific plans, honest challenge, and a working architecture for change.</p></div>
-    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div><div class="sq-text">I described who I wanted to be in three years to AI — honestly, in detail, without holding back. It wrote me back a portrait of that person so specific, so real, so clearly possible, that I sat there reading it thinking: why am I not already making decisions from this place? I printed it out. It's on my desk.</div><div class="sq-attr">&#8212; Tom W. &middot; Logistics manager, Leeds</div></div></div>
+    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div>
+<div style="margin:40px 0;padding:28px 32px;border-left:2px solid rgba(200,168,75,.35);background:rgba(200,168,75,.04)">
+  <p style="font-family:var(--font-s);font-style:italic;font-size:17px;color:var(--dust);line-height:1.8;margin:0 0 10px 0">I built this website because I wanted to become someone different. Not dramatically different — just more of who I actually am. I wanted to learn faster, work better, create things, think clearly. I am still working on all of it. But the gap between who I was and who I am becoming feels smaller than it ever has. That is what this room is for. And it is a better room to visit than you might think.</p>
+  <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.5);margin:0">— From the person who built this room</p>
+</div><div class="sq-text">I described who I wanted to be in three years to AI — honestly, in detail, without holding back. It wrote me back a portrait of that person so specific, so real, so clearly possible, that I sat there reading it thinking: why am I not already making decisions from this place? I printed it out. It's on my desk.</div><div class="sq-attr">&#8212; Tom W. &middot; Logistics manager, Leeds</div></div></div>
   </div></div>
 </section>
 <section class="sec" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090d 50%,var(--void) 100%)">

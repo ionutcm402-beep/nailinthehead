@@ -141,25 +141,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .pf-room-btn:hover{color:var(--gold);border-color:rgba(200,168,75,.3)}
 .pf-bot{text-align:center;margin-top:32px;font-size:10px;color:rgba(200,184,152,.18);letter-spacing:1px}
 /* RESPONSIVE */
-@media(max-width:768px){
-  #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important
-  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
-.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
-}
-}
-  #nav.dense{padding:0 24px}
-  .wrap{padding:0 24px}
-  .step{grid-template-columns:56px 1fr;gap:20px}
-  .sq{padding:28px 28px 28px 36px}
-  .page-footer{padding:40px 24px 24px}
-}
-.nav-burger{display:none;background:none;border:1px solid var(--gold-line);color:var(--bone);width:40px;height:40px;border-radius:2px;font-size:16px;cursor:pointer;align-items:center;justify-content:center;}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:var(--deep);border-left:1px solid var(--gold-line);padding:72px 32px 40px;z-index:600;display:flex;flex-direction:column;gap:20px;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);}
-#drawer.open{transform:translateX(0);}
-#drawer a{color:var(--dust);cursor:pointer;font-size:15px;padding-bottom:16px;border-bottom:1px solid var(--gold-line);transition:color .3s;text-decoration:none;display:block;}
-#drawer a:hover{color:var(--gold);}
-#drawer-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--shadow);font-size:20px;cursor:pointer;padding:4px;}
+@media(max-width:768px){#nav{padding:0 24px;height:56px;align-items:center}#nav.dense{padding:0 24px}.nav-burger{display:flex!important}.wrap{padding:0 24px}.step{grid-template-columns:56px 1fr;gap:20px}.sq{padding:28px 28px 28px 36px}.page-footer{padding:40px 24px 24px}.rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}}
 @media(max-width:480px){
   .nav-back span{display:none}
 }
@@ -171,11 +153,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 @keyframes slUp{to{opacity:1;transform:translateY(0)}}
 @keyframes sBr{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
 @keyframes sPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(1.9)}}
-
-/* ── Mobile-responsive split grids (RC1.8 fix) ── */
-.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
-.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style>
 </head><body>
 <div id="dot"></div><div id="ring"></div>
@@ -243,7 +221,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
       <p class="body-text fog d3">The biggest lie about creativity is that it's a talent you either have or you don't. It isn't. It's a practice — and like all practices, it gets easier with the right support. AI is the support that has been missing.</p>
       <p class="body-text fog d4"><strong>AI doesn't create for you.</strong> It creates alongside you. It helps you start when the blank page is terrifying. It helps you develop an idea when it's still shapeless. It helps you finish when you run out of momentum. The voice, the vision, the meaning — those are yours.</p>
     </div>
-    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div><div class="sq-text">I've been saying I'd write a book for fifteen years. I'd start, get two paragraphs in, and give up because it felt overwhelming. With AI, I wrote the first chapter in one evening. Not because AI wrote it — because it helped me start. I'm now on chapter nine.</div><div class="sq-attr">&#8212; David R. &middot; Secondary school teacher, Edinburgh</div></div></div>
+    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div>
+<div style="margin:40px 0;padding:28px 32px;border-left:2px solid rgba(200,168,75,.35);background:rgba(200,168,75,.04)">
+  <p style="font-family:var(--font-s);font-style:italic;font-size:17px;color:var(--dust);line-height:1.8;margin:0 0 10px 0">This entire website is the thing I had been meaning to build for years. Every time I started, I got stuck — because I could not code, because I did not know where to begin, because the gap between the idea and the execution felt impossible to cross. AI closed that gap. This room exists because I want the same thing to happen for you and whatever you have been putting off.</p>
+  <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.5);margin:0">— From the person who built this room</p>
+</div><div class="sq-text">I've been saying I'd write a book for fifteen years. I'd start, get two paragraphs in, and give up because it felt overwhelming. With AI, I wrote the first chapter in one evening. Not because AI wrote it — because it helped me start. I'm now on chapter nine.</div><div class="sq-attr">&#8212; David R. &middot; Secondary school teacher, Edinburgh</div></div></div>
   </div></div>
 </section>
 

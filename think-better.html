@@ -139,25 +139,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 .pf-room-btn:hover{color:var(--gold);border-color:rgba(200,168,75,.3)}
 .pf-bot{text-align:center;margin-top:32px;font-size:10px;color:rgba(200,184,152,.18);letter-spacing:1px}
 /* RESPONSIVE */
-@media(max-width:768px){
-  #nav{padding:0 24px;height:56px;align-items:center
-  .nav-burger{display:flex!important
-  .rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}
-.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}
-}
-}
-  #nav.dense{padding:0 24px}
-  .wrap{padding:0 24px}
-  .step{grid-template-columns:56px 1fr;gap:20px}
-  .sq{padding:28px 28px 28px 36px}
-  .page-footer{padding:40px 24px 24px}
-}
-.nav-burger{display:none;background:none;border:1px solid var(--gold-line);color:var(--bone);width:40px;height:40px;border-radius:2px;font-size:16px;cursor:pointer;align-items:center;justify-content:center;}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);background:var(--deep);border-left:1px solid var(--gold-line);padding:72px 32px 40px;z-index:600;display:flex;flex-direction:column;gap:20px;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);}
-#drawer.open{transform:translateX(0);}
-#drawer a{color:var(--dust);cursor:pointer;font-size:15px;padding-bottom:16px;border-bottom:1px solid var(--gold-line);transition:color .3s;text-decoration:none;display:block;}
-#drawer a:hover{color:var(--gold);}
-#drawer-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--shadow);font-size:20px;cursor:pointer;padding:4px;}
+@media(max-width:768px){#nav{padding:0 24px;height:56px;align-items:center}#nav.dense{padding:0 24px}.nav-burger{display:flex!important}.wrap{padding:0 24px}.step{grid-template-columns:56px 1fr;gap:20px}.sq{padding:28px 28px 28px 36px}.page-footer{padding:40px 24px 24px}.rm-split,.rm-split-c{grid-template-columns:1fr;gap:48px}.rm-cta-box{grid-template-columns:1fr;gap:24px;padding:36px 28px}}
 @media(max-width:480px){
   .nav-back span{display:none}
 }
@@ -169,11 +151,7 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 @keyframes slUp{to{opacity:1;transform:translateY(0)}}
 @keyframes sBr{0%,100%{transform:scaleY(.4);opacity:.3}50%{transform:scaleY(1);opacity:1}}
 @keyframes sPulse{0%,100%{opacity:1}50%{opacity:.2;transform:scale(1.9)}}
-
-/* ── Mobile-responsive split grids (RC1.8 fix) ── */
-.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
-.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.rm-split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.rm-split-c{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}.rm-cta-box{background:var(--abyss);border:1px solid var(--gold-line);padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 </style></head><body>
 <div id="dot"></div><div id="ring"></div>
 <nav id="nav">
@@ -228,7 +206,11 @@ body { background:var(--void); color:var(--bone); font-family:var(--font-b); fon
 <section class="sec" id="story" style="padding:120px 0;background:linear-gradient(180deg,var(--void) 0%,#090b10 50%,var(--void) 100%)">
   <div class="wrap"><div class="rm-split-c">
     <div><div class="sec-label fog">The Story</div><h2 class="sec-title fog d1" style="margin-bottom:28px">You think better than you think.</h2><p class="body-text fog d2">Most people don't have a thinking problem. They have a thinking-alone problem. When you have to explain something out loud, you understand it better. When someone asks you 'why?', you find the reasons. When a challenge is raised, you find the weaknesses before they become mistakes.</p><p class="body-text fog d3">The problem is that access to this kind of rigorous, honest thinking partnership has always been limited to people who could afford coaches, mentors, or therapists — or who happened to know the right people.</p><p class="body-text fog d4"><strong>AI is the first time in history that this kind of thinking partnership is available to everyone.</strong> Not instead of human support — alongside it. Available at 2am. Available when the decision can't wait. Available with no judgement and no agenda.</p></div>
-    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div><div class="sq-text">I was stuck in the same decision for three months. I'd been going round in circles — too close to it, too emotionally involved to think clearly. One conversation with AI, using the right prompt, and I had clarity in twenty minutes. I don't know why it took me so long.</div><div class="sq-attr">&#8212; Maria L. &middot; Freelance designer, Bristol</div></div></div>
+    <div class="fog-r"><div class="sq"><div class="sq-mark">"</div>
+<div style="margin:40px 0;padding:28px 32px;border-left:2px solid rgba(200,168,75,.35);background:rgba(200,168,75,.04)">
+  <p style="font-family:var(--font-s);font-style:italic;font-size:17px;color:var(--dust);line-height:1.8;margin:0 0 10px 0">The decision that finally made me understand this room was about whether to leave a job I had outgrown. I had been going in circles for months. I sat down with AI, explained the situation completely, and asked it to help me think — not to decide, just to think. An hour later I had clarity I had not found in all those months alone. That is what a good thinking partner does. Most people have never had one. Now everyone can.</p>
+  <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.5);margin:0">— From the person who built this room</p>
+</div><div class="sq-text">I was stuck in the same decision for three months. I'd been going round in circles — too close to it, too emotionally involved to think clearly. One conversation with AI, using the right prompt, and I had clarity in twenty minutes. I don't know why it took me so long.</div><div class="sq-attr">&#8212; Maria L. &middot; Freelance designer, Bristol</div></div></div>
   </div></div>
 </section>
 <section class="sec" style="padding:100px 0;background:linear-gradient(180deg,var(--void) 0%,#08090d 50%,var(--void) 100%)">
